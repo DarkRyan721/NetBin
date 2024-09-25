@@ -196,20 +196,154 @@ margin-left: auto;
     border-radius: 10px;
 }
 
-.Logo-NetBin {
-    display: flex;
-    height: auto;
-    width: 85px;
-    margin-right: 20px;
-    align-items: center;
-  }
+.NetBin-Logo-Container{
+  display: flex;
+  height: auto;
+  width: 85px;
+  margin-right: 20px;
+  align-items: center;
+}
 
-  #logo-netbin
-  {
-    margin: 10px;
-  }
+#logo-netbin
+{
+  margin: 10px;
+}
 
-  #letters-netbin
-  {
-    margin: 10px;
-  }
+#letters-netbin
+{
+  margin: 10px;
+}
+
+.Information-Container 
+{
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+  width: 100%;
+  padding-top: 40px;
+  background-color: #ffffff;
+  min-height: 100vh;
+}
+
+.Information-About-NetBin
+{
+  position: relative;
+  /* background-color: rgba(0, 0, 0, 0.2); */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 700px;
+  margin-bottom: 50px;
+  border-radius: 30px;
+  padding: 15px;
+}
+
+.Information-Title-About-NetBin
+{
+  color: #000000;
+  font-size: 24px;
+  font: bold;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+.Information-Text-About-NetBin{
+  color: #000000;
+  font-size: 16px;
+  text-align: center;
+}
+
+.Product-Description-Container{
+  position: relative;
+  /* background-color: rgb(255, 0, 0); */
+  display: flex;
+  justify-content: space-between; /*Mantiene un espacio uniforme entre los componentes*/
+  align-items: center;
+  flex-grow: 1;
+  width: 100%;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+.Product-AI{
+  background: #cbc1af;
+  border-radius: 30px;
+  width: 250px;
+  height: 300px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Product-Text
+{
+  color: #000000;
+  padding-top: 10px;
+  text-align: center;
+}
+
+.Product-Rewards{
+  background: #cbc1af;
+  border-radius: 30px;
+  width: 250px;
+  height: 300px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Product-Focus{
+  background: #cbc1af;
+  border-radius: 30px;
+  width: 250px;
+  height: 300px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* From Uiverse.io by AlimurtuzaCodes */ 
+.btn {
+  border: none;
+  width: 15em;
+  height: 3em;
+  border-radius: 3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  background: #1C1A1C;
+  cursor: pointer;
+  transition: all 450ms ease-in-out;
+}
+
+.sparkle {
+  fill: #AAAAAA;
+  transition: all 800ms ease;
+}
+
+.text {
+  font-weight: 600;
+  color: #AAAAAA;
+  font-size: 16px;
+}
+
+.btn:hover {
+  background: linear-gradient(0deg, #4CAF50, #1e8449);
+  transform: translateY(-2px);
+}
+
+.btn:hover .text {
+  color: white;
+}
+
+.btn:hover .sparkle {
+  fill: white;
+  transform: scale(1.2);
+} 

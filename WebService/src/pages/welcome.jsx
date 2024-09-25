@@ -1,13 +1,25 @@
-import React from "react";
+import React, {useRef} from "react";
 import { Button } from "@nextui-org/react"; // Importacion del componente Button para su uso.
 import "./welcome.css"; // CSS para welcome.jsx
 import {UserIcon} from '../components/UserIcon'; // Importacion del diseño del simbolo de usuario para los botones de registro e ingreso.
 import { LetterNetBin, LogoNetBin } from "../components/Logo_NetBin"; // Importacion del logo y nombres de la empresa.
 import { Link } from 'react-router-dom'; // Importacion de Link, componente que permite cambiar de pagina web.
 import Cookies from "js-cookie"; // Libreria para el manejo de Cookies.
+import {motion} from "framer-motion";
+import {ArcticonsOpenaiChatgpt} from "../components/ChatGpt_Icon";
+import {EpMoney} from "../components/Rewards_Icon";
+import {GravityUiTrashBin} from "../components/Bin_Icon";
 
 export default function WelcomePage()
 {
+  const informationRef = useRef(null); // Referencia al div Information-Container
+
+  const scrollToInformation = () => {
+    if (informationRef.current) {
+      informationRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   // Accedemos/buscamos el token que permite adquirir las cookies.
   const token = Cookies.get('token');
 
@@ -48,11 +60,12 @@ export default function WelcomePage()
   */
 
   return(
-    <div className="Welcome-Background">
+    <div>
+      <div className="Welcome-Background">
         <div className="Welcome-Bar">
-            <div className="Logo-NetBin">
-              <LogoNetBin />
-              <LetterNetBin/>
+            <div className="NetBin-Logo-Container">
+              <LogoNetBin className="Logo-NetBin" />
+              <LetterNetBin className="Letter-NetBin"/>
             </div>
             <div className="Button-Container">
               <Link to="/signup">
@@ -71,10 +84,54 @@ export default function WelcomePage()
         <div className="Welcome-Container">
             <h1 className="Company-Phrase">Reduce, Reusa y Recicla</h1>
             <h1 className="Initial-Phrase">ASEGURAMOS El CORRECTO{"\n"}RECICLAJE.</h1>
-            <Button className="Product-Button" onClick={Product_Section}>
+            {/* <Button className="Product-Button" onClick={scrollToInformation}>
                 Nuestro Producto
-            </Button>
+            </Button> */}
+            <button class="btn" onClick={scrollToInformation}>
+              <GravityUiTrashBin className="sparkle" width="20" height="20"/>
+              <span class="text">Nuestro Producto</span>
+            </button>
         </div>
+      </div>
+      
+      <div className="Information-Container" ref={informationRef}>
+        <div className="Information-About-NetBin">
+          <h1 className="Information-Title-About-NetBin"> 
+            Sobre Nuestro Producto
+          </h1>
+          <p className="Information-Text-About-NetBin">
+            NetBin es una solución innovadora de gestión de residuos que utiliza tecnología de vanguardia como 
+            inteligencia artificial, IoT, reconocimiento de voz y NFC para ayudar a los usuarios a clasificar 
+            correctamente su basura.
+          </p>
+        </div>
+
+        <div className="Product-Description-Container">
+          <motion.div className="Product-AI" whileHover={{ scale: 1.1 }}>
+            <ArcticonsOpenaiChatgpt width="50" height="50"/>
+            <p className="Product-Text">
+              Usando la tecnologia de ChatGpt y el reconocimiento de voz NetBin adquiere la capacidad de escucharte,
+              comprenderte y actuar. Apoyado por IA podras clasificar correctamente la basura.
+            </p>
+          </motion.div>
+
+          <motion.div className="Product-Rewards" whileHover={{ scale: 1.1 }}>
+            <EpMoney width="50" height="50" color = "black"/>
+            <p className="Product-Text">
+              Integrando NFC es posible identificar un usuario eficientemente. Esto nos permitira recompensarte por tu
+              compromiso con el medio ambiente.
+            </p>
+          </motion.div>
+
+          <motion.div className="Product-Focus" whileHover={{ scale: 1.1 }}>
+            <GravityUiTrashBin width="50" height="50" color = "black"/>
+            <p className="Product-Text">
+              NetBin se preocupa por el medio ambiente y la sostenibilidad. Este producto esta pensado
+              para continuar con la responsabilidad ambiental.
+            </p>
+          </motion.div>
+        </div>
+      </div>
     </div>
   )
 }

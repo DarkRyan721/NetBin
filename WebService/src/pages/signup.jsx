@@ -201,10 +201,10 @@ export default function SignUpPage()
                         <h2>¡{message}!</h2>
                     </motion.div>)
                 }
-
-                <Button className="Save-Button text-white bg-transparent border border-transparent px-4 py-2 text-lg font-bold hover:border-white transition m-4" onClick={RegisterFunction}>
-                    Guardar
-                </Button>
+                <button class="button" data-text="Awesome" onClick={RegisterFunction}>
+                    <span class="actual-text">&nbsp;Guardar&nbsp;</span>
+                    <span aria-hidden="true" class="hover-text">&nbsp;Guardar&nbsp;</span>
+                </button>
             </div>
         </div>
     );

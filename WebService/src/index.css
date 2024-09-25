@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 :root {
   line-height: 1.5;
   font-weight: 400;
@@ -16,8 +14,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-
-
+html {
+  scroll-behavior: smooth;
+}
 
 body{
   display: flex;
