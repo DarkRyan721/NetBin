@@ -1,4 +1,3 @@
-com\netbin\app\Config\WebConfig.class
 com\netbin\app\Auth\AuthResponse$AuthResponseBuilder.class
 com\netbin\app\Config\SecurityConfig.class
 com\netbin\app\Auth\AuthService.class
