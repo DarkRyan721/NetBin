@@ -1,0 +1,21 @@
+.Bin-container{
+    width: 150px;
+    height: 350px;
+    border-radius: 4px;
+    border-right: 6px solid rgb(254, 254, 254);     /* Borde derecho */
+    border-bottom: 6px solid rgb(254, 254, 254);   /* Borde inferior */
+    border-left: 6px solid rgb(254, 254, 254);    /* Borde izquierdo */
+    border-top-left-radius: 0px; /* Redondea la esquina superior izquierda */
+    border-top-right-radius: 0px; /* Redondea la esquina superior derecha */
+    border-bottom-right-radius: 5px; /* Redondea la esquina inferior derecha */
+    border-bottom-left-radius: 5px;
+    display: flex;
+    flex-direction: column; /* Coloca los elementos en una columna */
+    justify-content: flex-end; /* Ubica los elementos en la parte inferior */
+    margin-bottom: 50px;
+}
+
+.Bin{
+    width: 100%;  /* Ocupa el 50% del ancho del contenedor */
+    background-color: #0BB63E;
+}

@@ -1,0 +1,215 @@
+.Welcome-Background 
+{
+  position: relative;
+  margin: 0;
+  padding: 0;
+  background-image: url('../assets/Img_Fondo1.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh; /* Ocupa al menos toda la altura de la ventana */
+  width: 100vw;
+  background-repeat: no-repeat;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Welcome-Background::after{
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Media Queries para dispositivos móviles */
+@media (max-width: 768px) {
+  .Welcome-Background {
+      background-position: top;  /* Ajustar el fondo en dispositivos más pequeños */
+      background-size: cover;
+      padding: 20px;  /* Añadimos un poco de padding */
+      height: auto;   /* Permitir que el contenido crezca */
+  }
+}
+
+/* Media Queries para tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .Welcome-Background {
+      background-position: center;
+      background-size: cover;  /* Aseguramos que el fondo no se corte en pantallas medianas */
+      padding: 20px;
+  }
+}
+
+.Welcome-Bar {
+  justify-content: space-between;
+  flex-direction: row;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.0);
+  display: flex;
+  align-items: center;
+  padding: 10px 20px; /* Añadir un padding para que haya más espacio */
+  z-index: 1;
+}
+
+.Welcome-Bar::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 5%;
+  width: 90%;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Media Queries para dispositivos móviles */
+@media (max-width: 768px) {
+  .Welcome-Bar {
+      flex-direction: column; /* Cambiar a columna en móviles */
+      align-items: center; /* Centrar los elementos en móviles */
+      padding: 10px 15px; /* Reducir el padding en pantallas pequeñas */
+  }
+
+  .Welcome-Bar::after {
+      width: 80%; /* Reducir el ancho de la línea inferior */
+      left: 10%; /* Ajustar el centrado de la línea inferior */
+  }
+
+  .Welcome-Bar a { 
+      font-size: 14px; /* Reducir el tamaño de la fuente para los enlaces */
+  }
+}
+
+/* Media Queries para tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .Welcome-Bar {
+      padding: 10px 30px; /* Añadir más padding en tablets */
+  }
+
+  .Welcome-Bar::after {
+      width: 85%; /* Ajustar el ancho de la línea */
+      left: 7.5%; /* Centrar la línea */
+  }
+
+  .Welcome-Bar a {
+      font-size: 16px; /* Ajustar el tamaño de los enlaces en tablets */
+  }
+}
+
+
+.Button-Container {
+display: flex;
+gap: 20px;
+margin-left: auto;
+}
+
+.Welcome-Container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;  /* Asegura que los elementos dentro se alineen a la izquierda */
+  flex-grow: 1;  /* Permite que el contenedor crezca y ocupe todo el ancho disponible */
+  width: 100%;  /* Aseguramos que ocupe el 100% del ancho disponible */
+  padding-top: 20px;
+  padding-left: 150px;
+}
+
+@media (max-width: 1024px) {
+  .Welcome-Container {
+      padding-left: 10vw;  /* Cambiamos el margen izquierdo a un 10% del ancho de la ventana */
+  }
+}
+
+/* Ajustes para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .Welcome-Container {
+      width: 100%;  /* Asegura que ocupe todo el ancho en móviles */
+      padding-left: 5vw;  /* Reducimos el margen izquierdo aún más en pantallas pequeñas */
+      padding-right: 5vw;  /* También ajustamos el margen derecho */
+  }
+}
+
+/* Texto superior */
+.Company-Phrase {
+  font-size: 2rem;  /* Escalable con `rem` */
+  font-weight: bold;
+  color: #f9f9f9;
+  margin-bottom: 20px;  /* Espacio entre los textos */
+}
+
+/* Texto principal */
+.Initial-Phrase {
+  white-space: pre-wrap;  /* Para permitir saltos de línea automáticos */
+  font-size: 4rem;  /* Tamaño grande, pero escalable */
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 30px;
+}
+
+
+.Product-Button {
+  border: 2px solid transparent !important;
+  width: 200px;
+  padding: 10px 20px;
+  color: #1e8449 !important;
+  font-weight: bold !important;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Efecto hover */
+.Product-Button:hover {
+  background-color: transparent;
+  border: 2px solid white !important;
+  color: white !important;
+}
+
+/* Media Queries para pantallas pequeñas */
+@media (max-width: 768px) {
+  .Company-Phrase {
+      font-size: 1.5rem;
+  }
+
+  .Initial-Phrase {
+      font-size: 2.5rem;
+  }
+
+  .Product-Button {
+      width: 180px;
+  }
+}
+
+.NetBin-Information{
+    width: 600px;
+    height: 200px;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: justify;
+    padding: 20px;
+    font-size: 1.2rem;
+    color: white;
+    border-radius: 10px;
+}
+
+.Logo-NetBin {
+    display: flex;
+    height: auto;
+    width: 85px;
+    margin-right: 20px;
+    align-items: center;
+  }
+
+  #logo-netbin
+  {
+    margin: 10px;
+  }
+
+  #letters-netbin
+  {
+    margin: 10px;
+  }

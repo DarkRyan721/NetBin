@@ -1,0 +1,96 @@
+.home-container {
+    display: flex;
+    height: 100vh; /* Esto hará que la altura ocupe toda la pantalla */
+    width: 100%;
+}
+
+.menu-column {
+    flex: 1; /* Esta columna ocupará una parte más pequeña */
+    background-color: #191D25; /* Color de fondo para diferenciar */
+    border-right: 5px solid #24262D;
+    padding: 20px;
+    color: white;
+}
+
+.user-info{
+    border-bottom: 2px solid #0BB63E;
+    padding: 10px;
+    margin-bottom: 50px; /* Espaciado debajo */
+}
+
+.username {
+    font-size: 2rem; /* Tamaño de la fuente */
+    color: #ffffff; /* Color del texto */
+    font-weight: bold; /* Negrita */
+    margin-bottom: 10px; /* Espaciado debajo */
+    text-align: center; /* Centrar el texto */
+}
+
+.bin-column {
+    display: flex;
+    flex: 2; /* Esta columna ocupará el doble de espacio que la de menú */
+    flex-direction: column;
+    background-color: #191D25;
+    border-right: 5px solid #24262D;
+    padding: 20px;
+    color: white;
+    align-items: center;
+}
+
+.bin-column-title
+{
+    font-size: 2rem; /* Tamaño de la fuente */
+    color: #ffffff; /* Color del texto */
+    font-weight: bold; /* Negrita */
+    text-align: center; /* Centrar el texto */
+    margin-bottom: 75px; /* Espaciado debajo */
+}
+
+.bin-pecent{
+    font-size: 2rem; /* Tamaño de la fuente */
+    color: #ffffff; /* Color del texto */
+    font-weight: bold; /* Negrita */
+    text-align: center; /* Centrar el texto */
+    margin-bottom: 75px;
+}
+
+.Benefits-column {
+    display: flex;
+    flex: 3; /* Esta columna será la más grande */
+    flex-direction: column;
+    background-color: #14171E;
+    padding: 20px;
+    color: white;
+    align-items: center;
+}
+
+.Benefits-title{
+    font-size: 2rem; /* Tamaño de la fuente */
+    color: #ffffff; /* Color del texto */
+    font-weight: bold; /* Negrita */
+    text-align: center; /* Centrar el texto */
+    margin-bottom: 50px; /* Espaciado debajo */
+}
+
+.Query-IA{
+    width: 300px;
+    height: 250px;
+    background-color: #191D25;
+    border-radius: 6px;
+    margin-bottom: 50px;
+}
+
+.Benefits-list{
+    width: 550px;
+    height: 150px;
+    background-color: #0BB63E;
+    border-radius: 6px;
+}
+
+.Last-waste{
+    font-size: 1.5rem; /* Tamaño de la fuente */
+    color: #ffffff; /* Color del texto */
+    font-weight: bold; /* Negrita */
+    text-align: center; /* Centrar el texto */
+    margin-bottom: 50px; /* Espaciado debajo */
+}
