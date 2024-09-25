@@ -37,9 +37,9 @@ export default function SignUpPage()
     //_____________________________________________________________________________________________________________________________
 
     // Funcion encargada del registro de usuarios y la comunicacion con el servidor BackEnd.
-    const RegisterFunction = async() => 
+    const RegisterFunction = async() =>
     {
-        try 
+        try
         {
             // Se crea un plain object que contenga la informacion del usuario suministrada en los Inputs.
             const userData = {username, password, firstname, secondname};
@@ -47,7 +47,7 @@ export default function SignUpPage()
             console.log("Datos enviados:", JSON.stringify(userData));
 
             // Elemento que almacenara la respuesta de la solicitud POST hecha con la funcion fetch().
-            const response = await fetch('/api/auth/register', 
+            const response = await fetch('/auth/register',
                 {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(userData)}
             );
 
