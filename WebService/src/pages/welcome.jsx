@@ -12,9 +12,12 @@ import {GravityUiTrashBin} from "../components/Bin_Icon";
 
 export default function WelcomePage()
 {
-  const informationRef = useRef(null); // Referencia al div Information-Container
+   // Referencia al div Information-Container
+  const informationRef = useRef(null);
 
-  const scrollToInformation = () => {
+  // Funcion para generar el desplazamiento que ejecuta el boton "Nuestro Producto"
+  const scrollToInformation = () => 
+  {
     if (informationRef.current) {
       informationRef.current.scrollIntoView({ behavior: 'smooth' });
     }
@@ -31,12 +34,6 @@ export default function WelcomePage()
   {
     console.log('Usuario no autenticado');
   }
-
-  // **IGNORAR FUNCION, ES DE PRUEBA MOMENTANEAMENTE**
-  const Product_Section = () => 
-  { 
-    console.log("Epaaaa");
-  };
 
   /*
     Welcome-Background: es el Div encargado de cargar la imagen y por medio de ::after se aplica la capa de opacidad sobre esta.
@@ -64,7 +61,7 @@ export default function WelcomePage()
       <div className="Welcome-Background">
         <div className="Welcome-Bar">
             <div className="NetBin-Logo-Container">
-              <LogoNetBin className="Logo-NetBin" />
+              <LogoNetBin className="Logo-NetBin"/>
               <LetterNetBin className="Letter-NetBin"/>
             </div>
             <div className="Button-Container">
@@ -84,12 +81,9 @@ export default function WelcomePage()
         <div className="Welcome-Container">
             <h1 className="Company-Phrase">Reduce, Reusa y Recicla</h1>
             <h1 className="Initial-Phrase">ASEGURAMOS El CORRECTO{"\n"}RECICLAJE.</h1>
-            {/* <Button className="Product-Button" onClick={scrollToInformation}>
-                Nuestro Producto
-            </Button> */}
-            <button class="btn" onClick={scrollToInformation}>
-              <GravityUiTrashBin className="sparkle" width="20" height="20"/>
-              <span class="text">Nuestro Producto</span>
+            <button class="Product-Button" onClick={scrollToInformation}>
+              <GravityUiTrashBin className="Bin-On-Button" width="20" height="20"/>
+              <span class="Text-On-Button">Nuestro Producto</span>
             </button>
         </div>
       </div>
