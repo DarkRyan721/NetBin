@@ -1,49 +1,39 @@
-import React, { useRef, useState, useEffect } from "react";
-import { Button, Input } from "@nextui-org/react"; // Importacion del componente Button para su uso.
+import React, {useRef, useState} from "react";
 import "./welcome.css"; // CSS para welcome.jsx
+import { Button, Input } from "@nextui-org/react"; // Importacion del componente Button e Input para la pagina web.
 import {UserIcon} from '../components/UserIcon'; // Importacion del diseño del simbolo de usuario para los botones de registro e ingreso.
-import { LetterNetBin, LogoNetBin } from "../components/Logo_NetBin"; // Importacion del logo y nombres de la empresa.
+import { LetterNetBin, LogoNetBin } from "../components/Logo_NetBin"; // logo y nombres de la empresa
+import {ArcticonsOpenaiChatgpt} from "../components/ChatGpt_Icon"; // Logo ChatGpt
+import {EpMoney} from "../components/Rewards_Icon"; // Icono de billetes
+import {GravityUiTrashBin} from "../components/Bin_Icon"; // Icono de caneca de basura
+import {MdiCloseOutline} from "../components/Close_Icon"; // Icono de X(Usado para cerrar el Pop-Up).
+import { EyeFilledIcon } from "../components/EyeFilledIcon"; // Componente grafico para la opcion de ocultar la contraseña.
+import { EyeSlashFilledIcon } from "../components/EyeSlashFilledIcon"; // Componente grafico para la opcion de ocultar la contraseña.
 import { Link } from 'react-router-dom'; // Importacion de Link, componente que permite cambiar de pagina web.
-import Cookies from "js-cookie"; // Libreria para el manejo de Cookies.
-import {motion} from "framer-motion";
-import {ArcticonsOpenaiChatgpt} from "../components/ChatGpt_Icon";
-import {EpMoney} from "../components/Rewards_Icon";
-import {GravityUiTrashBin} from "../components/Bin_Icon";
-import {MdiCloseOutline} from "../components/Close_Icon";
-import { EyeFilledIcon } from "./EyeFilledIcon"; // Componente grafico para la opcion de ocultar la contraseña.
-import { EyeSlashFilledIcon } from "./EyeSlashFilledIcon"; // Componente grafico para la opcion de ocultar la contraseña.
+import {motion} from "framer-motion"; // Importacion de motion, herramienta para generar animaciones.
 
 export default function WelcomePage()
 {
-   // Referencia al div Information-Container
+
+  // Referencia al div:Information-Container
   const informationRef = useRef(null);
 
-  // Funcion para generar el desplazamiento que ejecuta el boton "Nuestro Producto"
+  // Funcion para generar el desplazamiento que ejecuta el button:Product-Button
   const scrollToInformation = () => 
   {
-    if (informationRef.current) {
-      informationRef.current.scrollIntoView({ behavior: 'smooth' });
+    if(informationRef.current) 
+    {
+      informationRef.current.scrollIntoView({behavior: 'smooth'});
     }
   };
 
-  // useEffect(() => {
-  //   // Código que solo se ejecuta una vez al montar el componente
-  //   const token = Cookies.get('token');
-
-  //   if (token) {
-  //     console.log('Usuario autenticado con token:', token);
-  //   } else {
-  //     console.log('Usuario no autenticado');
-  //   }
-  // }, []);
-
+  // Elementos creados para abrir/cerrar la ventana emergente(Pop-Up) de registro
   const [isOpen, setIsOpen] = useState(false);
 
-  const togglePopUp = () => 
-  {
-    setIsOpen(!isOpen); // Alterna entre mostrar y ocultar
-  };
+  // Funcion que alterna el estado de la ventana Pop-up(oculto/visible)
+  const togglePopUp = () => setIsOpen(!isOpen);
 
+  // Elementos creados para activar/desactivar la animacion del mensaje relacionado al registro 
   const [showSuccess, setShowSuccess] = useState(false);
 
   //________________________________________________________________________________________________
@@ -68,10 +58,12 @@ export default function WelcomePage()
   //_____________________________________________________________________________________________________________________________
 
   // Funcion encargada del registro de usuarios y la comunicacion con el servidor BackEnd.
-  const RegisterFunction = async () => {
-    try {
+  const RegisterFunction = async () => 
+  {
+    try 
+    {
       // Se crea un plain object que contenga la informacion del usuario suministrada en los Inputs.
-      const userData = { username, password, firstname, secondname };
+      const userData = {username, password, firstname, secondname};
 
       console.log("Datos enviados:", JSON.stringify(userData));
 
@@ -86,18 +78,10 @@ export default function WelcomePage()
       );
 
       // Verifica si la respuesta del servidor BackEnd fue negativa para cortar el flujo y arrojar el error.
-      if (!response.ok) {
+      if(!response.ok) 
+      {
         throw new Error("Error en el registro.");
       }
-
-      // Se convierten y extraen los datos recibidos del servidor BackEnd para usarlo en las cookies.
-      const data = await response.json();
-
-      // **SE IMPRIMEN LOS DATOS MOMENTANEAMENTE PARA SU REVISION. BORRARLO**.
-      console.log(data);
-
-      // Se establecen las cookies en el sistema.
-      //Cookies.set("token", data.token, { expires: 7, secure: true });
 
       // Se establece el mensaje de un correcto registro para el usuario.
       setMessage("Registro exitoso");
@@ -105,19 +89,24 @@ export default function WelcomePage()
       // Se activa la bandera que permite una animacion.
       setShowSuccess(true);
 
-      setUserName("");
-      setFirstName("");
-      setSecondName("");
-      setPassword("");
-
       //Después de 2 segundos de la animación, se re-dirige al WelcomePage
-      setTimeout(() => {
+      setTimeout(() => 
+      {
+        // Se reinicia el estado de las variables para un nuevo registro.
         setShowSuccess(false);
+        setUserName("");
+        setFirstName("");
+        setSecondName("");
+        setPassword("");
+
+        // Se desactiva la ventana Pop-Up
         togglePopUp();
       }, 2000);
-    } catch (error) {
-      // Se establece un mensaje de error en caso tal de que la comunicacion con el BackEnd haya fallado.
-      setMessage("No se pudo lograr el registo. " + error.message);
+    } 
+    catch (error) 
+    {
+      // Se establece un mensaje en caso de error.
+      setMessage("El registro ha fallado");
     }
   };
 
@@ -293,6 +282,7 @@ export default function WelcomePage()
             </div>
           </div>
         )}
+
       </div>
       
       <div className="Information-Container" ref={informationRef}>

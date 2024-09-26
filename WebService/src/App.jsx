@@ -2,10 +2,8 @@ import React from "react";
 import "./App.css"; // Estilo CSS general de la pagina web
 import { HashRouter as Router, Routes, Route } from 'react-router-dom'; // Libreria para el cambiar entre paginas del DOM
 import LoginPage from "./pages/login"; // Pagina Inicio de sesion
-import SignUpPage from "./pages/signup"; // Pagina Registro de Usuarios
 import WelcomePage from "./pages/welcome"; // Pagina de Bienvenida
 import HomePage from "./pages/home";
-import { LogoNetBin } from "./components/Logo_NetBin"; // Logo de Netbin para WelcomePage
 
 /*
   Router: es el elemento que encapsula toda la aplicacion web y permite navegar entre sus paginas.

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { Input, Button } from "@nextui-org/react";
-import { EyeFilledIcon } from "./EyeFilledIcon";
-import { EyeSlashFilledIcon } from "./EyeSlashFilledIcon";
+import { EyeFilledIcon } from "../components/EyeFilledIcon";
+import { EyeSlashFilledIcon } from "../components/EyeSlashFilledIcon";
 import "./login.css";
 import { useNavigate } from 'react-router-dom'; // Componente para poder cambiar de pagina en un momento especifico.
 
