@@ -91,10 +91,10 @@ export default function WelcomePage()
       <div className="Information-Container" ref={informationRef}>
         <div className="Information-About-NetBin">
           <h1 className="Information-Title-About-NetBin"> 
-            Sobre Nuestro Producto
+            Sobre NetBin
           </h1>
           <p className="Information-Text-About-NetBin">
-            NetBin es una solución innovadora de gestión de residuos que utiliza tecnología de vanguardia como 
+            NetBin es una caneca de basura inteligente e innovadora encargada de la gestión de residuos que utiliza tecnología de vanguardia como 
             inteligencia artificial, IoT, reconocimiento de voz y NFC para ayudar a los usuarios a clasificar 
             correctamente su basura.
           </p>
@@ -112,8 +112,8 @@ export default function WelcomePage()
           <motion.div className="Product-Rewards" whileHover={{ scale: 1.1 }}>
             <EpMoney width="50" height="50" color = "black"/>
             <p className="Product-Text">
-              Integrando NFC es posible identificar un usuario eficientemente. Esto nos permitira recompensarte por tu
-              compromiso con el medio ambiente.
+              Integrado con NFC, cada una de nuestras canecas tiene la capacidad de reconocerte. 
+              Esto nos permitira recompensarte con CoBins por tu compromiso con el medio ambiente.
             </p>
           </motion.div>
 
@@ -121,7 +121,7 @@ export default function WelcomePage()
             <GravityUiTrashBin width="50" height="50" color = "black"/>
             <p className="Product-Text">
               NetBin se preocupa por el medio ambiente y la sostenibilidad. Este producto esta pensado
-              para continuar con la responsabilidad ambiental.
+              para continuar con la responsabilidad ambiental, no solo incentiva sino lo mas importante, enseña.
             </p>
           </motion.div>
         </div>
