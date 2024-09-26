@@ -60,7 +60,7 @@ export default function WelcomePage()
   */
 
   return(
-    <div>
+    <div className="WelcomePage-Container">
       <div className="Welcome-Background">
         <div className="Welcome-Bar">
             <div className="NetBin-Logo-Container">
