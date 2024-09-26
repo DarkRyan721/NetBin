@@ -178,7 +178,7 @@ export default function WelcomePage()
                   label: "custom-label-input",
                 }}
                 style={{
-                  color: "#ffffff", // Color personalizado para el texto
+                  color: "#ffffff",
                   fontWeight: 400,
                 }}
                 value={firstname}
@@ -282,15 +282,16 @@ export default function WelcomePage()
             </div>
           </div>
         )}
-
       </div>
+
+
       
-      <div className="Information-Container" ref={informationRef}>
-        <div className="Information-About-NetBin">
-          <h1 className="Information-Title-About-NetBin"> 
+      <div className="features-Container" ref={informationRef}>
+        <div className="features-About-NetBin">
+          <h1 className="features-Title-About-NetBin"> 
             Sobre NetBin
           </h1>
-          <p className="Information-Text-About-NetBin">
+          <p className="features-Text-About-NetBin">
             NetBin es una caneca de basura inteligente e innovadora encargada de la gestión de residuos que utiliza tecnología de vanguardia como 
             inteligencia artificial, IoT, reconocimiento de voz y NFC para ayudar a los usuarios a clasificar 
             correctamente su basura.

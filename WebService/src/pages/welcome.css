@@ -187,46 +187,46 @@
 
 /* From Uiverse.io by satyamchaudharydev */ 
   /* button styling */
-  .button {
-    --border-right: 6px;
-    --text-stroke-color: rgba(255,255,255,0.6);
-    --animation-color: #37FF8B;
-    --fs-size: 1.5em;
-    letter-spacing: 3px;
-    text-decoration: none;
-    font-size: var(--fs-size);
-    font-family: "Arial";
-    position: relative;
-    text-transform: uppercase;
-    color: transparent;
-    -webkit-text-stroke: 1px var(--text-stroke-color);
-    margin-top: 20px;
-  }
-  /* this is the text, when you hover on button */
-  .hover-text {
-    position: absolute;
-    box-sizing: border-box;
-    content: attr(data-text);
-    color: var(--animation-color);
-    width: 0%;
-    inset: 0;
-    border-right: var(--border-right) solid var(--animation-color);
-    overflow: hidden;
-    transition: 0.5s;
-    -webkit-text-stroke: 1px var(--animation-color);
-  }
-  /* hover */
-  .button:hover .hover-text {
-    width: 100%;
-    filter: drop-shadow(0 0 23px var(--animation-color))
-  }
+.button {
+  --border-right: 6px;
+  --text-stroke-color: rgba(255,255,255,0.6);
+  --animation-color: #37FF8B;
+  --fs-size: 1.5em;
+  letter-spacing: 3px;
+  text-decoration: none;
+  font-size: var(--fs-size);
+  font-family: "Arial";
+  position: relative;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--text-stroke-color);
+  margin-top: 20px;
+}
+/* this is the text, when you hover on button */
+.hover-text {
+  position: absolute;
+  box-sizing: border-box;
+  content: attr(data-text);
+  color: var(--animation-color);
+  width: 0%;
+  inset: 0;
+  border-right: var(--border-right) solid var(--animation-color);
+  overflow: hidden;
+  transition: 0.5s;
+  -webkit-text-stroke: 1px var(--animation-color);
+}
+/* hover */
+.button:hover .hover-text {
+  width: 100%;
+  filter: drop-shadow(0 0 23px var(--animation-color))
+}
 
-  .button:active .hover-text {
-    color: white;  /* Cambia el color de las letras a blanco mientras el botón está presionado */
-    -webkit-text-stroke: none;  /* Elimina el stroke para hacer el texto completamente blanco */
-    filter: none;  /* Opcional: Elimina el filtro de sombra mientras haces click */
-    transition: 0.1s;  /* Suaviza la transición del clic */
-  }
+.button:active .hover-text {
+  color: white;  /* Cambia el color de las letras a blanco mientras el botón está presionado */
+  -webkit-text-stroke: none;  /* Elimina el stroke para hacer el texto completamente blanco */
+  filter: none;  /* Opcional: Elimina el filtro de sombra mientras haces click */
+  transition: 0.1s;  /* Suaviza la transición del clic */
+}
 
 /* Texto superior */
 .Company-Phrase 
@@ -281,7 +281,7 @@
   margin: 10px;
 }
 
-.Information-Container 
+.features-Container 
 {
   position: relative;
   z-index: 2;
@@ -294,7 +294,7 @@
   min-height: 100vh;
 }
 
-.Information-About-NetBin
+.features-About-NetBin
 {
   position: relative;
   background-color: #cbc1af;
@@ -309,7 +309,7 @@
   border-radius: 0px;
 }
 
-.Information-About-NetBin::after 
+.features-About-NetBin::after 
 {
   content: '';
   position: absolute;
@@ -319,7 +319,7 @@
   border-bottom: 2px solid rgb(0, 0, 0);
 }
 
-.Information-Title-About-NetBin
+.features-Title-About-NetBin
 {
   color: #000000;
   font-size: 24px;
@@ -328,7 +328,7 @@
   font-weight: bold;
 }
 
-.Information-Text-About-NetBin
+.features-Text-About-NetBin
 {
   color: #000000;
   font-size: 16px;
@@ -458,6 +458,19 @@
   .Welcome-Container {
       padding-left: 10vw;  /* Cambiamos el margen izquierdo a un 10% del ancho de la ventana */
   }
+
+  .Product-Description-Container{
+      width: 100%;  /* Asegura que ocupe todo el ancho en móviles */
+      padding-left: 5vw;  /* Reducimos el margen izquierdo aún más en pantallas pequeñas */
+      padding-right: 5vw;  /* También ajustamos el margen derecho */
+      flex-direction: column;
+      gap: 15px;
+  }
+
+  .features-About-NetBin
+  {
+    margin-bottom: 25px;
+  }
 }
 
 /* Media Queries para dispositivos móviles */
@@ -519,9 +532,13 @@
       gap: 15px;
   }
 
-  .Information-About-NetBin
+  .features-About-NetBin
   {
     width: 100%;
+    padding-top: 30px;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-bottom: 25px;
   }
 
   #logo-netbin
