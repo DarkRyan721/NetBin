@@ -20,7 +20,6 @@ export default function App()
       <div className="App">
         <Routes>
           <Route path="/" element={<WelcomePage/>}/>
-          <Route path="/signup" element={<SignUpPage/>}/>
           <Route path="/login" element={<LoginPage/>}/>
           <Route path="/home" element={<HomePage/>}/>
         </Routes>

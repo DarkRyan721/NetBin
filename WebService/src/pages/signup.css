@@ -23,7 +23,7 @@
 
 .SignUp-Container {
     position: relative;
-    z-index: 3;
+    z-index: 0;
     width: 400px;
     height: 500px;
     background-color: rgba(0, 0, 0, 0.7);

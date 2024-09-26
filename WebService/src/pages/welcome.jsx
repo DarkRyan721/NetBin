@@ -1,5 +1,5 @@
-import React, {useRef} from "react";
-import { Button } from "@nextui-org/react"; // Importacion del componente Button para su uso.
+import React, { useRef, useState, useEffect } from "react";
+import { Button, Input } from "@nextui-org/react"; // Importacion del componente Button para su uso.
 import "./welcome.css"; // CSS para welcome.jsx
 import {UserIcon} from '../components/UserIcon'; // Importacion del diseño del simbolo de usuario para los botones de registro e ingreso.
 import { LetterNetBin, LogoNetBin } from "../components/Logo_NetBin"; // Importacion del logo y nombres de la empresa.
@@ -9,6 +9,9 @@ import {motion} from "framer-motion";
 import {ArcticonsOpenaiChatgpt} from "../components/ChatGpt_Icon";
 import {EpMoney} from "../components/Rewards_Icon";
 import {GravityUiTrashBin} from "../components/Bin_Icon";
+import {MdiCloseOutline} from "../components/Close_Icon";
+import { EyeFilledIcon } from "./EyeFilledIcon"; // Componente grafico para la opcion de ocultar la contraseña.
+import { EyeSlashFilledIcon } from "./EyeSlashFilledIcon"; // Componente grafico para la opcion de ocultar la contraseña.
 
 export default function WelcomePage()
 {
@@ -23,17 +26,100 @@ export default function WelcomePage()
     }
   };
 
-  // Accedemos/buscamos el token que permite adquirir las cookies.
-  const token = Cookies.get('token');
+  // useEffect(() => {
+  //   // Código que solo se ejecuta una vez al montar el componente
+  //   const token = Cookies.get('token');
 
-  if(token)// Usuario ya previamente autenticado(No es necesario hacer de nuevo el logeo).
+  //   if (token) {
+  //     console.log('Usuario autenticado con token:', token);
+  //   } else {
+  //     console.log('Usuario no autenticado');
+  //   }
+  // }, []);
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const togglePopUp = () => 
   {
-    console.log('Usuario autenticado con token:', token);
-  } 
-  else// Usuario no autenticado previamente.
-  {
-    console.log('Usuario no autenticado');
-  }
+    setIsOpen(!isOpen); // Alterna entre mostrar y ocultar
+  };
+
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  //________________________________________________________________________________________________
+  // Lista de variables que el usuario registrara en la base de datos para la creacion de su cuenta.
+
+  const [firstname, setFirstName] = useState("");
+  const [secondname, setSecondName] = useState("");
+  const [username, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+
+  //________________________________________________________________________________________________
+
+  // Variable que permite el intercambio de mensajes entre el BackEnd y el FrontEnd.
+  const [message, setMessage] = useState("");
+
+  //_____________________________________________________________________________________________________________________________
+  // Variables y funcion necesarias para ocultar o dejar visible la contraseña(Recuperada de la documentacion oficial de NextUI).
+
+  const [isVisible, setIsVisible] = React.useState(false);
+  const toggleVisibility = () => setIsVisible(!isVisible);
+
+  //_____________________________________________________________________________________________________________________________
+
+  // Funcion encargada del registro de usuarios y la comunicacion con el servidor BackEnd.
+  const RegisterFunction = async () => {
+    try {
+      // Se crea un plain object que contenga la informacion del usuario suministrada en los Inputs.
+      const userData = { username, password, firstname, secondname };
+
+      console.log("Datos enviados:", JSON.stringify(userData));
+
+      // Elemento que almacenara la respuesta de la solicitud POST hecha con la funcion fetch().
+      const response = await fetch(
+        "https://netbin.onrender.com/auth/register",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(userData),
+        }
+      );
+
+      // Verifica si la respuesta del servidor BackEnd fue negativa para cortar el flujo y arrojar el error.
+      if (!response.ok) {
+        throw new Error("Error en el registro.");
+      }
+
+      // Se convierten y extraen los datos recibidos del servidor BackEnd para usarlo en las cookies.
+      const data = await response.json();
+
+      // **SE IMPRIMEN LOS DATOS MOMENTANEAMENTE PARA SU REVISION. BORRARLO**.
+      console.log(data);
+
+      // Se establecen las cookies en el sistema.
+      //Cookies.set("token", data.token, { expires: 7, secure: true });
+
+      // Se establece el mensaje de un correcto registro para el usuario.
+      setMessage("Registro exitoso");
+
+      // Se activa la bandera que permite una animacion.
+      setShowSuccess(true);
+
+      setUserName("");
+      setFirstName("");
+      setSecondName("");
+      setPassword("");
+
+      //Después de 2 segundos de la animación, se re-dirige al WelcomePage
+      setTimeout(() => {
+        setShowSuccess(false);
+        togglePopUp();
+      }, 2000);
+    } catch (error) {
+      // Se establece un mensaje de error en caso tal de que la comunicacion con el BackEnd haya fallado.
+      setMessage("No se pudo lograr el registo. " + error.message);
+    }
+  };
 
   /*
     Welcome-Background: es el Div encargado de cargar la imagen y por medio de ::after se aplica la capa de opacidad sobre esta.
@@ -65,11 +151,10 @@ export default function WelcomePage()
               <LetterNetBin className="Letter-NetBin"/>
             </div>
             <div className="Button-Container">
-              <Link to="/signup">
-                <Button className="SignUp-Button text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition" startContent={<UserIcon/>} Link to="/about">
+              
+                <Button type="button" className="SignUp-Button text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition" startContent={<UserIcon/>} onClick={togglePopUp}>
                     Registrarse
                 </Button>
-              </Link>
               <Link to="/login">
                 <Button className="LogIn-Button text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition" endContent={<UserIcon/>}>
                   Ingresar
@@ -86,6 +171,128 @@ export default function WelcomePage()
               <span class="Text-On-Button">Nuestro Producto</span>
             </button>
         </div>
+
+        {isOpen && (
+          <div className="SignUp-Back">
+            <div className="SignUp-Container">
+              {/* From Uiverse.io by vinodjangid07 */} 
+              <button type="button" class="Close-PopUp-Button" onClick={togglePopUp}>
+                <MdiCloseOutline className="svgIcon"/>
+              </button>
+              <h1 className="SignUp-Title">Crear Cuenta</h1>
+              <Input
+                isClearable
+                label="Nombre"
+                variant="underlined"
+                className="Name-Input max-w-xs mb-4"
+                classNames={{
+                  label: "custom-label-input",
+                }}
+                style={{
+                  color: "#ffffff", // Color personalizado para el texto
+                  fontWeight: 400,
+                }}
+                value={firstname}
+                onChange={(e) => setFirstName(e.target.value)}
+                onClear={() => setFirstName("")}
+              />
+              <Input
+                isClearable
+                label="Apellido"
+                variant="underlined"
+                className="LastName-Input max-w-xs mb-4"
+                classNames={{
+                  label: "custom-label-input",
+                }}
+                style={{
+                  color: "#ffffff", // Color personalizado para el texto
+                  fontWeight: 400,
+                }}
+                value={secondname}
+                onChange={(e) => setSecondName(e.target.value)}
+                onClear={() => setSecondName("")}
+              />
+              <Input
+                isClearable
+                label="Correo"
+                variant="underlined"
+                className="Email-Input max-w-xs mb-4"
+                classNames={{
+                  label: "custom-label-input",
+                }}
+                style={{
+                  color: "#ffffff", // Color personalizado para el texto
+                  fontWeight: 400,
+                }}
+                value={username}
+                onChange={(e) => setUserName(e.target.value)}
+                onClear={() => setUserName("")}
+              />
+
+              <Input
+                label="Contraseña"
+                variant="underlined"
+                className="Password-Input max-w-xs mb-4"
+                classNames={{
+                  label: "custom-label-input",
+                }}
+                style={{
+                  color: "#ffffff", // Color personalizado para el texto
+                  fontWeight: 400,
+                }}
+                // color="success"
+                endContent={
+                  <button
+                    className="focus:outline-none"
+                    type="button"
+                    onClick={toggleVisibility}
+                    aria-label="toggle password visibility"
+                  >
+                    {isVisible ? (
+                      <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+                    ) : (
+                      <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+                    )}
+                  </button>
+                }
+                type={isVisible ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              {showSuccess && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.7, backgroundPosition: "0% 100%" }}
+                  animate={{
+                    opacity: 1,
+                    scale: 0.9,
+                    backgroundPosition: "100% 100%", // El gradiente se moverá de izquierda a derecha
+                  }}
+                  transition={{
+                    duration: 2, // Duración total de la animación
+                    ease: "easeInOut",
+                  }}
+                  style={{
+                    padding: "20px",
+                    borderRadius: "10px",
+                    border: "4px solid transparent", // Borde transparente para no interferir
+                    background:
+                      "linear-gradient(90deg, transparent 45%, #d0d3d4 50%, transparent 55%) no-repeat", // Gradiente ajustado para una línea verde más delgada
+                    backgroundSize: "200% 5%",
+                  }}
+                  className="Success-Message"
+                >
+                  <h2>¡{message}!</h2>
+                </motion.div>
+              )}
+              <button type="button" class="button" data-text="Awesome" onClick={RegisterFunction}>
+                <span class="actual-text">&nbsp;Guardar&nbsp;</span>
+                <span aria-hidden="true" class="hover-text">
+                  &nbsp;Guardar&nbsp;
+                </span>
+              </button>
+            </div>
+          </div>
+        )}
       </div>
       
       <div className="Information-Container" ref={informationRef}>
