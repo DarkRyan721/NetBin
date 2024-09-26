@@ -44,7 +44,7 @@ export default function SignUpPage() {
       console.log("Datos enviados:", JSON.stringify(userData));
 
       // Elemento que almacenara la respuesta de la solicitud POST hecha con la funcion fetch().
-      const response = await fetch("http://localhost:8080/auth/register", {
+      const response = await fetch("https://netbin.onrender.com/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userData),
