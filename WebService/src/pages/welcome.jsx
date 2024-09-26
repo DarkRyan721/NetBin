@@ -77,7 +77,6 @@ export default function WelcomePage()
               </Link>
             </div>
         </div>
-
         <div className="Welcome-Container">
             <h1 className="Company-Phrase">Reduce, Reusa y Recicla</h1>
             <h1 className="Initial-Phrase">ASEGURAMOS El CORRECTO{"\n"}RECICLAJE.</h1>
