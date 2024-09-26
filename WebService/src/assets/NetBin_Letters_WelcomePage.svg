@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="107.34228"
-   height="27.402979"
-   viewBox="0 0 71.561518 18.268653"
+   width="112.342"
+   height="32.403"
+   viewBox="0 0 74.894668 21.602"
    version="1.1"
    id="svg1"
    xml:space="preserve"
@@ -26,10 +26,10 @@
      inkscape:document-units="px"
      showguides="false"
      showborder="true"
-     inkscape:zoom="1.9705668"
-     inkscape:cx="157.82261"
-     inkscape:cy="44.403468"
-     inkscape:window-width="1366"
+     inkscape:zoom="5.5736046"
+     inkscape:cx="64.679866"
+     inkscape:cy="18.210836"
+     inkscape:window-width="1360"
      inkscape:window-height="745"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
@@ -88,10 +88,10 @@
          offset="0"
          id="stop22" /></linearGradient><inkscape:perspective
        sodipodi:type="inkscape:persp3d"
-       inkscape:vp_x="-790.169 : 303.86169 : 1"
-       inkscape:vp_y="0 : 2519.6848 : 0"
-       inkscape:vp_z="4995.3552 : -4.7655387 : 1"
-       inkscape:persp3d-origin="2415.1982 : -304.18807 : 1"
+       inkscape:vp_x="-790.16901 : 307.35767 : 1"
+       inkscape:vp_y="0 : 2519.685 : 0"
+       inkscape:vp_z="4995.3552 : -1.2695748 : 1"
+       inkscape:persp3d-origin="2415.1982 : -300.69213 : 1"
        id="perspective72" /><linearGradient
        inkscape:collect="always"
        xlink:href="#swatch22"
@@ -103,9 +103,9 @@
        gradientUnits="userSpaceOnUse" /><linearGradient
        inkscape:collect="always"
        xlink:href="#swatch39"
-       id="linearGradient35"
+       id="linearGradient63"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="translate(-45.249997,-13.500002)"
+       gradientTransform="translate(-41.916662,-11)"
        x1="49.999996"
        y1="24.134329"
        x2="121.56152"
@@ -113,16 +113,16 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-4.7500013,-1.4999999)"><text
+     transform="translate(-6.4166692,-2.3333339)"><text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:25.4px;font-family:'SF Pro Display';-inkscape-font-specification:'SF Pro Display, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;mix-blend-mode:normal;fill:#161617;fill-opacity:1;fill-rule:nonzero;stroke:url(#linearGradient35);stroke-width:0;stroke-linecap:round;stroke-linejoin:bevel;stroke-dasharray:none;paint-order:stroke markers fill"
-       x="40.332325"
-       y="19.520605"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:25.4px;font-family:'SF Pro Display';-inkscape-font-specification:'SF Pro Display, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;mix-blend-mode:normal;fill:#161617;fill-opacity:1;fill-rule:nonzero;stroke:url(#linearGradient63);stroke-width:0;stroke-linecap:round;stroke-linejoin:bevel;stroke-dasharray:none;paint-order:stroke markers fill"
+       x="43.665661"
+       y="22.020605"
        id="text1-5"><tspan
          sodipodi:role="line"
          id="tspan1-6"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:25.4px;font-family:'SF Pro Display';-inkscape-font-specification:'SF Pro Display, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:url(#linearGradient35);stroke-width:0;stroke-linecap:round;stroke-linejoin:bevel;stroke-dasharray:none;paint-order:stroke markers fill"
-         x="40.332325"
-         y="19.520605">Net<tspan
-   style="text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:url(#linearGradient35);stroke-width:0;stroke-linecap:round;stroke-linejoin:bevel;stroke-dasharray:none;paint-order:stroke markers fill"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:25.4px;font-family:'SF Pro Display';-inkscape-font-specification:'SF Pro Display, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:url(#linearGradient63);stroke-width:0;stroke-linecap:round;stroke-linejoin:bevel;stroke-dasharray:none;paint-order:stroke markers fill"
+         x="43.665661"
+         y="22.020605">Net<tspan
+   style="text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:url(#linearGradient63);stroke-width:0;stroke-linecap:round;stroke-linejoin:bevel;stroke-dasharray:none;paint-order:stroke markers fill"
    id="tspan2-9">Bin</tspan></tspan></text></g></svg>
