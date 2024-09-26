@@ -6,8 +6,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@CrossOrigin(origins = {"https://netbin.vercel.app/"})
 @RequestMapping("/auth")
+@RestController
 @RequiredArgsConstructor
 public class AuthController {
 
@@ -18,7 +19,7 @@ public class AuthController {
     {
         return ResponseEntity.ok(authService.login(request));
     }
-    @CrossOrigin(origins = "https://netbin.vercel.app")
+
     @PostMapping(value = "register")
     public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request)
     {

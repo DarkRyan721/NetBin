@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.netbin.app.NetBinApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 11.85 s -- in com.netbin.app.NetBinApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 12.20 s -- in com.netbin.app.NetBinApplicationTests
