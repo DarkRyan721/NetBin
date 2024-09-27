@@ -12,8 +12,11 @@ import { EyeSlashFilledIcon } from "../components/EyeSlashFilledIcon"; // Compon
 import { Link } from "react-router-dom"; // Importacion de Link, componente que permite cambiar de pagina web.
 import { motion } from "framer-motion"; // Importacion de motion, herramienta para generar animaciones.
 
+<<<<<<< HEAD
 export default function WelcomePage() {
   // Referencia al div:Information-Container
+=======
+>>>>>>> 7853228ac4d266a499fe0f0e3716f551fcf8dc89
   // Referencia al div:features-Container
   const featuresRef = useRef(null);
   const informationRef = useRef(null);
@@ -315,8 +318,11 @@ export default function WelcomePage() {
         )}
       </div>
 
+<<<<<<< HEAD
       <div className="features-Container" ref={informationRef}>
 =======
+=======
+>>>>>>> 7853228ac4d266a499fe0f0e3716f551fcf8dc89
       <div className="Information-Container" ref={informationRef}>
         <div className="Information-About-NetBin">
           {/* From Uiverse.io by alexruix */}
@@ -351,10 +357,13 @@ export default function WelcomePage() {
         <div className="features-About-NetBin">
           <h1 className="features-Title-About-NetBin">Sobre NetBin</h1>
           <p className="features-Text-About-NetBin">
+<<<<<<< HEAD
             NetBin es una caneca de basura inteligente e innovadora encargada de
             la gestión de residuos que utiliza tecnología de vanguardia como
             inteligencia artificial, IoT, reconocimiento de voz y NFC para
             ayudar a los usuarios a clasificar correctamente su basura.
+=======
+>>>>>>> 7853228ac4d266a499fe0f0e3716f551fcf8dc89
             NetBin es una propuesta innovadora encargada de la gestión de residuos que utiliza tecnología de vanguardia como 
             inteligencia artificial, IoT, reconocimiento de voz y NFC para ayudar a los usuarios a clasificar 
             correctamente su basura. NetBin se rige en tres aspectos fundamentales para su funcionamiento:
@@ -365,9 +374,12 @@ export default function WelcomePage() {
           <motion.div className="Product-AI" whileHover={{ scale: 1.1 }}>
             <ArcticonsOpenaiChatgpt width="50" height="50" />
             <p className="Product-Text">
+<<<<<<< HEAD
               Usando la tecnologia de ChatGpt y el reconocimiento de voz NetBin
               adquiere la capacidad de escucharte, comprenderte y actuar.
               Apoyado por IA podras clasificar correctamente la basura.
+=======
+>>>>>>> 7853228ac4d266a499fe0f0e3716f551fcf8dc89
               Usando la tecnologia de ChatGpt y el reconocimiento de voz NetBin, adquiere la capacidad de escucharte,
               comprenderte y actuar por ti. Apoyado por IA podras clasificar correctamente la basura.
             </p>
@@ -376,9 +388,12 @@ export default function WelcomePage() {
           <motion.div className="Product-Rewards" whileHover={{ scale: 1.1 }}>
             <EpMoney width="50" height="50" color="black" />
             <p className="Product-Text">
+<<<<<<< HEAD
               Integrado con NFC, cada una de nuestras canecas tiene la capacidad
               de reconocerte. Esto nos permitira recompensarte con CoBins por tu
               compromiso con el medio ambiente.
+=======
+>>>>>>> 7853228ac4d266a499fe0f0e3716f551fcf8dc89
               Integrado con NFC, cada una de nuestras canecas tiene la capacidad de reconocerte. 
               Esto nos permitira a nosotros y las compañias aliadas, recompensarte con CoBins y productos por tu compromiso con el medio ambiente.
             </p>
