@@ -42,12 +42,7 @@
   color: #000000;
   background-color: rgba(7, 7, 7, 100);
   align-items: center;
-<<<<<<< HEAD
-  padding: 0px 20px;
-  /* Añadir un padding para que haya más espacio */
-=======
   padding: 10px 20px; /* Añadir un padding para que haya más espacio */
->>>>>>> 1e1e531a9a8cdf8a9ca60e6dad88e948b92e29fe
   z-index: 1;
 }
 .Welcome-Bar::after 
@@ -272,12 +267,8 @@
 {
   display: flex;
   height: auto;
-<<<<<<< HEAD
-  padding: 5px 10px;
-=======
   width: 85px;
   margin-right: 20px;
->>>>>>> 1e1e531a9a8cdf8a9ca60e6dad88e948b92e29fe
   align-items: center;
 }
 
