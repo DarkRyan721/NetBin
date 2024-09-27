@@ -20,7 +20,7 @@ export default function WelcomePage()
   const informationRef = useRef(null);
 
   // Funcion para generar el desplazamiento que ejecuta el button:Product-Button
-  const scrollToInformation = () => 
+  const scrollToInformation = () =>
   {
     if(informationRef.current)
     {
@@ -42,7 +42,7 @@ export default function WelcomePage()
   // Funcion que alterna el estado de la ventana Pop-up(oculto/visible)
   const togglePopUp = () => setIsOpen(!isOpen);
 
-  // Elementos creados para activar/desactivar la animacion del mensaje relacionado al registro 
+  // Elementos creados para activar/desactivar la animacion del mensaje relacionado al registro
   const [showSuccess, setShowSuccess] = useState(false);
 
   //________________________________________________________________________________________________
@@ -160,7 +160,6 @@ export default function WelcomePage()
               </Link>
             </div>
         </div>
-
         <div className="Welcome-Container">
             <h1 className="Company-Phrase">Reduce, Reusa y Recicla</h1>
             <h1 className="Initial-Phrase">ASEGURAMOS El CORRECTO{"\n"}RECICLAJE.</h1>
