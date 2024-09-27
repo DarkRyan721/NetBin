@@ -635,6 +635,8 @@
   .features-About-NetBin
   {
     margin-bottom: 25px;
+    padding-left: 150px;
+    padding-right: 150px;
   }
 }
 
@@ -687,6 +689,20 @@
 
   .Product-Button {
       width: 180px;
+  }
+
+  .Information-Container 
+  {
+    flex-direction: column;
+  }
+
+  .Information-About-NetBin
+  {
+    width: 100%;
+  }
+
+  .Image-Container{
+    width: 100%;
   }
 
   .Product-Description-Container{
