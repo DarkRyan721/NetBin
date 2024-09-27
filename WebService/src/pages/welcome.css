@@ -244,7 +244,7 @@
   font-size: 4rem;  /* Tamaño grande, pero escalable */
   font-weight: bold;
   color: #ffffff;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 
 .NetBin-Information
@@ -279,6 +279,172 @@
 #letters-netbin
 {
   margin: 10px;
+}
+
+.Information-Container 
+{
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  flex-grow: 1;
+  width: 100%;
+  min-height: 100vh;
+  background: #202020;
+}
+
+.Information-About-NetBin
+{
+  /* background-color: #1e8449; */
+  width: 60%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.Image-Container
+{
+  /* background-color: #471e84; */
+  width: 40%;
+  height: 100px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.Image-NetBin
+{
+  position: relative;
+  margin: 0;
+  padding: 0;
+  background-image: url('../assets/Img_NetBin.jpg');
+  background-size: cover;
+  background-position: center;
+
+  width: 75%;
+  height: 75%;
+
+  background-repeat: no-repeat;
+  object-fit: cover; /* Asegura que la imagen mantenga su proporción */
+  border-radius: 15px; /* Ajusta el valor para hacer los bordes más o menos redondeados */
+}
+
+/* From Uiverse.io by alexruix */ 
+.card 
+{
+  --background: linear-gradient(to left, #c2a84c 0%, #5dd661 50%);
+  width: 450px;
+  height: 450px;
+  padding: 5px;
+  border-radius: 1rem;
+  overflow: visible;
+  background: #f7ba2b;
+  background: var(--background);
+  position: relative;
+  transition: transform 0.5s ease;
+  margin-bottom: 50px;
+}
+ 
+.card::after 
+{
+  position: absolute;
+  content: "";
+  top: 30px;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  transform: scale(0.8);
+  filter: blur(45px);
+  background: var(--background);
+  transition: opacity .5s;
+}
+ 
+.card-info 
+{
+  --color: #181818;
+  background: var(--color);
+  color: var(--color);
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  border-radius: .7rem;
+  padding: 30px;
+}
+ 
+ .card .title 
+ {
+  color: #82f788;
+  font-weight: bold;
+  letter-spacing: .1em;
+  font-size: 32px;
+  margin-bottom: 30px;
+  transition: color 0.5s;
+ }
+
+ .card .Text
+ {
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 16px;
+  text-align: justify;
+ }
+ 
+ /*Hover*/
+ .card:hover
+ {
+  transform: scale(1.08);
+ }
+
+ .card:hover::after 
+ {
+  opacity: 0;
+ }
+ 
+ .card:hover .title 
+ {
+  color: #eaf1eb;
+ }
+ 
+ .Information-Button 
+ {
+  position: relative;
+  display: inline-block;
+  margin: 15px;
+  padding: 15px 30px;
+  text-align: center;
+  font-size: 18px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: #ecffe6;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: ease-out 0.5s;
+  border: 3px solid #ecffe6;
+  border-radius: 10px;
+  box-shadow: inset 0 0 0 0 #5dd661;
+}
+
+.Information-Button:hover 
+{
+  color: rgb(0, 0, 0);
+  border: 3px solid #5dd661;
+  box-shadow: inset 0 -100px 0 0 #5dd661;
+}
+
+.Information-Button:active 
+{
+  transform: scale(0.9);
 }
 
 .features-Container 
@@ -339,7 +505,6 @@
 .Product-Description-Container
 {
   position: relative;
-  /* background-color: rgb(255, 0, 0); */
   display: flex;
   justify-content: space-between; /*Mantiene un espacio uniforme entre los componentes*/
   align-items: center;
