@@ -13,6 +13,8 @@ import { Link } from "react-router-dom"; // Importacion de Link, componente que 
 import { motion } from "framer-motion"; // Importacion de motion, herramienta para generar animaciones.
 
 export default function WelcomePage() {
+
+
   // Referencia al div:Information-Container
   // Referencia al div:features-Container
   const featuresRef = useRef(null);
