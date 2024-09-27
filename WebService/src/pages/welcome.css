@@ -37,9 +37,10 @@
   top: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.0);
+  color: #000000;
+  background-color: rgba(7, 7, 7, 100);
   align-items: center;
-  padding: 10px 20px;
+  padding: 0px 20px;
   /* Añadir un padding para que haya más espacio */
   z-index: 1;
 }
@@ -48,9 +49,9 @@
   content: '';
   position: absolute;
   bottom: 0;
-  left: 5%;
-  width: 90%;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  left: 0%;
+  width: 100%;
+  border-bottom: 2px solid rgb(255, 255, 255);
 }
 
 .Button-Container {
@@ -266,7 +267,7 @@
 .NetBin-Logo-Container {
   display: flex;
   height: auto;
-  padding: 10px 10px;
+  padding: 5px 10px;
   align-items: center;
 }
 
@@ -420,6 +421,20 @@
 .Product-Button:hover .Bin-On-Button {
   fill: white;
   transform: scale(1.2);
+}
+
+.nav-button{
+  color: #ffffff;
+  background-color: transparent;
+  border: 0px;
+  border-color: transparent;
+  padding: 4px;
+  transition: 0.2s;
+  /* text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition */
+}
+
+.nav-button:hover{
+  color: #1f1e1e;
 }
 
 /* Media Queries para tablets */
