@@ -12,14 +12,27 @@ import { EyeSlashFilledIcon } from "../components/EyeSlashFilledIcon"; // Compon
 import { Link } from "react-router-dom"; // Importacion de Link, componente que permite cambiar de pagina web.
 import { motion } from "framer-motion"; // Importacion de motion, herramienta para generar animaciones.
 
+<<<<<<< HEAD
 export default function WelcomePage() {
   // Referencia al div:Information-Container
+=======
+  // Referencia al div:features-Container
+  const featuresRef = useRef(null);
+>>>>>>> 1e1e531a9a8cdf8a9ca60e6dad88e948b92e29fe
   const informationRef = useRef(null);
 
   // Funcion para generar el desplazamiento que ejecuta el Button:Product-Button
   const scrollToInformation = () => {
     if (informationRef.current) {
       informationRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const scrollToFeatures = () => 
+  {
+    if(featuresRef.current) 
+    {
+      featuresRef.current.scrollIntoView({behavior: 'smooth'});
     }
   };
 
@@ -305,14 +318,55 @@ export default function WelcomePage() {
         )}
       </div>
 
+<<<<<<< HEAD
       <div className="features-Container" ref={informationRef}>
+=======
+      <div className="Information-Container" ref={informationRef}>
+        <div className="Information-About-NetBin">
+          {/* From Uiverse.io by alexruix */}
+          <div class="card">
+            <div class="card-info">
+              <h1 class="title">
+                NETBIN
+              </h1>
+              <p className="Text">
+                NetBin es una caneca inteligente diseñada para guiar a las personas en la correcta clasificación de los residuos de basura. 
+                A través de la inteligencia artificial, NetBin te ayudará si no estás seguro a que categoria corresponde lo que deseas desechar. 
+                Además de contribuir al cuidado del medio ambiente, serás recompensado con CoBins, nuestra moneda 
+                virtual. Estas CoBins pueden ser canjeadas en nuestras empresas aliadas, comprometidas con la responsabilidad ambiental, 
+                como una forma de agradecer tu participación y esfuerzo en el reciclaje responsable. 
+                ¡Juntos podemos hacer una gran diferencia para el planeta!
+              </p>
+            </div>
+          </div>
+
+          <button class="Information-Button" onClick={scrollToFeatures}>
+            ¡Quiero saber mas!
+          </button>
+        </div>
+
+        <div className="Image-Container">
+          <div className="Image-NetBin">
+
+          </div>
+        </div>
+      </div>
+      
+      <div className="features-Container" ref={featuresRef}>
+>>>>>>> 1e1e531a9a8cdf8a9ca60e6dad88e948b92e29fe
         <div className="features-About-NetBin">
           <h1 className="features-Title-About-NetBin">Sobre NetBin</h1>
           <p className="features-Text-About-NetBin">
+<<<<<<< HEAD
             NetBin es una caneca de basura inteligente e innovadora encargada de
             la gestión de residuos que utiliza tecnología de vanguardia como
             inteligencia artificial, IoT, reconocimiento de voz y NFC para
             ayudar a los usuarios a clasificar correctamente su basura.
+=======
+            NetBin es una propuesta innovadora encargada de la gestión de residuos que utiliza tecnología de vanguardia como 
+            inteligencia artificial, IoT, reconocimiento de voz y NFC para ayudar a los usuarios a clasificar 
+            correctamente su basura. NetBin se rige en tres aspectos fundamentales para su funcionamiento:
+>>>>>>> 1e1e531a9a8cdf8a9ca60e6dad88e948b92e29fe
           </p>
         </div>
 
@@ -320,18 +374,28 @@ export default function WelcomePage() {
           <motion.div className="Product-AI" whileHover={{ scale: 1.1 }}>
             <ArcticonsOpenaiChatgpt width="50" height="50" />
             <p className="Product-Text">
+<<<<<<< HEAD
               Usando la tecnologia de ChatGpt y el reconocimiento de voz NetBin
               adquiere la capacidad de escucharte, comprenderte y actuar.
               Apoyado por IA podras clasificar correctamente la basura.
+=======
+              Usando la tecnologia de ChatGpt y el reconocimiento de voz NetBin, adquiere la capacidad de escucharte,
+              comprenderte y actuar por ti. Apoyado por IA podras clasificar correctamente la basura.
+>>>>>>> 1e1e531a9a8cdf8a9ca60e6dad88e948b92e29fe
             </p>
           </motion.div>
 
           <motion.div className="Product-Rewards" whileHover={{ scale: 1.1 }}>
             <EpMoney width="50" height="50" color="black" />
             <p className="Product-Text">
+<<<<<<< HEAD
               Integrado con NFC, cada una de nuestras canecas tiene la capacidad
               de reconocerte. Esto nos permitira recompensarte con CoBins por tu
               compromiso con el medio ambiente.
+=======
+              Integrado con NFC, cada una de nuestras canecas tiene la capacidad de reconocerte. 
+              Esto nos permitira a nosotros y las compañias aliadas, recompensarte con CoBins y productos por tu compromiso con el medio ambiente.
+>>>>>>> 1e1e531a9a8cdf8a9ca60e6dad88e948b92e29fe
             </p>
           </motion.div>
 
