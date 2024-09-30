@@ -610,13 +610,137 @@ color: #eaf1eb;
 {
   position: relative;
   z-index: 2;
-  display: flex;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columnas iguales */
+  grid-template-rows: repeat(2, 1fr); /* 2 filas iguales */
+  align-items: stretch; /* Asegurar que las grillas se estiren */
   flex-grow: 1;
   width: 100%;
-  min-height: 100vh;
-  background: #202020;
+  height: 100vh;
+  background: #14141C;
+  grid-gap: 20px; /* Espacio entre los elementos */
+  padding: 20px;
 }
+
+.Register-Option-Container
+{
+  display: flex;
+  /* background-color: #e71111; */
+  border-radius: 8px;
+  text-align: left;
+  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+  /* height: 100%; */
+  flex-direction: column;
+  padding: 0px 50px;
+  gap: 20px;
+}
+
+.Register-Option-Title
+{
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.Register-Option-Text
+{
+  color: white;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+/* From Uiverse.io by cssbuttons-io */ 
+.Register-Option-Button {
+  align-items: center;
+  background-image: linear-gradient(144deg, #a3ff40, #6ef342 50%, #00eb18);
+  border: 0;
+  border-radius: 8px;
+  box-shadow: rgba(65, 252, 68, 0.2) 0 15px 30px -5px;
+  box-sizing: border-box;
+  color: #ffffff;
+  display: flex;
+  font-size: 18px;
+  justify-content: center;
+  line-height: 1em;
+  width: 140px;
+  padding: 3px;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.Register-Option-Button:active,
+.Register-Option-Button:hover {
+  outline: 0;
+}
+.Register-Option-Button span {
+  background-color: rgb(6, 45, 5);
+  padding: 16px 24px;
+  border-radius: 6px;
+  width: 100%;
+  height: 100%;
+  transition: 300ms;
+  font-weight: bold;
+}
+.Register-Option-Button:hover span {
+  background: none;
+  color: #000000;
+}
+.Register-Option-Button:active {
+  transform: scale(0.9);
+}
+
+
+.User1-Container, .User2-Container, .User3-Container 
+{
+  background-color: #171721; /* color de fondo oscuro */
+  padding: 20px;
+  border-radius: 8px;
+  color: white; /* texto blanco */
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* sombra para darle algo de profundidad */
+  display: flex;
+  /* height: 100%; */
+  flex-direction: row;
+}
+
+.User1-Icon-Container
+{
+  /* background-color: #eb0000; */
+  width: 25%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.User1-Information-Container
+{
+  display: flex;
+  text-align: left;
+  flex-direction: column;
+  /* background-color: #00d8eb; */
+  flex-grow: 1;
+  height: 100%;
+}
+
+.User1-IC-Title
+{
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.User1-Ic-Text li 
+{
+  margin-bottom: 10px; /* Espacio entre los elementos de la lista */
+  color: rgb(246, 246, 246); /* Cambia el color del texto si es necesario */
+  font-size: 16px; /* Ajusta el tamaño de la fuente */
+}
+
 
 /* Media Queries para tablets */
 @media (min-width: 768px) and (max-width: 1024px)

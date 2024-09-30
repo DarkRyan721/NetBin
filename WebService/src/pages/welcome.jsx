@@ -19,6 +19,7 @@ export default function WelcomePage()
   const featuresRef = useRef(null);
   const informationRef = useRef(null);
   const instructionRef = useRef(null);
+  const welcomeRef = useRef(null);
 
   // Funcion para generar el desplazamiento que ejecuta el Button:Product-Button
   const scrollToInformation = () => 
@@ -43,6 +44,15 @@ export default function WelcomePage()
       instructionRef.current.scrollIntoView({behavior: 'smooth'});
     }
   };
+
+  const scrollToWelcome = () =>
+    {
+      if(welcomeRef.current)
+      {
+        welcomeRef.current.scrollIntoView({behavior: 'smooth'});
+        togglePopUp();
+      }
+    };
 
   // Elementos creados para abrir/cerrar la ventana emergente(Pop-Up) de registro
   const [isOpen, setIsOpen] = useState(false);
@@ -150,7 +160,7 @@ export default function WelcomePage()
 
   return (
     <div className="WelcomePage-Container">
-      <div className="Welcome-Background">
+      <div className="Welcome-Background" ref={welcomeRef}>
         <div className="Welcome-Bar">
             <div className="NetBin-Logo-Container">
               <LogoNetBin className="Logo-NetBin"/>
@@ -382,15 +392,48 @@ export default function WelcomePage()
 
       <div className="Instruction-Container" ref={instructionRef}>
         <div className="Register-Option-Container">
+          <h1 className="Register-Option-Title">
+            ¡Usa una de nuestras canecas!
+          </h1>
+          <p className="Register-Option-Text">
+            Si quieres utilizar una de nuestras canecas y ganar CoBins, puedes
+            registrarte ahora mismo, descargar nuestra aplicacion en tu celular y usar el NFC que
+            este dispone &#x1f60a;.
+          </p>
+          {/* From Uiverse.io by cssbuttons-io */ }
+          <button className="Register-Option-Button" onClick={scrollToWelcome}>
+            <span class="text">Registrate</span>
+          </button>
         </div>
 
         <div className="User1-Container">
+          <div className="User1-Icon-Container">
+            <GravityUiTrashBin width="50" height="50" color="#00eb18" />
+          </div>
+          <div className="User1-Information-Container">
+            <h1 className="User1-IC-Title">
+              ¿Ya sabes donde botar tu basura?
+            </h1>
+            <ol className="User1-Ic-Text">
+              <li>1] Acércate a una de nuestras canecas</li>
+              <li>2] Aproxima tu residuo de basura al compartimento correspondiente.</li>
+              <li>3] Nuestro sensor de proximidad te detectará y podrás botar tu basura.</li>
+            </ol>
+          </div>
         </div>
 
         <div className="User2-Container">
+          <div className="User2-Icon-Container">
+          </div>
+          <div className="User2-Information-Container">
+          </div>
         </div>
 
         <div className="User3-Container">
+          <div className="User3-Icon-Container">
+          </div>
+          <div className="User3-Information-Container">
+          </div>
         </div>
       </div>
     </div>
