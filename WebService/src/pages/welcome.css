@@ -161,18 +161,15 @@
   overflow: hidden;
   margin-left: 275px;
 }
-
 .svgIcon 
 {
   width: 18px;
   transition-duration: 0.3s;
 }
-
 .svgIcon path 
 {
   fill: white;
 }
-
 .Close-PopUp-Button:hover 
 {
   width: 100px;
@@ -181,14 +178,12 @@
   background-color: rgb(147, 0, 0);
   align-items: center;
 }
-
 .Close-PopUp-Button:hover .svgIcon 
 {
   /* width: 20px; */
   transition-duration: 0.3s;
   transform: translateY(-200%);
 }
-
 .Close-PopUp-Button::before 
 {
   position: absolute;
@@ -198,7 +193,6 @@
   /* transition-duration: .3s; */
   font-size: 0px;
 }
-
 .Close-PopUp-Button:hover::before 
 {
   font-size: 13px;
@@ -269,7 +263,6 @@
   transition: 0.1s;  /* Suaviza la transición del clic */
 }
 
-/* Texto superior */
 .Company-Phrase
 {
   font-size: 2rem;  /* Escalable con `rem` */
@@ -278,7 +271,6 @@
   margin-bottom: 20px;  /* Espacio entre los textos */
 }
 
-/* Texto principal */
 .Initial-Phrase
 {
   white-space: pre-wrap;  /* Para permitir saltos de línea automáticos */
@@ -290,7 +282,8 @@
 
 
 /* From Uiverse.io by AlimurtuzaCodes */
-.Welcome-Container-Button {
+.Welcome-Container-Button 
+{
   border: none;
   width: 16em;
   height: 3em;
@@ -305,27 +298,30 @@
   margin-bottom: 20px;
 }
 
-.Icon-WC-Button {
+.Icon-WC-Button 
+{
   fill: #AAAAAA;
   transition: all 800ms ease;
 }
 
-.Text-WC-Button {
+.Text-WC-Button 
+{
   font-weight: 600;
   color: #AAAAAA;
   font-size: 16px;
 }
 
-.Welcome-Container-Button:hover {
+.Welcome-Container-Button:hover 
+{
   background: linear-gradient(0deg, #4CAF50, #1e8449);
   transform: translateY(-2px);
 }
-
-.Welcome-Container-Button:hover .Text-WC-Button {
+.Welcome-Container-Button:hover .Text-WC-Button 
+{
   color: white;
 }
-
-.Welcome-Container-Button:hover .Icon-WC-Button {
+.Welcome-Container-Button:hover .Icon-WC-Button 
+{
   fill: white;
   transform: scale(1.2);
 }
@@ -412,7 +408,6 @@
   transition: transform 0.5s ease;
   margin-bottom: 50px;
 }
-
 .card::after
 {
   position: absolute;
@@ -428,7 +423,6 @@
   background: var(--background);
   transition: opacity .5s;
 }
-
 .card-info
 {
   --color: #181818;
@@ -444,43 +438,37 @@
   border-radius: .7rem;
   padding: 30px;
 }
+.card .title
+{
+color: #82f788;
+font-weight: bold;
+letter-spacing: .1em;
+font-size: 32px;
+margin-bottom: 30px;
+transition: color 0.5s;
+}
+.card .Text
+{
+color: #ffffff;
+font-weight: 500;
+font-size: 16px;
+text-align: justify;
+}
+.card:hover
+{
+transform: scale(1.08);
+}
+.card:hover::after
+{
+opacity: 0;
+}
+.card:hover .title
+{
+color: #eaf1eb;
+}
 
- .card .title
- {
-  color: #82f788;
-  font-weight: bold;
-  letter-spacing: .1em;
-  font-size: 32px;
-  margin-bottom: 30px;
-  transition: color 0.5s;
- }
-
- .card .Text
- {
-  color: #ffffff;
-  font-weight: 500;
-  font-size: 16px;
-  text-align: justify;
- }
-
- /*Hover*/
- .card:hover
- {
-  transform: scale(1.08);
- }
-
- .card:hover::after
- {
-  opacity: 0;
- }
-
- .card:hover .title
- {
-  color: #eaf1eb;
- }
-
- .Information-Button
- {
+.Information-Button
+{
   position: relative;
   display: inline-block;
   margin: 15px;
@@ -498,14 +486,12 @@
   border-radius: 10px;
   box-shadow: inset 0 0 0 0 #5dd661;
 }
-
 .Information-Button:hover
 {
   color: rgb(0, 0, 0);
   border: 3px solid #5dd661;
   box-shadow: inset 0 -100px 0 0 #5dd661;
 }
-
 .Information-Button:active
 {
   transform: scale(0.9);
@@ -538,7 +524,6 @@
   padding-right: 200px;
   border-radius: 0px;
 }
-
 .features-About-NetBin::after
 {
   content: '';
@@ -590,13 +575,6 @@
   align-items: center;
 }
 
-.Product-Text
-{
-  color: #000000;
-  padding-top: 10px;
-  text-align: center;
-}
-
 .Product-Rewards
 {
   background: #cbc1af;
@@ -619,6 +597,25 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.Product-Text
+{
+  color: #000000;
+  padding-top: 10px;
+  text-align: center;
+}
+
+.Instruction-Container
+{
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  flex-grow: 1;
+  width: 100%;
+  min-height: 100vh;
+  background: #202020;
 }
 
 /* Media Queries para tablets */

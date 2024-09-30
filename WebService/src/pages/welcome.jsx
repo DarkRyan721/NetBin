@@ -18,6 +18,7 @@ export default function WelcomePage()
   // Referencia al div:features-Container
   const featuresRef = useRef(null);
   const informationRef = useRef(null);
+  const instructionRef = useRef(null);
 
   // Funcion para generar el desplazamiento que ejecuta el Button:Product-Button
   const scrollToInformation = () => 
@@ -32,6 +33,14 @@ export default function WelcomePage()
     if(featuresRef.current)
     {
       featuresRef.current.scrollIntoView({behavior: 'smooth'});
+    }
+  };
+
+  const scrollToInstruction = () =>
+  {
+    if(instructionRef.current)
+    {
+      instructionRef.current.scrollIntoView({behavior: 'smooth'});
     }
   };
 
@@ -167,7 +176,7 @@ export default function WelcomePage()
               <GravityUiTrashBin className="Icon-WC-Button" width="20" height="20"/>
               <span class="Text-WC-Button">Nuestro Producto</span>
             </button>
-            <button class="Welcome-Container-Button" onClick={scrollToInformation}>
+            <button class="Welcome-Container-Button" onClick={scrollToInstruction}>
               <FluentEmojiHighContrastThinkingFace className="Icon-WC-Button" width="20" height="20"/>
               <span class="Text-WC-Button">¿Como usar NetBin?</span>
             </button>
@@ -230,7 +239,7 @@ export default function WelcomePage()
                 onClear={() => setUserName("")}
               />
 
-<Input
+              <Input
                 label="Contraseña"
                 variant="underlined"
                 className="Password-Input max-w-xs mb-4"
@@ -371,7 +380,8 @@ export default function WelcomePage()
         </div>
       </div>
 
-
+      <div className="Instruction-Container" ref={instructionRef}>
+      </div>
     </div>
   );
 }
