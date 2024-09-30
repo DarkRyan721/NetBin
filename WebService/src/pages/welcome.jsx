@@ -3,23 +3,25 @@ import "./welcome.css"; // CSS para welcome.jsx
 import { Button, Input } from "@nextui-org/react"; // Importacion del componente Button e Input para la pagina web.
 import { UserIcon } from "../components/UserIcon"; // Importacion del diseño del simbolo de usuario para los botones de registro e ingreso.
 import { LetterNetBin, LogoNetBin } from "../components/Logo_NetBin"; // logo y nombres de la empresa
-import { ArcticonsOpenaiChatgpt } from "../components/ChatGpt_Icon"; // Logo ChatGpt
-import { EpMoney } from "../components/Rewards_Icon"; // Icono de billetes
-import { GravityUiTrashBin } from "../components/Bin_Icon"; // Icono de caneca de basura
-import { MdiCloseOutline } from "../components/Close_Icon"; // Icono de X(Usado para cerrar el Pop-Up).
+import {ArcticonsOpenaiChatgpt} from "../components/ChatGpt_Icon"; // Logo ChatGpt
+import {EpMoney} from "../components/Rewards_Icon"; // Icono de billetes
+import {GravityUiTrashBin} from "../components/Bin_Icon"; // Icono de caneca de basura
+import {MdiCloseOutline} from "../components/Close_Icon"; // Icono de X(Usado para cerrar el Pop-Up).
+import {FluentEmojiHighContrastThinkingFace} from "../components/Thinking_Icon.jsx";
 import { EyeFilledIcon } from "../components/EyeFilledIcon"; // Componente grafico para la opcion de ocultar la contraseña.
 import { EyeSlashFilledIcon } from "../components/EyeSlashFilledIcon"; // Componente grafico para la opcion de ocultar la contraseña.
 import { Link } from "react-router-dom"; // Importacion de Link, componente que permite cambiar de pagina web.
 import { motion } from "framer-motion"; // Importacion de motion, herramienta para generar animaciones.
 
-export default function WelcomePage() {
-  // Referencia al div:Information-Container
+export default function WelcomePage() 
+{
   // Referencia al div:features-Container
   const featuresRef = useRef(null);
   const informationRef = useRef(null);
 
   // Funcion para generar el desplazamiento que ejecuta el Button:Product-Button
-  const scrollToInformation = () => {
+  const scrollToInformation = () => 
+  {
     if (informationRef.current) {
       informationRef.current.scrollIntoView({ behavior: "smooth" });
     }
@@ -64,8 +66,10 @@ export default function WelcomePage() {
   //_____________________________________________________________________________________________________________________________
 
   // Funcion encargada del registro de usuarios y la comunicacion con el servidor BackEnd.
-  const RegisterFunction = async () => {
-    try {
+  const RegisterFunction = async () =>
+  {
+    try
+    {
       // Se crea un plain object que contenga la informacion del usuario suministrada en los Inputs.
       const userData = { username, password, firstname, secondname };
 
@@ -82,7 +86,8 @@ export default function WelcomePage() {
       );
 
       // Verifica si la respuesta del servidor BackEnd fue negativa para cortar el flujo y arrojar el error.
-      if (!response.ok) {
+      if(!response.ok)
+      {
         throw new Error("Error en el registro.");
       }
 
@@ -93,7 +98,8 @@ export default function WelcomePage() {
       setShowSuccess(true);
 
       //Después de 2 segundos de la animación, se re-dirige al WelcomePage
-      setTimeout(() => {
+      setTimeout(() =>
+      {
         // Se reinicia el estado de las variables para un nuevo registro.
         setShowSuccess(false);
         setUserName("");
@@ -104,7 +110,9 @@ export default function WelcomePage() {
         // Se desactiva la ventana Pop-Up
         togglePopUp();
       }, 2000);
-    } catch (error) {
+    }
+    catch (error)
+    {
       // Se establece un mensaje en caso de error.
       setMessage("El registro ha fallado");
     }
@@ -118,7 +126,7 @@ export default function WelcomePage() {
         LogoNetBin: es el elemento recuperado de la carpeta components del proyecto que contiene el logo de la empresa.
         LetterNetBin: es un elemento extraido de la carpeta components el cual contiene el nombre de NetBin.
 
-        Button-Container: es el div que contendra los diferentes botones de la barra principal. Aquellos elementos encerrados en los componentes
+      Button-Container: es el div que contendra los diferentes botones de la barra principal. Aquellos elementos encerrados en los componentes
       Links son aquellos que desviaran al usuario a otras paginas.
         SignUp-Button: es el boton que llevara al SignUpPage o mejor dicho, encargado del registro de usuarios.
         LogIn-Button: es el boton encargado de llevar a los empresarios a su pagina(AdminPage).
@@ -135,61 +143,43 @@ export default function WelcomePage() {
     <div className="WelcomePage-Container">
       <div className="Welcome-Background">
         <div className="Welcome-Bar">
-          <div className="NetBin-Logo-Container">
-            <LogoNetBin className="Logo-NetBin" />
-            <LetterNetBin className="Letter-NetBin" />
-          </div>
-          <div >
-            <Button className = "nav-button-products">Products</Button>
-            <Button className = "nav-button-solutions">Solutions</Button>
-            <Button className = "nav-button-contact text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition">contact us</Button>
-          </div>
-          <div className="Button-Container">
-            <Button
-              type="Button"
-              className={`nav-button-singup`}
-              startContent={<UserIcon />}
-              onClick={togglePopUp}
-            >
-              Registrarse
-            </Button>
-            <Link to="/login">
-              <Button
-                className="nav-button-login"
-                endContent={<UserIcon />}
-              >
-                Ingresar
-              </Button>
-            </Link>
-          </div>
+            <div className="NetBin-Logo-Container">
+              <LogoNetBin className="Logo-NetBin"/>
+              <LetterNetBin className="Letter-NetBin"/>
+            </div>
+            <div className="Button-Container">
+
+                <Button type="button" className="SignUp-Button text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition" startContent={<UserIcon className="User-Icon"/>} onClick={togglePopUp}>
+                    Registrarse
+                </Button>
+              <Link to="/login">
+                <Button className="LogIn-Button text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition" endContent={<UserIcon/>}>
+                  Ingresar
+                </Button>
+              </Link>
+            </div>
         </div>
 
         <div className="Welcome-Container">
-          <h1 className="Company-Phrase">Reduce, Reusa y Recicla</h1>
-          <h1 className="Initial-Phrase">
-            ASEGURAMOS El CORRECTO{"\n"}RECICLAJE.
-          </h1>
-          <Button class="Product-Button" onClick={scrollToInformation}>
-            <GravityUiTrashBin
-              className="Bin-On-Button"
-              width="20"
-              height="20"
-            />
-            <span class="Text-On-Button">Nuestro Producto</span>
-          </Button>
+            <h1 className="Company-Phrase">Reduce, Reusa y Recicla</h1>
+            <h1 className="Initial-Phrase">ASEGURAMOS El CORRECTO{"\n"}RECICLAJE.</h1>
+            <button class="Welcome-Container-Button" onClick={scrollToInformation}>
+              <GravityUiTrashBin className="Icon-WC-Button" width="20" height="20"/>
+              <span class="Text-WC-Button">Nuestro Producto</span>
+            </button>
+            <button class="Welcome-Container-Button" onClick={scrollToInformation}>
+              <FluentEmojiHighContrastThinkingFace className="Icon-WC-Button" width="20" height="20"/>
+              <span class="Text-WC-Button">¿Como usar NetBin?</span>
+            </button>
         </div>
 
         {isOpen && (
           <div className="SignUp-Back">
             <div className="SignUp-Container">
               {/* From Uiverse.io by vinodjangid07 */}
-              <Button
-                type="Button"
-                class="Close-PopUp-Button"
-                onClick={togglePopUp}
-              >
-                <MdiCloseOutline className="svgIcon" />
-              </Button>
+              <button type="button" class="Close-PopUp-Button" onClick={togglePopUp}>
+                <MdiCloseOutline className="svgIcon"/>
+              </button>
               <h1 className="SignUp-Title">Crear Cuenta</h1>
               <Input
                 isClearable
@@ -240,7 +230,7 @@ export default function WelcomePage() {
                 onClear={() => setUserName("")}
               />
 
-              <Input
+<Input
                 label="Contraseña"
                 variant="underlined"
                 className="Password-Input max-w-xs mb-4"
@@ -253,9 +243,9 @@ export default function WelcomePage() {
                 }}
                 // color="success"
                 endContent={
-                  <Button
+                  <button
                     className="focus:outline-none"
-                    type="Button"
+                    type="button"
                     onClick={toggleVisibility}
                     aria-label="toggle password visibility"
                   >
@@ -264,7 +254,7 @@ export default function WelcomePage() {
                     ) : (
                       <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
                     )}
-                  </Button>
+                  </button>
                 }
                 type={isVisible ? "text" : "password"}
                 value={password}
@@ -299,23 +289,17 @@ export default function WelcomePage() {
                   <h2>¡{message}!</h2>
                 </motion.div>
               )}
-              <Button
-                type="Button"
-                class="Button"
-                data-text="Awesome"
-                onClick={RegisterFunction}
-              >
-                <span class="actual-text">&nbsp;Guardar&nbsp;</span>
+              <button type="button" class="PopUp-Send-Button" data-text="Awesome" onClick={RegisterFunction}>
+                <span class="actual-text">&nbsp;Enviar&nbsp;</span>
                 <span aria-hidden="true" class="hover-text">
-                  &nbsp;Guardar&nbsp;
+                  &nbsp;Enviar&nbsp;
                 </span>
-              </Button>
+              </button>
             </div>
           </div>
         )}
       </div>
 
-      <div className="features-Container" ref={informationRef}>
       <div className="Information-Container" ref={informationRef}>
         <div className="Information-About-NetBin">
           {/* From Uiverse.io by alexruix */}
@@ -325,11 +309,11 @@ export default function WelcomePage() {
                 NETBIN
               </h1>
               <p className="Text">
-                NetBin es una caneca inteligente diseñada para guiar a las personas en la correcta clasificación de los residuos de basura. 
-                A través de la inteligencia artificial, NetBin te ayudará si no estás seguro a que categoria corresponde lo que deseas desechar. 
-                Además de contribuir al cuidado del medio ambiente, serás recompensado con CoBins, nuestra moneda 
-                virtual. Estas CoBins pueden ser canjeadas en nuestras empresas aliadas, comprometidas con la responsabilidad ambiental, 
-                como una forma de agradecer tu participación y esfuerzo en el reciclaje responsable. 
+                NetBin es una caneca inteligente diseñada para guiar a las personas en la correcta clasificación de los residuos de basura.
+                A través de la inteligencia artificial, NetBin te ayudará si no estás seguro a que categoria corresponde lo que deseas desechar.
+                Además de contribuir al cuidado del medio ambiente, serás recompensado con CoBins, nuestra moneda
+                virtual. Estas CoBins pueden ser canjeadas en nuestras empresas aliadas, comprometidas con la responsabilidad ambiental,
+                como una forma de agradecer tu participación y esfuerzo en el reciclaje responsable.
                 ¡Juntos podemos hacer una gran diferencia para el planeta!
               </p>
             </div>
@@ -346,16 +330,15 @@ export default function WelcomePage() {
           </div>
         </div>
       </div>
+
       <div className="features-Container" ref={featuresRef}>
         <div className="features-About-NetBin">
-          <h1 className="features-Title-About-NetBin">Sobre NetBin</h1>
+          <h1 className="features-Title-About-NetBin">
+            Sobre NetBin
+          </h1>
           <p className="features-Text-About-NetBin">
-            NetBin es una caneca de basura inteligente e innovadora encargada de
-            la gestión de residuos que utiliza tecnología de vanguardia como
-            inteligencia artificial, IoT, reconocimiento de voz y NFC para
-            ayudar a los usuarios a clasificar correctamente su basura.
-            NetBin es una propuesta innovadora encargada de la gestión de residuos que utiliza tecnología de vanguardia como 
-            inteligencia artificial, IoT, reconocimiento de voz y NFC para ayudar a los usuarios a clasificar 
+            NetBin es una propuesta innovadora encargada de la gestión de residuos que utiliza tecnología de vanguardia como
+            inteligencia artificial, IoT, reconocimiento de voz y NFC para ayudar a los usuarios a clasificar
             correctamente su basura. NetBin se rige en tres aspectos fundamentales para su funcionamiento:
           </p>
         </div>
@@ -364,9 +347,6 @@ export default function WelcomePage() {
           <motion.div className="Product-AI" whileHover={{ scale: 1.1 }}>
             <ArcticonsOpenaiChatgpt width="50" height="50" />
             <p className="Product-Text">
-              Usando la tecnologia de ChatGpt y el reconocimiento de voz NetBin
-              adquiere la capacidad de escucharte, comprenderte y actuar.
-              Apoyado por IA podras clasificar correctamente la basura.
               Usando la tecnologia de ChatGpt y el reconocimiento de voz NetBin, adquiere la capacidad de escucharte,
               comprenderte y actuar por ti. Apoyado por IA podras clasificar correctamente la basura.
             </p>
@@ -375,10 +355,7 @@ export default function WelcomePage() {
           <motion.div className="Product-Rewards" whileHover={{ scale: 1.1 }}>
             <EpMoney width="50" height="50" color="black" />
             <p className="Product-Text">
-              Integrado con NFC, cada una de nuestras canecas tiene la capacidad
-              de reconocerte. Esto nos permitira recompensarte con CoBins por tu
-              compromiso con el medio ambiente.
-              Integrado con NFC, cada una de nuestras canecas tiene la capacidad de reconocerte. 
+              Integrado con NFC, cada una de nuestras canecas tiene la capacidad de reconocerte.
               Esto nos permitira a nosotros y las compañias aliadas, recompensarte con CoBins y productos por tu compromiso con el medio ambiente.
             </p>
           </motion.div>
@@ -393,7 +370,8 @@ export default function WelcomePage() {
           </motion.div>
         </div>
       </div>
-    </div>
+
+
     </div>
   );
 }
