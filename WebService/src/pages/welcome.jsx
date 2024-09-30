@@ -381,6 +381,17 @@ export default function WelcomePage()
       </div>
 
       <div className="Instruction-Container" ref={instructionRef}>
+        <div className="Register-Option-Container">
+        </div>
+
+        <div className="User1-Container">
+        </div>
+
+        <div className="User2-Container">
+        </div>
+
+        <div className="User3-Container">
+        </div>
       </div>
     </div>
   );
