@@ -407,14 +407,14 @@ export default function WelcomePage()
         </div>
 
         <div className="User1-Container">
-          <div className="User1-Icon-Container">
+          <div className="User-Icon-Container">
             <GravityUiTrashBin width="50" height="50" color="#00eb18" />
           </div>
-          <div className="User1-Information-Container">
-            <h1 className="User1-IC-Title">
+          <div className="User-Information-Container">
+            <h1 className="User-IC-Title">
               ¿Ya sabes donde botar tu basura?
             </h1>
-            <ol className="User1-Ic-Text">
+            <ol className="User-Ic-Text">
               <li>1] Acércate a una de nuestras canecas</li>
               <li>2] Aproxima tu residuo de basura al compartimento correspondiente.</li>
               <li>3] Nuestro sensor de proximidad te detectará y podrás botar tu basura.</li>
@@ -423,16 +423,37 @@ export default function WelcomePage()
         </div>
 
         <div className="User2-Container">
-          <div className="User2-Icon-Container">
+          <div className="User-Icon-Container">
+            <EpMoney width="50" height="50" color="#00eb18" />
           </div>
-          <div className="User2-Information-Container">
+          <div className="User-Information-Container">
+            <h1 className="User-IC-Title">
+              ¿Quieres obtener CoBins por seccionar bien la basura?
+            </h1>
+            <ol className="User-Ic-Text">
+              <li>1] Acércate a una de nuestras canecas</li>
+              <li>2] Coloca tu celular en nuestro sensor NFC para verificar tu cuenta</li>
+              <li>3] ¡Habla con nuestra IA! dile que residuo llevas contigo</li>
+              <li>4] Se te abrira la seccion correspondiente y podras botar tu basura</li>
+              <li>5] Revisa tu celular y mira cuantos CoBins ganaste</li>
+            </ol>
           </div>
         </div>
 
         <div className="User3-Container">
-          <div className="User3-Icon-Container">
+          <div className="User-Icon-Container">
+            <FluentEmojiHighContrastThinkingFace width="50" height="50" color="#00eb18" />
           </div>
-          <div className="User3-Information-Container">
+          <div className="User-Information-Container">
+            <h1 className="User-IC-Title">
+              ¿Solo quieres saber donde botar tu basura?
+            </h1>
+            <ol className="User-Ic-Text">
+              <li>1] Acércate a una de nuestras canecas</li>
+              <li>2] Aproxima tu mano al microfono de la caneca para activarlo</li>
+              <li>3] ¡Habla con nuestra IA! dile que residuo llevas contigo</li>
+              <li>4] Se te abrira la seccion correspondiente y podras botar tu basura</li>
+            </ol>
           </div>
         </div>
       </div>
