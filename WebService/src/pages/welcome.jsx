@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import "./welcome.css"; // CSS para welcome.jsx
-import { Button, Input } from "@nextui-org/react"; // Importacion del componente Button e Input para la pagina web.
+import { Button, Input, Textarea } from "@nextui-org/react"; // Importacion del componente Button e Input para la pagina web.
 import { UserIcon } from "../components/UserIcon"; // Importacion del diseño del simbolo de usuario para los botones de registro e ingreso.
 import { LetterNetBin, LogoNetBin } from "../components/Logo_NetBin"; // logo y nombres de la empresa
 import {ArcticonsOpenaiChatgpt} from "../components/ChatGpt_Icon"; // Logo ChatGpt
@@ -8,6 +8,11 @@ import {EpMoney} from "../components/Rewards_Icon"; // Icono de billetes
 import {GravityUiTrashBin} from "../components/Bin_Icon"; // Icono de caneca de basura
 import {MdiCloseOutline} from "../components/Close_Icon"; // Icono de X(Usado para cerrar el Pop-Up).
 import {FluentEmojiHighContrastThinkingFace} from "../components/Thinking_Icon.jsx";
+import {LogosNetflixIcon} from "../components/Netflix_Icon.jsx";
+import {FlatColorIconsGoogle} from "../components/Google_Icon.jsx";
+import {SimpleIconsMcdonalds} from "../components/Mcdonalds_Icon.jsx";
+import {SimpleIconsCocacola} from "../components/CocaCola_Icon.jsx";
+import {SimpleIconsWalmart} from "../components/Walmart_Icon.jsx";
 import { EyeFilledIcon } from "../components/EyeFilledIcon"; // Componente grafico para la opcion de ocultar la contraseña.
 import { EyeSlashFilledIcon } from "../components/EyeSlashFilledIcon"; // Componente grafico para la opcion de ocultar la contraseña.
 import { Link } from "react-router-dom"; // Importacion de Link, componente que permite cambiar de pagina web.
@@ -20,6 +25,7 @@ export default function WelcomePage()
   const informationRef = useRef(null);
   const instructionRef = useRef(null);
   const welcomeRef = useRef(null);
+  const contactUsRef = useRef(null);
 
   // Funcion para generar el desplazamiento que ejecuta el Button:Product-Button
   const scrollToInformation = () => 
@@ -46,13 +52,21 @@ export default function WelcomePage()
   };
 
   const scrollToWelcome = () =>
+  {
+    if(welcomeRef.current)
     {
-      if(welcomeRef.current)
-      {
-        welcomeRef.current.scrollIntoView({behavior: 'smooth'});
-        togglePopUp();
-      }
-    };
+      welcomeRef.current.scrollIntoView({behavior: 'smooth'});
+      togglePopUp();
+    }
+  };
+
+  const scrollToContactUs = () =>
+  {
+    if(contactUsRef.current)
+    {
+      contactUsRef.current.scrollIntoView({behavior: 'smooth'});
+    }
+  };
 
   // Elementos creados para abrir/cerrar la ventana emergente(Pop-Up) de registro
   const [isOpen, setIsOpen] = useState(false);
@@ -85,7 +99,7 @@ export default function WelcomePage()
   //_____________________________________________________________________________________________________________________________
 
   // Funcion encargada del registro de usuarios y la comunicacion con el servidor BackEnd.
-  const RegisterFunction = async () =>
+  const RegisterForm = async () =>
   {
     try
     {
@@ -137,6 +151,61 @@ export default function WelcomePage()
     }
   };
 
+  // Funcion encargada del registro de usuarios y la comunicacion con el servidor BackEnd.
+  const ContactForm = async () =>
+    {
+      try
+      {
+        // Se crea un plain object que contenga la informacion del usuario suministrada en los Inputs.
+        const contactData = { firstname, username, message };
+  
+        console.log("Datos enviados:", JSON.stringify(contactData));
+  
+        // Elemento que almacenara la respuesta de la solicitud POST hecha con la funcion fetch().
+        const response = await fetch(
+          "https://32a62b0f-344f-4868-b3b0-974f2047eba6.mock.pstmn.io/register",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(contactData),
+          }
+        );
+  
+        // Verifica si la respuesta del servidor BackEnd fue negativa para cortar el flujo y arrojar el error.
+        if(!response.ok)
+        {
+          throw new Error("Error en el registro.");
+        }
+  
+        // Se establece el mensaje de un correcto registro para el usuario.
+        //setMessage("Registro exitoso");
+  
+        // Se activa la bandera que permite una animacion.
+        //setShowSuccess(true);
+
+        setUserName("");
+        setFirstName("");
+        setSecondName("");
+        setPassword("");
+        setMessage("");
+  
+        //Después de 2 segundos de la animación, se re-dirige al WelcomePage
+        // setTimeout(() =>
+        // {
+        //   // Se reinicia el estado de las variables para un nuevo registro.
+        //   //setShowSuccess(false);
+  
+        //   // Se desactiva la ventana Pop-Up
+        //   togglePopUp();
+        // }, 2000);
+      }
+      catch (error)
+      {
+        // Se establece un mensaje en caso de error.
+        setMessage("El registro ha fallado");
+      }
+    };
+
   /*
     Welcome-Background: es el Div encargado de cargar la imagen y por medio de ::after se aplica la capa de opacidad sobre esta.
     Welcom-Bar: es el Div que contendra todo los elementos de la barra principal(Logo, Nombre de la empresa, Iniciar sesion...).
@@ -167,12 +236,17 @@ export default function WelcomePage()
               <LetterNetBin className="Letter-NetBin"/>
             </div>
             <div className="Button-Container">
-
-                <Button type="button" className="SignUp-Button text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition" startContent={<UserIcon className="User-Icon"/>} onClick={togglePopUp}>
+                <Button className="LogIn-Button text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition" startContent={<GravityUiTrashBin/>} onClick={scrollToContactUs}>
+                  Contactanos
+                </Button>
+                <Button className="LogIn-Button text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition" startContent={<GravityUiTrashBin/>} onClick={scrollToInformation}>
+                  Productos
+                </Button>
+                <Button type="button" className="SignUp-Button text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition" startContent={<UserIcon/>} onClick={togglePopUp}>
                     Registrarse
                 </Button>
               <Link to="/login">
-                <Button className="LogIn-Button text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition" endContent={<UserIcon/>}>
+                <Button className="LogIn-Button text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition" startContent={<UserIcon/>}>
                   Ingresar
                 </Button>
               </Link>
@@ -308,7 +382,7 @@ export default function WelcomePage()
                   <h2>¡{message}!</h2>
                 </motion.div>
               )}
-              <button type="button" class="PopUp-Send-Button" data-text="Awesome" onClick={RegisterFunction}>
+              <button type="button" class="PopUp-Send-Button" data-text="Awesome" onClick={RegisterForm}>
                 <span class="actual-text">&nbsp;Enviar&nbsp;</span>
                 <span aria-hidden="true" class="hover-text">
                   &nbsp;Enviar&nbsp;
@@ -345,7 +419,14 @@ export default function WelcomePage()
 
         <div className="Image-Container">
           <div className="Image-NetBin">
-
+          </div>
+          <h1 className="Image-Container-Title">Compañias aliadas:</h1>
+          <div className="Companies-Container">
+            <LogosNetflixIcon width="50" height="50"/>
+            <SimpleIconsCocacola width="70" height="70"/>
+            <SimpleIconsMcdonalds width="50" height="50" color="yellow"/>
+            <SimpleIconsWalmart width="100" height="100"/>
+            <FlatColorIconsGoogle width="50" height="50"/>
           </div>
         </div>
       </div>
@@ -454,6 +535,76 @@ export default function WelcomePage()
               <li>3] ¡Habla con nuestra IA! dile que residuo llevas contigo</li>
               <li>4] Se te abrira la seccion correspondiente y podras botar tu basura</li>
             </ol>
+          </div>
+        </div>
+      </div>
+
+      <div className="ContactUs-Container" ref={contactUsRef}>
+        <div className="ContactUs-Img-Container">
+          <div className="ContactUs-Form-Container">
+            <h1 className="ContactUs-FC-Title">
+              Contactanos
+            </h1>
+            <Input
+              isClearable
+              label="Nombre"
+              variant="bordered"
+              className="Name-Input max-w-xs mb-4"
+              classNames={{
+                label: "custom-label-input",
+                inputWrapper: "custom-wrapper-contactUs"
+              }}
+              style={{
+                color: "#ffffff",
+                fontWeight: 400,
+                
+              }}
+              value={firstname}
+              onChange={(e) => setFirstName(e.target.value)}
+              onClear={() => setFirstName("")}
+            />
+            <Input
+              isClearable
+              label="Correo"
+              variant="bordered"
+              className="Email-Input max-w-xs mb-4"
+              classNames={{
+                label: "custom-label-input",
+                inputWrapper: "custom-wrapper-contactUs"
+              }}
+              style={{
+                color: "#ffffff", // Color personalizado para el texto
+                fontWeight: 400,
+              }}
+              value={username}
+              onChange={(e) => setUserName(e.target.value)}
+              onClear={() => setUserName("")}
+            />
+            <Textarea
+              variant="bordered"
+              label="Mensaje"
+              placeholder="Ingresa tu mensaje..."
+              className="max-w-xs"
+              classNames={{
+                label: "custom-label-input",
+                inputWrapper: "custom-wrapper-contactUs"
+              }}
+              style={{
+                color: "#ffffff", // Color personalizado para el texto
+                fontWeight: 400,
+              }}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+            />
+
+            <button type="button" class="ContactUs-Send-Button" onClick={ContactForm}>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"></path>
+              </svg>
+              <div class="text">
+                Enviar
+              </div>
+            </button>
           </div>
         </div>
       </div>

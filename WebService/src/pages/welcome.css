@@ -386,11 +386,37 @@
   background-position: center;
 
   width: 75%;
-  height: 75%;
+  height: 65%;
 
   background-repeat: no-repeat;
   object-fit: cover; /* Asegura que la imagen mantenga su proporción */
   border-radius: 15px; /* Ajusta el valor para hacer los bordes más o menos redondeados */
+  margin-bottom: 15px;
+}
+
+.Image-Container-Title
+{
+  color: #ffffff;
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.Companies-Container
+{
+  display: flex;
+  background-color: #161616;
+  width: 80%;
+  height: 15%;
+  border-radius: 30px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  transition: all 0.5s ease;
+}
+.Companies-Container:hover
+{
+  transform: scale(1.15);
 }
 
 /* From Uiverse.io by alexruix */
@@ -741,6 +767,108 @@ color: #eaf1eb;
   font-size: 16px; /* Ajusta el tamaño de la fuente */
 }
 
+.User-Icon
+{
+  width: 50px;
+  height: 50px;
+}
+
+.ContactUs-Container
+{
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  flex-grow: 1;
+  width: 100%;
+  min-height: 100vh;
+  background: #202020;
+}
+
+.ContactUs-Img-Container
+{
+  position: relative;
+  margin: 0;
+  padding: 0;
+  background-image: url('../assets/Img_ContactUs.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh; /* Ocupa al menos toda la altura de la ventana */
+  width: 100%;
+  background-repeat: no-repeat;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ContactUs-Form-Container
+{
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  width: 50%;
+  height: 80vh;
+  border-radius: 20px;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.ContactUs-FC-Title
+{
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.custom-wrapper-contactUs
+{
+  border-color: #ffffff !important;
+}
+.custom-wrapper-contactUs:focus-within
+{
+  border-color: #00eb18 !important;
+}
+
+/* From Uiverse.io by reshades */ 
+.ContactUs-Send-Button 
+{
+  background-color: transparent;
+  color: #fff;
+  width: 8.5em;
+  height: 2.9em;
+  border: #1e8449 0.2em solid;
+  border-radius: 11px;
+  text-align: right;
+  transition: all 0.6s ease;
+}
+.ContactUs-Send-Button:hover 
+{
+  background-color: #1e8449;
+  cursor: pointer;
+}
+.ContactUs-Send-Button:active
+{
+  background-color: #ffffff;
+}
+.ContactUs-Send-Button svg 
+{
+  width: 1.6em;
+  margin: -0 1em;
+  position: absolute;
+  display: flex;
+  transition: all 0.4s ease;
+}
+.ContactUs-Send-Button:hover svg 
+{
+  transform: translateX(5px);
+}
+.text 
+{
+  margin: 0 1.5em;
+  font-weight: bold;
+}
 
 /* Media Queries para tablets */
 @media (min-width: 768px) and (max-width: 1024px)
