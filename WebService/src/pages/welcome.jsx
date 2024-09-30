@@ -33,9 +33,6 @@ export default function WelcomePage() {
     {
       featuresRef.current.scrollIntoView({behavior: 'smooth'});
 
-
-
-
     }
   };
 
