@@ -20,6 +20,8 @@ import { motion } from "framer-motion"; // Importacion de motion, herramienta pa
 
 export default function WelcomePage() 
 {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   // Referencia al div:features-Container
   const featuresRef = useRef(null);
   const informationRef = useRef(null);
@@ -84,6 +86,42 @@ export default function WelcomePage()
   const [secondname, setSecondName] = useState("");
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [usernameError, setUserNameError] = useState("");
+  const [isUsernameValid, setisUsernameValid] = useState(false);
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
+
+
+  const handleEmailChange = (e) => 
+  {
+    setUserName(e.target.value);
+    if (!emailRegex.test(e.target.value)) 
+    {
+      setUserNameError("Correo no válido");
+      setisUsernameValid(false);
+    } 
+    else 
+    {
+      setUserNameError("");
+      setisUsernameValid(true);
+    }
+  };
+
+  const handlePasswordChange = (e) => 
+  {
+    setPassword(e.target.value);
+
+    if (!(e.target.value.length >= 8)) 
+    {
+      setPasswordError("La contraseña debe tener al menos 8 caracteres");
+      setIsPasswordValid(false);
+    } 
+    else 
+    {
+      setPasswordError("");
+      setIsPasswordValid(true);
+    }
+  };
 
   //________________________________________________________________________________________________
 
@@ -103,46 +141,56 @@ export default function WelcomePage()
   {
     try
     {
-      // Se crea un plain object que contenga la informacion del usuario suministrada en los Inputs.
-      const userData = { username, password, firstname, secondname };
+      if(isUsernameValid && isPasswordValid)
+      {
+        // Se crea un plain object que contenga la informacion del usuario suministrada en los Inputs.
+        const userData = { username, password, firstname, secondname };
 
-      console.log("Datos enviados:", JSON.stringify(userData));
+        console.log("Datos enviados:", JSON.stringify(userData));
 
-      // Elemento que almacenara la respuesta de la solicitud POST hecha con la funcion fetch().
-      const response = await fetch(
-        "https://netbin.onrender.com/auth/register",
+        // Elemento que almacenara la respuesta de la solicitud POST hecha con la funcion fetch().
+        const response = await fetch(
+          "https://netbin.onrender.com/auth/register",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(userData),
+          }
+        );
+
+        console.log("Se enviaron los datos al Backend");
+
+        // Verifica si la respuesta del servidor BackEnd fue negativa para cortar el flujo y arrojar el error.
+        if(!response.ok)
         {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(userData),
+          throw new Error("Error en el registro.");
         }
-      );
 
-      // Verifica si la respuesta del servidor BackEnd fue negativa para cortar el flujo y arrojar el error.
-      if(!response.ok)
-      {
-        throw new Error("Error en el registro.");
+        // Se establece el mensaje de un correcto registro para el usuario.
+        setMessage("Registro exitoso");
+
+        // Se activa la bandera que permite una animacion.
+        setShowSuccess(true);
+
+        //Después de 2 segundos de la animación, se re-dirige al WelcomePage
+        setTimeout(() =>
+        {
+          // Se reinicia el estado de las variables para un nuevo registro.
+          setShowSuccess(false);
+          setUserName("");
+          setFirstName("");
+          setSecondName("");
+          setPassword("");
+
+          // Se desactiva la ventana Pop-Up
+          togglePopUp();
+        }, 2000);
       }
-
-      // Se establece el mensaje de un correcto registro para el usuario.
-      setMessage("Registro exitoso");
-
-      // Se activa la bandera que permite una animacion.
-      setShowSuccess(true);
-
-      //Después de 2 segundos de la animación, se re-dirige al WelcomePage
-      setTimeout(() =>
+      else
       {
-        // Se reinicia el estado de las variables para un nuevo registro.
-        setShowSuccess(false);
-        setUserName("");
-        setFirstName("");
-        setSecondName("");
-        setPassword("");
-
-        // Se desactiva la ventana Pop-Up
-        togglePopUp();
-      }, 2000);
+        console.log("Faltan datos");
+      }
+      
     }
     catch (error)
     {
@@ -236,17 +284,17 @@ export default function WelcomePage()
               <LetterNetBin className="Letter-NetBin"/>
             </div>
             <div className="Button-Container">
-                <Button className="LogIn-Button text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition" startContent={<GravityUiTrashBin/>} onClick={scrollToContactUs}>
-                  Contactanos
-                </Button>
-                <Button className="LogIn-Button text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition" startContent={<GravityUiTrashBin/>} onClick={scrollToInformation}>
-                  Productos
-                </Button>
-                <Button type="button" className="SignUp-Button text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition" startContent={<UserIcon/>} onClick={togglePopUp}>
-                    Registrarse
-                </Button>
-              <Link to="/login">
-                <Button className="LogIn-Button text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition" startContent={<UserIcon/>}>
+              <Button className="Bar-Button text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition" startContent={<GravityUiTrashBin/>} onClick={scrollToContactUs}>
+                Contactanos
+              </Button>
+              <Button className="Bar-Button text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition" startContent={<GravityUiTrashBin/>} onClick={scrollToInformation}>
+                Productos
+              </Button>
+              <Button type="button" className="Bar-Button text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition" startContent={<UserIcon height="80%"/>} onClick={togglePopUp}>
+                Registrarse
+              </Button>
+              <Link to="/login" className="link-no-style">
+                <Button className="Bar-Button text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition" startContent={<UserIcon height="80%"/>}>
                   Ingresar
                 </Button>
               </Link>
@@ -311,6 +359,7 @@ export default function WelcomePage()
                 label="Correo"
                 variant="underlined"
                 className="Email-Input max-w-xs mb-4"
+                description = {usernameError}
                 classNames={{
                   label: "custom-label-input",
                 }}
@@ -319,7 +368,7 @@ export default function WelcomePage()
                   fontWeight: 400,
                 }}
                 value={username}
-                onChange={(e) => setUserName(e.target.value)}
+                onChange={handleEmailChange}
                 onClear={() => setUserName("")}
               />
 
@@ -327,6 +376,7 @@ export default function WelcomePage()
                 label="Contraseña"
                 variant="underlined"
                 className="Password-Input max-w-xs mb-4"
+                description = {passwordError}
                 classNames={{
                   label: "custom-label-input",
                 }}
@@ -351,7 +401,7 @@ export default function WelcomePage()
                 }
                 type={isVisible ? "text" : "password"}
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={handlePasswordChange}
               />
               {showSuccess && (
                 <motion.div
@@ -418,16 +468,18 @@ export default function WelcomePage()
         </div>
 
         <div className="Image-Container">
-          <div className="Image-NetBin">
-          </div>
-          <h1 className="Image-Container-Title">Compañias aliadas:</h1>
+          <div className="Image-NetBin" />
           <div className="Companies-Container">
-            <LogosNetflixIcon width="50" height="50"/>
-            <SimpleIconsCocacola width="70" height="70"/>
-            <SimpleIconsMcdonalds width="50" height="50" color="yellow"/>
-            <SimpleIconsWalmart width="100" height="100"/>
-            <FlatColorIconsGoogle width="50" height="50"/>
+            <h1 className="Image-Container-Title">Compañias aliadas:</h1>
+            <div className="Companies-List-Container">
+              <LogosNetflixIcon width="50" height="50"/>
+              <SimpleIconsCocacola width="70" height="70"/>
+              <SimpleIconsMcdonalds width="50" height="50" color="yellow"/>
+              <SimpleIconsWalmart width="100" height="100"/>
+              <FlatColorIconsGoogle width="50" height="50"/>
+            </div>
           </div>
+          
         </div>
       </div>
 
@@ -444,7 +496,7 @@ export default function WelcomePage()
         </div>
 
         <div className="Product-Description-Container">
-          <motion.div className="Product-AI" whileHover={{ scale: 1.1 }}>
+          <motion.div className="Product-Cards" whileHover={{ scale: 1.1 }}>
             <ArcticonsOpenaiChatgpt width="50" height="50" />
             <p className="Product-Text">
               Usando la tecnologia de ChatGpt y el reconocimiento de voz NetBin, adquiere la capacidad de escucharte,
@@ -452,7 +504,7 @@ export default function WelcomePage()
             </p>
           </motion.div>
 
-          <motion.div className="Product-Rewards" whileHover={{ scale: 1.1 }}>
+          <motion.div className="Product-Cards" whileHover={{ scale: 1.1 }}>
             <EpMoney width="50" height="50" color="black" />
             <p className="Product-Text">
               Integrado con NFC, cada una de nuestras canecas tiene la capacidad de reconocerte.
@@ -460,7 +512,7 @@ export default function WelcomePage()
             </p>
           </motion.div>
 
-          <motion.div className="Product-Focus" whileHover={{ scale: 1.1 }}>
+          <motion.div className="Product-Cards" whileHover={{ scale: 1.1 }}>
             <GravityUiTrashBin width="50" height="50" color="black" />
             <p className="Product-Text">
               NetBin se preocupa por el medio ambiente y la sostenibilidad. Este
@@ -487,7 +539,7 @@ export default function WelcomePage()
           </button>
         </div>
 
-        <div className="User1-Container">
+        <div className="User-Container">
           <div className="User-Icon-Container">
             <GravityUiTrashBin width="50" height="50" color="#00eb18" />
           </div>
@@ -503,7 +555,7 @@ export default function WelcomePage()
           </div>
         </div>
 
-        <div className="User2-Container">
+        <div className="User-Container">
           <div className="User-Icon-Container">
             <EpMoney width="50" height="50" color="#00eb18" />
           </div>
@@ -521,7 +573,7 @@ export default function WelcomePage()
           </div>
         </div>
 
-        <div className="User3-Container">
+        <div className="User-Container">
           <div className="User-Icon-Container">
             <FluentEmojiHighContrastThinkingFace width="50" height="50" color="#00eb18" />
           </div>

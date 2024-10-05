@@ -4,12 +4,12 @@ import { ReactSVG } from "react-svg";
 import logoURL from "../assets/NetBin_Logo_WelcomePage.svg";
 import letterURL from "../assets/NetBin_Letters_WelcomePage.svg";
 
-const LogoNetBin = () => {
+const LogoNetBin = ({ className }) => {
   return (
     <img
       src={logoURL}
-      style={{ height: "100%", width: "100%" }}
-      id="logo-netbin"
+      className={className || "logo-netbin"}  // Default className if not provided
+      alt="NetBin Logo"
     />
   );
 };
