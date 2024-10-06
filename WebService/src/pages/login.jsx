@@ -5,8 +5,6 @@ import { EyeSlashFilledIcon } from "../components/EyeSlashFilledIcon";
 import "./login.css";
 import { useNavigate } from 'react-router-dom'; // Componente para poder cambiar de pagina en un momento especifico.
 
-
-
 export default function LoginPage() 
 {
   const navigate = useNavigate();
@@ -18,7 +16,38 @@ export default function LoginPage()
 
   const LoginFunction = async() =>
   {
-    navigate('/home');
+    try
+    {
+      // Se crea un plain object que contenga la informacion del usuario suministrada en los Inputs.
+      const userData = { username, password };
+
+      console.log("Datos enviados:", JSON.stringify(userData));
+
+      // Elemento que almacenara la respuesta de la solicitud POST hecha con la funcion fetch().
+      const response = await fetch(
+        "https://netbin.onrender.com/auth/register",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(userData),
+        }
+      );
+
+      console.log("Se enviaron los datos al Backend");
+
+      // Verifica si la respuesta del servidor BackEnd fue negativa para cortar el flujo y arrojar el error.
+      if(!response.ok)
+      {
+        throw new Error("Error en el registro.");
+      }
+
+      navigate('/home');
+    }
+    catch (error)
+    {
+      // Se establece un mensaje en caso de error.
+      setMessage("El registro ha fallado");
+    }
   };
 
   return (

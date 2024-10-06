@@ -150,7 +150,7 @@ export default function WelcomePage()
 
         // Elemento que almacenara la respuesta de la solicitud POST hecha con la funcion fetch().
         const response = await fetch(
-          "https://netbin.onrender.com/auth/register",
+          "https://netbin.onrender.com/auth/login",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
