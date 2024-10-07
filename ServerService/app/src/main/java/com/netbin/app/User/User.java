@@ -23,7 +23,6 @@ public class User implements UserDetails {
     @Basic
     @Column(nullable = false)
     String username;
-    @Column(nullable = false)
     String lastname;
     String firstname;
     String password;
