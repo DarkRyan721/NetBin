@@ -29,7 +29,6 @@ public class JwtService {
                 .setExpiration(new Date(System.currentTimeMillis() +1000*60*24 ))
                 .signWith(getKey(), SignatureAlgorithm.HS256)
                 .compact();
-
     }
 
     private Key getKey() {
@@ -39,7 +38,6 @@ public class JwtService {
 
     public String getUsernameFromToken(String token) {
         return getClaim(token, Claims::getSubject);
-
     }
 
     public boolean isTokenvalid(String token, UserDetails userDetails) {
