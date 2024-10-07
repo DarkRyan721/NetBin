@@ -83,7 +83,7 @@ export default function WelcomePage()
   // Lista de variables que el usuario registrara en la base de datos para la creacion de su cuenta.
 
   const [firstname, setFirstName] = useState("");
-  const [secondname, setSecondName] = useState("");
+  const [lastname, setlastname] = useState("");
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -144,7 +144,7 @@ export default function WelcomePage()
       if(isUsernameValid && isPasswordValid)
       {
         // Se crea un plain object que contenga la informacion del usuario suministrada en los Inputs.
-        const userData = { username, password, firstname, secondname };
+        const userData = { username, password, firstname, lastname };
 
         console.log("Datos enviados:", JSON.stringify(userData));
 
@@ -183,7 +183,7 @@ export default function WelcomePage()
           setShowSuccess(false);
           setUserName("");
           setFirstName("");
-          setSecondName("");
+          setlastname("");
           setPassword("");
 
           // Se desactiva la ventana Pop-Up
@@ -237,7 +237,7 @@ export default function WelcomePage()
 
         setUserName("");
         setFirstName("");
-        setSecondName("");
+        setlastname("");
         setPassword("");
         setMessage("");
   
@@ -354,9 +354,9 @@ export default function WelcomePage()
                   color: "#ffffff", // Color personalizado para el texto
                   fontWeight: 400,
                 }}
-                value={secondname}
-                onChange={(e) => setSecondName(e.target.value)}
-                onClear={() => setSecondName("")}
+                value={lastname}
+                onChange={(e) => setlastname(e.target.value)}
+                onClear={() => setlastname("")}
               />
               <Input
                 isClearable
