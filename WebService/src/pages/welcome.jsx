@@ -166,6 +166,10 @@ export default function WelcomePage()
           throw new Error("Error en el registro.");
         }
 
+        const data = await response.json();
+
+        console.log(data);
+
         // Se establece el mensaje de un correcto registro para el usuario.
         setMessage("Registro exitoso");
 
