@@ -40,26 +40,23 @@ public class AuthService {
         User user = User.builder()
                 .username(request.username())
                 .password(passwordEncoder.encode(request.password()))
-                .email(request.email())
                 .firstname(request.firstname())
                 .lastname(request.lastname())
                 .role(Role.USER)
-                .registration_date(LocalDateTime.now())
                 .build();
-        logger.info("Register user: {}", user.toString());
-        try{
+        try {
             userRepository.save(user);
+            logger.info("Usuario guardado exitosamente: {}", user.getUsername());
             return AuthResponse.builder()
-                    .token(jwtService.getToken(user))
+                    .token(jwtService.getToken(user))  // Verifica si esto retorna null
                     .state("Usuario guardado correctamente")
                     .build();
-        }
-        catch (DataIntegrityViolationException e)
-        {
+        } catch (DataIntegrityViolationException e) {
+            logger.error("Error al guardar el usuario: {}", e.getMessage());
             return AuthResponse.builder()
-                .token(null)
-                .state("Error al guardar el usuario, intente de nuevo")
-                .build();
+                    .token(null)
+                    .state("Error al guardar el usuario, intente de nuevo")
+                    .build();
         }
     }
 }

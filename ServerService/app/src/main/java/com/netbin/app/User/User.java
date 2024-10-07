@@ -12,57 +12,42 @@ import java.util.List;
 
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = {"username"})})
+@Table(name="users", uniqueConstraints = {@UniqueConstraint(columnNames = {"username"})})
 public class User implements UserDetails {
     @Id
     @GeneratedValue
-    private Integer user_id;
+    Integer id;
     @Basic
     @Column(nullable = false)
-    private String username;
+    String username;
     @Column(nullable = false)
-    private String email;
-    @Column(nullable = false)
-    private String password;
-    @Column(nullable = false)
-    private String firstname;
-    private String lastname;
-    private LocalDateTime registration_date;
-    private LocalDateTime last_login_date;
+    String lastname;
+    String firstname;
+    String password;
     @Enumerated(EnumType.STRING)
-    private Role role;
-    private Integer cobins;
-
+    Role role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        return List.of(new SimpleGrantedAuthority((role.name())));
     }
-
     @Override
     public boolean isAccountNonExpired() {
-//        return UserDetails.super.isAccountNonExpired();
         return true;
     }
-
     @Override
     public boolean isAccountNonLocked() {
-//        return UserDetails.super.isAccountNonLocked();
         return true;
     }
-
     @Override
     public boolean isCredentialsNonExpired() {
-//        return UserDetails.super.isCredentialsNonExpired();
         return true;
     }
-
     @Override
     public boolean isEnabled() {
-//        return UserDetails.super.isEnabled();
         return true;
     }
 }
