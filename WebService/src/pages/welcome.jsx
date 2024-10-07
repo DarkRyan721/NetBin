@@ -111,9 +111,9 @@ export default function WelcomePage()
   {
     setPassword(e.target.value);
 
-    if (!(e.target.value.length >= 8)) 
+    if ((password.length < 8) && (!/[A-Z]/.test(password)) && (!/[!@#$%^&*(),.?":{}|<>]/.test(password))) 
     {
-      setPasswordError("La contraseña debe tener al menos 8 caracteres");
+      setPasswordError("La contraseña no es valida.");
       setIsPasswordValid(false);
     } 
     else 
