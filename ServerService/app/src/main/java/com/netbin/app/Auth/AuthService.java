@@ -44,19 +44,11 @@ public class AuthService {
                 .lastname(request.lastname())
                 .role(Role.USER)
                 .build();
-        try {
             userRepository.save(user);
             logger.info("Usuario guardado exitosamente: {}", user.getUsername());
             return AuthResponse.builder()
                     .token(jwtService.getToken(user))  // Verifica si esto retorna null
                     .state("Usuario guardado correctamente")
                     .build();
-        } catch (DataIntegrityViolationException e) {
-            logger.error("Error al guardar el usuario: {}", e.getMessage());
-            return AuthResponse.builder()
-                    .token(null)
-                    .state("Error al guardar el usuario, intente de nuevo")
-                    .build();
-        }
     }
 }
