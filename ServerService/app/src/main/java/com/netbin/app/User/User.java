@@ -18,7 +18,7 @@ import java.util.List;
 @Table(name="users", uniqueConstraints = {@UniqueConstraint(columnNames = {"username"})})
 public class User implements UserDetails {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
     @Basic
     @Column(nullable = false)
