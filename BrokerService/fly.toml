@@ -8,20 +8,14 @@ primary_region = 'bog'
 
 [build]
 
-[http_service]
-  internal_port = 1883
-  force_https = true
-  auto_stop_machines = 'stop'
-  auto_start_machines = true
-  min_machines_running = 0
-  processes = ['app']
-
 [[services]]
-  http_checks = []
   internal_port = 1883
+  protcol = "tcp"
   processes = ["app"]
+
   [[services.ports]]
     port = 1883
+    handlers = [ ]
 
 [[vm]]
   memory = '1gb'
