@@ -2,7 +2,7 @@ FROM eclipse-mosquitto
 
 WORKDIR /app
 
-COPY ./mosquitto.conf /mosquitto/config/
+COPY ./mosquitto.conf config/
 COPY ./entrypoint.sh .
 
 RUN chmod +x entrypoint.sh
