@@ -1,23 +1,21 @@
-# fly.toml app configuration file generated for netbin on 2024-10-31T00:33:03Z
+# fly.toml app configuration file generated for brokerservice on 2024-10-31T10:55:29-05:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'netbin'
+app = 'brokerservice'
 primary_region = 'bog'
 
 [build]
 
-[[services]]
-  internal_port = 1883
-  protcol = "tcp"
-  processes = ["app"]
-
-  [[services.ports]]
-    port = 1883
-    handlers = [ ]
+[[services.ports]]
+  handlers = [ ]
+  port = "1883"
 
 [[vm]]
-  memory = '1gb'
-  cpu_kind = 'shared'
-  cpus = 1
+  size = 'shared-cpu-1x'
+
+[[mounts]]
+  source="mosquitto_data"
+  destination="/mosquitto/data"
+
