@@ -1,8 +1,6 @@
-FROM eclipse-mosquitto
+FROM eclipse-mosquitto:latest
 
-WORKDIR /app
-
-COPY ./mosquitto.conf config/
+COPY /config/mosquitto.conf /config/mosquitto.conf
 COPY ./entrypoint.sh .
 
 RUN chmod +x entrypoint.sh
