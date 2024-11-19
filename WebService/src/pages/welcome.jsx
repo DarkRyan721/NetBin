@@ -3,23 +3,22 @@ import "./welcome.css"; // CSS para welcome.jsx
 import { Button, Input, Textarea } from "@nextui-org/react"; // Importacion del componente Button e Input para la pagina web.
 import { UserIcon } from "../components/UserIcon"; // Importacion del diseño del simbolo de usuario para los botones de registro e ingreso.
 import { LetterNetBin, LogoNetBin } from "../components/Logo_NetBin"; // logo y nombres de la empresa
-import {ArcticonsOpenaiChatgpt} from "../components/ChatGpt_Icon"; // Logo ChatGpt
-import {EpMoney} from "../components/Rewards_Icon"; // Icono de billetes
-import {GravityUiTrashBin} from "../components/Bin_Icon"; // Icono de caneca de basura
-import {MdiCloseOutline} from "../components/Close_Icon"; // Icono de X(Usado para cerrar el Pop-Up).
-import {FluentEmojiHighContrastThinkingFace} from "../components/Thinking_Icon.jsx";
-import {LogosNetflixIcon} from "../components/Netflix_Icon.jsx";
-import {FlatColorIconsGoogle} from "../components/Google_Icon.jsx";
-import {SimpleIconsMcdonalds} from "../components/Mcdonalds_Icon.jsx";
-import {SimpleIconsCocacola} from "../components/CocaCola_Icon.jsx";
-import {SimpleIconsWalmart} from "../components/Walmart_Icon.jsx";
+import { ArcticonsOpenaiChatgpt } from "../components/ChatGpt_Icon"; // Logo ChatGpt
+import { EpMoney } from "../components/Rewards_Icon"; // Icono de billetes
+import { GravityUiTrashBin } from "../components/Bin_Icon"; // Icono de caneca de basura
+import { MdiCloseOutline } from "../components/Close_Icon"; // Icono de X(Usado para cerrar el Pop-Up).
+import { FluentEmojiHighContrastThinkingFace } from "../components/Thinking_Icon.jsx";
+import { LogosNetflixIcon } from "../components/Netflix_Icon.jsx";
+import { FlatColorIconsGoogle } from "../components/Google_Icon.jsx";
+import { SimpleIconsMcdonalds } from "../components/Mcdonalds_Icon.jsx";
+import { SimpleIconsCocacola } from "../components/CocaCola_Icon.jsx";
+import { SimpleIconsWalmart } from "../components/Walmart_Icon.jsx";
 import { EyeFilledIcon } from "../components/EyeFilledIcon"; // Componente grafico para la opcion de ocultar la contraseña.
 import { EyeSlashFilledIcon } from "../components/EyeSlashFilledIcon"; // Componente grafico para la opcion de ocultar la contraseña.
 import { Link } from "react-router-dom"; // Importacion de Link, componente que permite cambiar de pagina web.
 import { motion } from "framer-motion"; // Importacion de motion, herramienta para generar animaciones.
 
-export default function WelcomePage() 
-{
+export default function WelcomePage() {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   // Referencia al div:features-Container
@@ -30,43 +29,34 @@ export default function WelcomePage()
   const contactUsRef = useRef(null);
 
   // Funcion para generar el desplazamiento que ejecuta el Button:Product-Button
-  const scrollToInformation = () => 
-  {
+  const scrollToInformation = () => {
     if (informationRef.current) {
       informationRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
 
-  const scrollToFeatures = () =>
-  {
-    if(featuresRef.current)
-    {
-      featuresRef.current.scrollIntoView({behavior: 'smooth'});
+  const scrollToFeatures = () => {
+    if (featuresRef.current) {
+      featuresRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
 
-  const scrollToInstruction = () =>
-  {
-    if(instructionRef.current)
-    {
-      instructionRef.current.scrollIntoView({behavior: 'smooth'});
+  const scrollToInstruction = () => {
+    if (instructionRef.current) {
+      instructionRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
 
-  const scrollToWelcome = () =>
-  {
-    if(welcomeRef.current)
-    {
-      welcomeRef.current.scrollIntoView({behavior: 'smooth'});
+  const scrollToWelcome = () => {
+    if (welcomeRef.current) {
+      welcomeRef.current.scrollIntoView({ behavior: "smooth" });
       togglePopUp();
     }
   };
 
-  const scrollToContactUs = () =>
-  {
-    if(contactUsRef.current)
-    {
-      contactUsRef.current.scrollIntoView({behavior: 'smooth'});
+  const scrollToContactUs = () => {
+    if (contactUsRef.current) {
+      contactUsRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -91,33 +81,28 @@ export default function WelcomePage()
   const [isUsernameValid, setisUsernameValid] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(false);
 
-
-  const handleEmailChange = (e) => 
-  {
+  const handleEmailChange = (e) => {
     setUserName(e.target.value);
-    if (!emailRegex.test(e.target.value)) 
-    {
+    if (!emailRegex.test(e.target.value)) {
       setUserNameError("Correo no válido");
       setisUsernameValid(false);
-    } 
-    else 
-    {
+    } else {
       setUserNameError("");
       setisUsernameValid(true);
     }
   };
 
-  const handlePasswordChange = (e) => 
-  {
+  const handlePasswordChange = (e) => {
     setPassword(e.target.value);
 
-    if ((password.length < 8) && (!/[A-Z]/.test(password)) && (!/[!@#$%^&*(),.?":{}|<>]/.test(password))) 
-    {
+    if (
+      password.length < 8 &&
+      !/[A-Z]/.test(password) &&
+      !/[!@#$%^&*(),.?":{}|<>]/.test(password)
+    ) {
       setPasswordError("La contraseña no es valida.");
       setIsPasswordValid(false);
-    } 
-    else 
-    {
+    } else {
       setPasswordError("");
       setIsPasswordValid(true);
     }
@@ -137,12 +122,9 @@ export default function WelcomePage()
   //_____________________________________________________________________________________________________________________________
 
   // Funcion encargada del registro de usuarios y la comunicacion con el servidor BackEnd.
-  const RegisterForm = async () =>
-  {
-    try
-    {
-      if(isUsernameValid && isPasswordValid)
-      {
+  const RegisterForm = async () => {
+    try {
+      if (isUsernameValid && isPasswordValid) {
         // Se crea un plain object que contenga la informacion del usuario suministrada en los Inputs.
         const userData = { username, password, firstname, lastname };
 
@@ -161,8 +143,7 @@ export default function WelcomePage()
         console.log("Se enviaron los datos al Backend");
 
         // Verifica si la respuesta del servidor BackEnd fue negativa para cortar el flujo y arrojar el error.
-        if(!response.ok)
-        {
+        if (!response.ok) {
           throw new Error("Error en el registro.");
         }
 
@@ -177,8 +158,7 @@ export default function WelcomePage()
         setShowSuccess(true);
 
         //Después de 2 segundos de la animación, se re-dirige al WelcomePage
-        setTimeout(() =>
-        {
+        setTimeout(() => {
           // Se reinicia el estado de las variables para un nuevo registro.
           setShowSuccess(false);
           setUserName("");
@@ -189,74 +169,64 @@ export default function WelcomePage()
           // Se desactiva la ventana Pop-Up
           togglePopUp();
         }, 2000);
-      }
-      else
-      {
+      } else {
         console.log("Faltan datos");
       }
-      
-    }
-    catch (error)
-    {
+    } catch (error) {
       // Se establece un mensaje en caso de error.
       setMessage("El registro ha fallado");
     }
   };
 
   // Funcion encargada del registro de usuarios y la comunicacion con el servidor BackEnd.
-  const ContactForm = async () =>
-    {
-      try
-      {
-        // Se crea un plain object que contenga la informacion del usuario suministrada en los Inputs.
-        const contactData = { firstname, username, message };
-  
-        console.log("Datos enviados:", JSON.stringify(contactData));
-  
-        // Elemento que almacenara la respuesta de la solicitud POST hecha con la funcion fetch().
-        const response = await fetch(
-          "https://32a62b0f-344f-4868-b3b0-974f2047eba6.mock.pstmn.io/register",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(contactData),
-          }
-        );
-  
-        // Verifica si la respuesta del servidor BackEnd fue negativa para cortar el flujo y arrojar el error.
-        if(!response.ok)
-        {
-          throw new Error("Error en el registro.");
-        }
-  
-        // Se establece el mensaje de un correcto registro para el usuario.
-        //setMessage("Registro exitoso");
-  
-        // Se activa la bandera que permite una animacion.
-        //setShowSuccess(true);
+  const ContactForm = async () => {
+    try {
+      // Se crea un plain object que contenga la informacion del usuario suministrada en los Inputs.
+      const contactData = { firstname, username, message };
 
-        setUserName("");
-        setFirstName("");
-        setlastname("");
-        setPassword("");
-        setMessage("");
-  
-        //Después de 2 segundos de la animación, se re-dirige al WelcomePage
-        // setTimeout(() =>
-        // {
-        //   // Se reinicia el estado de las variables para un nuevo registro.
-        //   //setShowSuccess(false);
-  
-        //   // Se desactiva la ventana Pop-Up
-        //   togglePopUp();
-        // }, 2000);
+      console.log("Datos enviados:", JSON.stringify(contactData));
+
+      // Elemento que almacenara la respuesta de la solicitud POST hecha con la funcion fetch().
+      const response = await fetch(
+        "https://32a62b0f-344f-4868-b3b0-974f2047eba6.mock.pstmn.io/register",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(contactData),
+        }
+      );
+
+      // Verifica si la respuesta del servidor BackEnd fue negativa para cortar el flujo y arrojar el error.
+      if (!response.ok) {
+        throw new Error("Error en el registro.");
       }
-      catch (error)
-      {
-        // Se establece un mensaje en caso de error.
-        setMessage("El registro ha fallado");
-      }
-    };
+
+      // Se establece el mensaje de un correcto registro para el usuario.
+      //setMessage("Registro exitoso");
+
+      // Se activa la bandera que permite una animacion.
+      //setShowSuccess(true);
+
+      setUserName("");
+      setFirstName("");
+      setlastname("");
+      setPassword("");
+      setMessage("");
+
+      //Después de 2 segundos de la animación, se re-dirige al WelcomePage
+      // setTimeout(() =>
+      // {
+      //   // Se reinicia el estado de las variables para un nuevo registro.
+      //   //setShowSuccess(false);
+
+      //   // Se desactiva la ventana Pop-Up
+      //   togglePopUp();
+      // }, 2000);
+    } catch (error) {
+      // Se establece un mensaje en caso de error.
+      setMessage("El registro ha fallado");
+    }
+  };
 
   /*
     Welcome-Background: es el Div encargado de cargar la imagen y por medio de ::after se aplica la capa de opacidad sobre esta.
@@ -283,47 +253,91 @@ export default function WelcomePage()
     <div className="WelcomePage-Container">
       <div className="Welcome-Background" ref={welcomeRef}>
         <div className="Welcome-Bar">
-            <div className="NetBin-Logo-Container">
-              <LogoNetBin className="Logo-NetBin"/>
-              <LetterNetBin className="Letter-NetBin"/>
-            </div>
-            <div className="Button-Container">
-              <Button className="Bar-Button text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition" startContent={<GravityUiTrashBin/>} onClick={scrollToContactUs}>
-                Contactanos
+          <div className="NetBin-Logo-Container">
+            <LogoNetBin className="Logo-NetBin" />
+            <LetterNetBin className="Letter-NetBin" />
+          </div>
+          <div className="Button-Container">
+            <Button
+              className="Bar-Button text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition"
+              startContent={<GravityUiTrashBin />}
+              onClick={scrollToContactUs}
+            >
+              Contactanos
+            </Button>
+            <Button
+              className="Bar-Button text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition"
+              startContent={<GravityUiTrashBin />}
+              onClick={scrollToInformation}
+            >
+              Productos
+            </Button>
+            <Button
+              type="button"
+              className="Bar-Button text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition"
+              startContent={<UserIcon height="80%" />}
+              onClick={togglePopUp}
+            >
+              Registrarse
+            </Button>
+            <Link to="/login" className="link-no-style">
+              <Button
+                className="Bar-Button text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition"
+                startContent={<UserIcon height="80%" />}
+              >
+                Ingresar
               </Button>
-              <Button className="Bar-Button text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition" startContent={<GravityUiTrashBin/>} onClick={scrollToInformation}>
-                Productos
+            </Link>
+            <Link to="/home" className="link-no-style">
+              <Button
+                className="Bar-Button text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition"
+                startContent={<UserIcon height="80%" />}
+              >
+                Pagina DashBoard
               </Button>
-              <Button type="button" className="Bar-Button text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition" startContent={<UserIcon height="80%"/>} onClick={togglePopUp}>
-                Registrarse
-              </Button>
-              <Link to="/login" className="link-no-style">
-                <Button className="Bar-Button text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition" startContent={<UserIcon height="80%"/>}>
-                  Ingresar
-                </Button>
-              </Link>
-            </div>
+            </Link>
+          </div>
         </div>
 
         <div className="Welcome-Container">
-            <h1 className="Company-Phrase">Reduce, Reusa y Recicla</h1>
-            <h1 className="Initial-Phrase">ASEGURAMOS El CORRECTO{"\n"}RECICLAJE.</h1>
-            <button class="Welcome-Container-Button" onClick={scrollToInformation}>
-              <GravityUiTrashBin className="Icon-WC-Button" width="20" height="20"/>
-              <span class="Text-WC-Button">Nuestro Producto</span>
-            </button>
-            <button class="Welcome-Container-Button" onClick={scrollToInstruction}>
-              <FluentEmojiHighContrastThinkingFace className="Icon-WC-Button" width="20" height="20"/>
-              <span class="Text-WC-Button">¿Como usar NetBin?</span>
-            </button>
+          <h1 className="Company-Phrase">Reduce, Reusa y Recicla</h1>
+          <h1 className="Initial-Phrase">
+            ASEGURAMOS El CORRECTO{"\n"}RECICLAJE.
+          </h1>
+          <button
+            class="Welcome-Container-Button"
+            onClick={scrollToInformation}
+          >
+            <GravityUiTrashBin
+              className="Icon-WC-Button"
+              width="20"
+              height="20"
+            />
+            <span class="Text-WC-Button">Nuestro Producto</span>
+          </button>
+          <button
+            class="Welcome-Container-Button"
+            onClick={scrollToInstruction}
+          >
+            <FluentEmojiHighContrastThinkingFace
+              className="Icon-WC-Button"
+              width="20"
+              height="20"
+            />
+            <span class="Text-WC-Button">¿Como usar NetBin?</span>
+          </button>
         </div>
 
         {isOpen && (
           <div className="SignUp-Back">
             <div className="SignUp-Container">
               {/* From Uiverse.io by vinodjangid07 */}
-              <button type="button" class="Close-PopUp-Button" onClick={togglePopUp}>
-                <MdiCloseOutline className="svgIcon"/>
+              <button
+                type="button"
+                class="Close-PopUp-Button"
+                onClick={togglePopUp}
+              >
+                <MdiCloseOutline className="svgIcon" />
               </button>
               <h1 className="SignUp-Title">Crear Cuenta</h1>
               <Input
@@ -363,7 +377,7 @@ export default function WelcomePage()
                 label="Correo"
                 variant="underlined"
                 className="Email-Input max-w-xs mb-4"
-                description = {usernameError}
+                description={usernameError}
                 classNames={{
                   label: "custom-label-input",
                 }}
@@ -380,7 +394,7 @@ export default function WelcomePage()
                 label="Contraseña"
                 variant="underlined"
                 className="Password-Input max-w-xs mb-4"
-                description = {passwordError}
+                description={passwordError}
                 classNames={{
                   label: "custom-label-input",
                 }}
@@ -436,7 +450,12 @@ export default function WelcomePage()
                   <h2>¡{message}!</h2>
                 </motion.div>
               )}
-              <button type="button" class="PopUp-Send-Button" data-text="Awesome" onClick={RegisterForm}>
+              <button
+                type="button"
+                class="PopUp-Send-Button"
+                data-text="Awesome"
+                onClick={RegisterForm}
+              >
                 <span class="actual-text">&nbsp;Enviar&nbsp;</span>
                 <span aria-hidden="true" class="hover-text">
                   &nbsp;Enviar&nbsp;
@@ -452,16 +471,18 @@ export default function WelcomePage()
           {/* From Uiverse.io by alexruix */}
           <div class="card">
             <div class="card-info">
-              <h1 class="title">
-                NETBIN
-              </h1>
+              <h1 class="title">NETBIN</h1>
               <p className="Text">
-                NetBin es una caneca inteligente diseñada para guiar a las personas en la correcta clasificación de los residuos de basura.
-                A través de la inteligencia artificial, NetBin te ayudará si no estás seguro a que categoria corresponde lo que deseas desechar.
-                Además de contribuir al cuidado del medio ambiente, serás recompensado con CoBins, nuestra moneda
-                virtual. Estas CoBins pueden ser canjeadas en nuestras empresas aliadas, comprometidas con la responsabilidad ambiental,
-                como una forma de agradecer tu participación y esfuerzo en el reciclaje responsable.
-                ¡Juntos podemos hacer una gran diferencia para el planeta!
+                NetBin es una caneca inteligente diseñada para guiar a las
+                personas en la correcta clasificación de los residuos de basura.
+                A través de la inteligencia artificial, NetBin te ayudará si no
+                estás seguro a que categoria corresponde lo que deseas desechar.
+                Además de contribuir al cuidado del medio ambiente, serás
+                recompensado con CoBins, nuestra moneda virtual. Estas CoBins
+                pueden ser canjeadas en nuestras empresas aliadas, comprometidas
+                con la responsabilidad ambiental, como una forma de agradecer tu
+                participación y esfuerzo en el reciclaje responsable. ¡Juntos
+                podemos hacer una gran diferencia para el planeta!
               </p>
             </div>
           </div>
@@ -476,26 +497,25 @@ export default function WelcomePage()
           <div className="Companies-Container">
             <h1 className="Image-Container-Title">Compañias aliadas:</h1>
             <div className="Companies-List-Container">
-              <LogosNetflixIcon width="50" height="50"/>
-              <SimpleIconsCocacola width="70" height="70"/>
-              <SimpleIconsMcdonalds width="50" height="50" color="yellow"/>
-              <SimpleIconsWalmart width="100" height="100"/>
-              <FlatColorIconsGoogle width="50" height="50"/>
+              <LogosNetflixIcon width="50" height="50" />
+              <SimpleIconsCocacola width="70" height="70" />
+              <SimpleIconsMcdonalds width="50" height="50" color="yellow" />
+              <SimpleIconsWalmart width="100" height="100" />
+              <FlatColorIconsGoogle width="50" height="50" />
             </div>
           </div>
-          
         </div>
       </div>
 
       <div className="features-Container" ref={featuresRef}>
         <div className="features-About-NetBin">
-          <h1 className="features-Title-About-NetBin">
-            Sobre NetBin
-          </h1>
+          <h1 className="features-Title-About-NetBin">Sobre NetBin</h1>
           <p className="features-Text-About-NetBin">
-            NetBin es una propuesta innovadora encargada de la gestión de residuos que utiliza tecnología de vanguardia como
-            inteligencia artificial, IoT, reconocimiento de voz y NFC para ayudar a los usuarios a clasificar
-            correctamente su basura. NetBin se rige en tres aspectos fundamentales para su funcionamiento:
+            NetBin es una propuesta innovadora encargada de la gestión de
+            residuos que utiliza tecnología de vanguardia como inteligencia
+            artificial, IoT, reconocimiento de voz y NFC para ayudar a los
+            usuarios a clasificar correctamente su basura. NetBin se rige en
+            tres aspectos fundamentales para su funcionamiento:
           </p>
         </div>
 
@@ -503,16 +523,19 @@ export default function WelcomePage()
           <motion.div className="Product-Cards" whileHover={{ scale: 1.1 }}>
             <ArcticonsOpenaiChatgpt width="50" height="50" />
             <p className="Product-Text">
-              Usando la tecnologia de ChatGpt y el reconocimiento de voz NetBin, adquiere la capacidad de escucharte,
-              comprenderte y actuar por ti. Apoyado por IA podras clasificar correctamente la basura.
+              Usando la tecnologia de ChatGpt y el reconocimiento de voz NetBin,
+              adquiere la capacidad de escucharte, comprenderte y actuar por ti.
+              Apoyado por IA podras clasificar correctamente la basura.
             </p>
           </motion.div>
 
           <motion.div className="Product-Cards" whileHover={{ scale: 1.1 }}>
             <EpMoney width="50" height="50" color="black" />
             <p className="Product-Text">
-              Integrado con NFC, cada una de nuestras canecas tiene la capacidad de reconocerte.
-              Esto nos permitira a nosotros y las compañias aliadas, recompensarte con CoBins y productos por tu compromiso con el medio ambiente.
+              Integrado con NFC, cada una de nuestras canecas tiene la capacidad
+              de reconocerte. Esto nos permitira a nosotros y las compañias
+              aliadas, recompensarte con CoBins y productos por tu compromiso
+              con el medio ambiente.
             </p>
           </motion.div>
 
@@ -534,10 +557,10 @@ export default function WelcomePage()
           </h1>
           <p className="Register-Option-Text">
             Si quieres utilizar una de nuestras canecas y ganar CoBins, puedes
-            registrarte ahora mismo, descargar nuestra aplicacion en tu celular y usar el NFC que
-            este dispone &#x1f60a;.
+            registrarte ahora mismo, descargar nuestra aplicacion en tu celular
+            y usar el NFC que este dispone &#x1f60a;.
           </p>
-          {/* From Uiverse.io by cssbuttons-io */ }
+          {/* From Uiverse.io by cssbuttons-io */}
           <button className="Register-Option-Button" onClick={scrollToWelcome}>
             <span class="text">Registrate</span>
           </button>
@@ -548,13 +571,17 @@ export default function WelcomePage()
             <GravityUiTrashBin width="50" height="50" color="#00eb18" />
           </div>
           <div className="User-Information-Container">
-            <h1 className="User-IC-Title">
-              ¿Ya sabes donde botar tu basura?
-            </h1>
+            <h1 className="User-IC-Title">¿Ya sabes donde botar tu basura?</h1>
             <ol className="User-Ic-Text">
               <li>1] Acércate a una de nuestras canecas</li>
-              <li>2] Aproxima tu residuo de basura al compartimento correspondiente.</li>
-              <li>3] Nuestro sensor de proximidad te detectará y podrás botar tu basura.</li>
+              <li>
+                2] Aproxima tu residuo de basura al compartimento
+                correspondiente.
+              </li>
+              <li>
+                3] Nuestro sensor de proximidad te detectará y podrás botar tu
+                basura.
+              </li>
             </ol>
           </div>
         </div>
@@ -569,9 +596,15 @@ export default function WelcomePage()
             </h1>
             <ol className="User-Ic-Text">
               <li>1] Acércate a una de nuestras canecas</li>
-              <li>2] Coloca tu celular en nuestro sensor NFC para verificar tu cuenta</li>
+              <li>
+                2] Coloca tu celular en nuestro sensor NFC para verificar tu
+                cuenta
+              </li>
               <li>3] ¡Habla con nuestra IA! dile que residuo llevas contigo</li>
-              <li>4] Se te abrira la seccion correspondiente y podras botar tu basura</li>
+              <li>
+                4] Se te abrira la seccion correspondiente y podras botar tu
+                basura
+              </li>
               <li>5] Revisa tu celular y mira cuantos CoBins ganaste</li>
             </ol>
           </div>
@@ -579,7 +612,11 @@ export default function WelcomePage()
 
         <div className="User-Container">
           <div className="User-Icon-Container">
-            <FluentEmojiHighContrastThinkingFace width="50" height="50" color="#00eb18" />
+            <FluentEmojiHighContrastThinkingFace
+              width="50"
+              height="50"
+              color="#00eb18"
+            />
           </div>
           <div className="User-Information-Container">
             <h1 className="User-IC-Title">
@@ -587,9 +624,14 @@ export default function WelcomePage()
             </h1>
             <ol className="User-Ic-Text">
               <li>1] Acércate a una de nuestras canecas</li>
-              <li>2] Aproxima tu mano al microfono de la caneca para activarlo</li>
+              <li>
+                2] Aproxima tu mano al microfono de la caneca para activarlo
+              </li>
               <li>3] ¡Habla con nuestra IA! dile que residuo llevas contigo</li>
-              <li>4] Se te abrira la seccion correspondiente y podras botar tu basura</li>
+              <li>
+                4] Se te abrira la seccion correspondiente y podras botar tu
+                basura
+              </li>
             </ol>
           </div>
         </div>
@@ -598,9 +640,7 @@ export default function WelcomePage()
       <div className="ContactUs-Container" ref={contactUsRef}>
         <div className="ContactUs-Img-Container">
           <div className="ContactUs-Form-Container">
-            <h1 className="ContactUs-FC-Title">
-              Contactanos
-            </h1>
+            <h1 className="ContactUs-FC-Title">Contactanos</h1>
             <Input
               isClearable
               label="Nombre"
@@ -608,12 +648,11 @@ export default function WelcomePage()
               className="Name-Input max-w-xs mb-4"
               classNames={{
                 label: "custom-label-input",
-                inputWrapper: "custom-wrapper-contactUs"
+                inputWrapper: "custom-wrapper-contactUs",
               }}
               style={{
                 color: "#ffffff",
                 fontWeight: 400,
-                
               }}
               value={firstname}
               onChange={(e) => setFirstName(e.target.value)}
@@ -626,7 +665,7 @@ export default function WelcomePage()
               className="Email-Input max-w-xs mb-4"
               classNames={{
                 label: "custom-label-input",
-                inputWrapper: "custom-wrapper-contactUs"
+                inputWrapper: "custom-wrapper-contactUs",
               }}
               style={{
                 color: "#ffffff", // Color personalizado para el texto
@@ -643,7 +682,7 @@ export default function WelcomePage()
               className="max-w-xs"
               classNames={{
                 label: "custom-label-input",
-                inputWrapper: "custom-wrapper-contactUs"
+                inputWrapper: "custom-wrapper-contactUs",
               }}
               style={{
                 color: "#ffffff", // Color personalizado para el texto
@@ -653,13 +692,26 @@ export default function WelcomePage()
               onChange={(e) => setMessage(e.target.value)}
             />
 
-            <button type="button" class="ContactUs-Send-Button" onClick={ContactForm}>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"></path>
+            <button
+              type="button"
+              class="ContactUs-Send-Button"
+              onClick={ContactForm}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
+                ></path>
               </svg>
-              <div class="text">
-                Enviar
-              </div>
+              <div class="text">Enviar</div>
             </button>
           </div>
         </div>

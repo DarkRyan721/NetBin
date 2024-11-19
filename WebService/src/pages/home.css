@@ -1,34 +1,54 @@
 .home-container {
     display: flex;
-    height: 100vh; /* Esto hará que la altura ocupe toda la pantalla */
+    height: 100vh;
+    /* Esto hará que la altura ocupe toda la pantalla */
     width: 100%;
 }
 
+.menu-column,
+.bin-column,
+.Benefits-column {
+    flex: 1;
+    /* Asegura que los 3 contenedores ocupen un espacio igual */
+    padding: 20px;
+    overflow-y: auto;
+    /* Agrega desplazamiento si el contenido se excede */
+}
+
 .menu-column {
-    flex: 1; /* Esta columna ocupará una parte más pequeña */
-    background-color: #191D25; /* Color de fondo para diferenciar */
+    flex: 1;
+    /* Esta columna ocupará una parte más pequeña */
+    background-color: #191D25;
+    /* Color de fondo para diferenciar */
     border-right: 5px solid #24262D;
     padding: 20px;
     color: white;
 }
 
-.user-info{
+.user-info {
     border-bottom: 2px solid #0BB63E;
     padding: 10px;
-    margin-bottom: 50px; /* Espaciado debajo */
+    margin-bottom: 50px;
+    /* Espaciado debajo */
 }
 
 .username {
-    font-size: 2rem; /* Tamaño de la fuente */
-    color: #ffffff; /* Color del texto */
-    font-weight: bold; /* Negrita */
-    margin-bottom: 10px; /* Espaciado debajo */
-    text-align: center; /* Centrar el texto */
+    font-size: 2rem;
+    /* Tamaño de la fuente */
+    color: #ffffff;
+    /* Color del texto */
+    font-weight: bold;
+    /* Negrita */
+    margin-bottom: 10px;
+    /* Espaciado debajo */
+    text-align: center;
+    /* Centrar el texto */
 }
 
 .bin-column {
     display: flex;
-    flex: 2; /* Esta columna ocupará el doble de espacio que la de menú */
+    flex: 2;
+    /* Esta columna ocupará el doble de espacio que la de menú */
     flex-direction: column;
     background-color: #191D25;
     border-right: 5px solid #24262D;
@@ -37,26 +57,35 @@
     align-items: center;
 }
 
-.bin-column-title
-{
-    font-size: 2rem; /* Tamaño de la fuente */
-    color: #ffffff; /* Color del texto */
-    font-weight: bold; /* Negrita */
-    text-align: center; /* Centrar el texto */
-    margin-bottom: 75px; /* Espaciado debajo */
+.bin-column-title {
+    font-size: 2rem;
+    /* Tamaño de la fuente */
+    color: #ffffff;
+    /* Color del texto */
+    font-weight: bold;
+    /* Negrita */
+    text-align: center;
+    /* Centrar el texto */
+    margin-bottom: 75px;
+    /* Espaciado debajo */
 }
 
-.bin-pecent{
-    font-size: 2rem; /* Tamaño de la fuente */
-    color: #ffffff; /* Color del texto */
-    font-weight: bold; /* Negrita */
-    text-align: center; /* Centrar el texto */
-    margin-bottom: 75px;
+.bin-percent {
+    font-size: 20px;
+    /* Tamaño de la fuente */
+    color: #ffffff;
+    /* Color del texto */
+    font-weight: bold;
+    /* Negrita */
+    text-align: center;
+    /* Centrar el texto */
+    margin: 10px;
 }
 
 .Benefits-column {
     display: flex;
-    flex: 3; /* Esta columna será la más grande */
+    flex: 3;
+    /* Esta columna será la más grande */
     flex-direction: column;
     background-color: #14171E;
     padding: 20px;
@@ -64,33 +93,44 @@
     align-items: center;
 }
 
-.Benefits-title{
-    font-size: 2rem; /* Tamaño de la fuente */
-    color: #ffffff; /* Color del texto */
-    font-weight: bold; /* Negrita */
-    text-align: center; /* Centrar el texto */
-    margin-bottom: 50px; /* Espaciado debajo */
+.Benefits-title {
+    font-size: 2rem;
+    /* Tamaño de la fuente */
+    color: #ffffff;
+    /* Color del texto */
+    font-weight: bold;
+    /* Negrita */
+    text-align: center;
+    /* Centrar el texto */
+    margin-bottom: 50px;
+    /* Espaciado debajo */
 }
 
-.Query-IA{
-    width: 300px;
+.Query-IA {
+    width: 450px;
     height: 250px;
     background-color: #191D25;
     border-radius: 6px;
     margin-bottom: 50px;
 }
 
-.Benefits-list{
-    width: 550px;
+.Benefits-list {
+    width: 400px;
     height: 150px;
     background-color: #0BB63E;
     border-radius: 6px;
 }
 
-.Last-waste{
-    font-size: 1.5rem; /* Tamaño de la fuente */
-    color: #ffffff; /* Color del texto */
-    font-weight: bold; /* Negrita */
-    text-align: center; /* Centrar el texto */
-    margin-bottom: 50px; /* Espaciado debajo */
+.Last-waste {
+    font-size: 1.5rem;
+    padding-top: 20px;
+    /* Tamaño de la fuente */
+    color: #ffffff;
+    /* Color del texto */
+    font-weight: bold;
+    /* Negrita */
+    text-align: center;
+    /* Centrar el texto */
+    margin-bottom: 50px;
+    /* Espaciado debajo */
 }
