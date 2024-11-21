@@ -35,24 +35,24 @@ public class UserController {
         return ResponseEntity.ok(userDTO);
     }
 
-    @PostMapping("/increment-cobins")
-    public ResponseEntity<String> incrementCoBins(@RequestHeader("Authorization") String token, @RequestBody CoBinRequest coBinRequest) {
-        // Extraer el token sin el prefijo "Bearer"
-        String jwtToken = token.replace("Bearer ", "");
-        String username = jwtService.getUsernameFromToken(jwtToken);
-
-        // Buscar el usuario en la base de datos
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-
-        // Incrementar los coBins
-        Integer currentCoBins = user.getCoBins() != null ? user.getCoBins() : 0;
-        Integer newCoBins = currentCoBins + coBinRequest.getAmount();
-        user.setCoBins(newCoBins);
-
-        // Guardar el nuevo valor en la base de datos
-        userRepository.save(user);
-
-        return ResponseEntity.ok("CoBins incrementados. Nuevo total: " + newCoBins);
-    }
+//    @PostMapping("/increment-cobins")
+//    public ResponseEntity<String> incrementCoBins(@RequestHeader("Authorization") String token, @RequestBody CoBinRequest coBinRequest) {
+//        // Extraer el token sin el prefijo "Bearer"
+//        String jwtToken = token.replace("Bearer ", "");
+//        String username = jwtService.getUsernameFromToken(jwtToken);
+//
+//        // Buscar el usuario en la base de datos
+//        User user = userRepository.findByUsername(username)
+//                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+//
+//        // Incrementar los coBins
+//        Integer currentCoBins = user.getCoBins() != null ? user.getCoBins() : 0;
+//        Integer newCoBins = currentCoBins + coBinRequest.getAmount();
+//        user.setCoBins(newCoBins);
+//
+//        // Guardar el nuevo valor en la base de datos
+//        userRepository.save(user);
+//
+//        return ResponseEntity.ok("CoBins incrementados. Nuevo total: " + newCoBins);
+//    }
 }

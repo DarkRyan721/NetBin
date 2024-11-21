@@ -98,7 +98,7 @@ export default function HomePage() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch("http://localhost:80/user/info", {
+        const response = await fetch("https://netbin.onrender.com/user/info", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -202,9 +202,9 @@ export default function HomePage() {
             <TableBody>
               {processedData_table.map((item) => (
                 <TableRow key={item.workspace}>
-                  <TableCell>{item.owner}</TableCell>
-                  <TableCell>{item.status}</TableCell>
-                  <TableCell>{item.costs}</TableCell>
+                  <TableCell>{item.variable_1}</TableCell>
+                  <TableCell>{item.value_1}</TableCell>
+                  <TableCell>{item.timestamp_1}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

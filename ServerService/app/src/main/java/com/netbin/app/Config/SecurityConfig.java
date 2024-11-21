@@ -17,6 +17,7 @@ import com.netbin.app.Jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -47,9 +48,9 @@ public class SecurityConfig {
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(Arrays.asList("http://localhost:5173")); // Permitir origen del frontend
+        config.setAllowedOrigins(List.of("https://netbin.vercel.app/")); // Permitir origen del frontend
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS")); // Métodos permitidos
-        config.setAllowedHeaders(Arrays.asList("*")); // Permitir todos los encabezados
+        config.setAllowedHeaders(List.of("*")); // Permitir todos los encabezados
         config.setAllowCredentials(true); // Permitir credenciales como cookies o Authorization headers
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
