@@ -1,29 +1,61 @@
 import { useState, useEffect } from "react";
 import mqttClient from "../mqtt/mqttClient";
 
-export function useMqtt(topic) {
+export function useMqttSub(topic, data_size) {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    // Suscribirse al tópico
-    mqttClient.subscribe(topic, (err) => {
-      if (err) {
-        console.error("Error al suscribirse:", err);
-      }
-    });
-
-    // Manejar mensajes recibidos
-    mqttClient.on("message", (receivedTopic, message) => {
+    const handleMessage = (receivedTopic, message) => {
       if (receivedTopic === topic) {
-        const parsedMessage = JSON.parse(message.toString());
-        setMessages((prev) => [...prev, parsedMessage]); // Agrega el mensaje a la lista
+        try {
+          const newMessage = JSON.parse(message.toString());
+          setMessages((prevMessages) => {
+            const updatedMessages = [...prevMessages, newMessage];
+            return updatedMessages.slice(-data_size);
+          });
+        } catch (error) {
+          console.error("Error al parsear el mensaje MQTT:", error);
+        }
       }
-    });
-
-    return () => {
-      mqttClient.unsubscribe(topic); // Cancelar la suscripción al desmontar
     };
-  }, [topic]);
+
+    // Verificar conexión y suscribir
+    const subscribe = () => {
+      if (mqttClient.connected) {
+        mqttClient.subscribe(topic, (err) => {
+          if (err) {
+            console.error(`Error al suscribirse al tema '${topic}':`, err);
+          } else {
+            console.log(`Suscripción exitosa al tema '${topic}'`);
+          }
+        });
+      } else {
+        mqttClient.on('connect', () => {
+          console.log('Cliente conectado, suscribiéndose al tema');
+          mqttClient.subscribe(topic, (err) => {
+            if (err) {
+              console.error(`Error al suscribirse al tema '${topic}':`, err);
+            }
+          });
+        });
+      }
+    };
+
+    subscribe();
+    mqttClient.on("message", handleMessage);
+
+    // Limpieza al desmontar el efecto
+    return () => {
+      if (mqttClient.connected) {
+        mqttClient.unsubscribe(topic, (err) => {
+          if (err) {
+            console.error(`Error al desuscribirse del tema '${topic}':`, err);
+          }
+        });
+      }
+      mqttClient.removeListener("message", handleMessage);
+    };
+  }, [topic, data_size]);
 
   return messages;
 }

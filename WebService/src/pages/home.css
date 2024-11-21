@@ -1,8 +1,13 @@
 .home-container {
     display: flex;
     height: 100vh;
-    /* Esto hará que la altura ocupe toda la pantalla */
-    width: 100%;
+    width: 100vw;
+    gap: 20px;
+    background: linear-gradient(to bottom, #0e1116, #14171E);
+    /* Gradiente */
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    /* Fuente moderna */
 }
 
 .menu-column,
@@ -17,58 +22,69 @@
 
 .menu-column {
     flex: 1;
-    /* Esta columna ocupará una parte más pequeña */
     background-color: #191D25;
-    /* Color de fondo para diferenciar */
-    border-right: 5px solid #24262D;
+    border-right: 2px solid #24262D;
     padding: 20px;
-    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    /* Sombra */
+    border-radius: 8px;
 }
 
 .user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 20px;
     border-bottom: 2px solid #0BB63E;
-    padding: 10px;
-    margin-bottom: 50px;
-    /* Espaciado debajo */
 }
 
 .username {
-    font-size: 2rem;
-    /* Tamaño de la fuente */
+    font-size: 1.8rem;
     color: #ffffff;
-    /* Color del texto */
     font-weight: bold;
-    /* Negrita */
-    margin-bottom: 10px;
-    /* Espaciado debajo */
     text-align: center;
-    /* Centrar el texto */
+}
+
+.CoinBin {
+    font-size: 1.2rem;
+    color: #b8b8b8;
+    text-align: center;
 }
 
 .bin-column {
-    display: flex;
     flex: 2;
-    /* Esta columna ocupará el doble de espacio que la de menú */
-    flex-direction: column;
     background-color: #191D25;
-    border-right: 5px solid #24262D;
+    border-right: 2px solid #24262D;
     padding: 20px;
-    color: white;
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    /* Sombra */
 }
 
 .bin-column-title {
     font-size: 2rem;
-    /* Tamaño de la fuente */
-    color: #ffffff;
-    /* Color del texto */
     font-weight: bold;
-    /* Negrita */
+    color: #0BB63E;
+    margin-bottom: 30px;
     text-align: center;
-    /* Centrar el texto */
-    margin-bottom: 75px;
-    /* Espaciado debajo */
 }
+
+.Card {
+    width: 90%;
+    background-color: #14171E;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
 
 .bin-percent {
     font-size: 20px;
@@ -83,54 +99,256 @@
 }
 
 .Benefits-column {
-    display: flex;
-    flex: 3;
-    /* Esta columna será la más grande */
-    flex-direction: column;
+    flex: 2;
     background-color: #14171E;
     padding: 20px;
-    color: white;
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    /* Sombra */
 }
 
 .Benefits-title {
     font-size: 2rem;
-    /* Tamaño de la fuente */
-    color: #ffffff;
-    /* Color del texto */
     font-weight: bold;
-    /* Negrita */
-    text-align: center;
-    /* Centrar el texto */
-    margin-bottom: 50px;
-    /* Espaciado debajo */
+    color: #0BB63E;
+    margin-bottom: 20px;
 }
 
 .Query-IA {
-    width: 450px;
-    height: 250px;
+    width: 90%;
+    max-width: 500px;
+    height: auto;
+    padding: 20px;
     background-color: #191D25;
-    border-radius: 6px;
-    margin-bottom: 50px;
-}
-
-.Benefits-list {
-    width: 400px;
-    height: 150px;
-    background-color: #0BB63E;
-    border-radius: 6px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    margin-bottom: 30px;
 }
 
 .Last-waste {
     font-size: 1.5rem;
-    padding-top: 20px;
-    /* Tamaño de la fuente */
-    color: #ffffff;
-    /* Color del texto */
     font-weight: bold;
-    /* Negrita */
+    color: #ffffff;
     text-align: center;
-    /* Centrar el texto */
-    margin-bottom: 50px;
-    /* Espaciado debajo */
+    margin-bottom: 10px;
+}
+
+.Table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.Table-container th,
+.Table-container td {
+    text-align: left;
+    padding: 8px;
+    color: #b8b8b8;
+    font-size: 0.9rem;
+}
+
+.Table-container th {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.Table-container tr:nth-child(odd) {
+    background-color: #24262D;
+}
+
+.Table-container tr:hover {
+    background-color: #0BB63E;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+
+
+.Benefits-list {
+    width: 90%;
+    /* Ajusta el ancho en relación al contenedor */
+    max-width: 500px;
+    height: 150px;
+    background-color: #535a55;
+    border-radius: 6px;
+}
+
+
+button {
+    background-color: #0BB63E;
+    border: 30px;
+    color: white;
+    padding: 10px 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #070808;
+}
+
+
+.activation-board {
+    display: flex;
+    /* Cambia a flexbox para controlar alineación */
+    flex-direction: column;
+    /* Los botones se alinean en columna */
+    align-items: center;
+    /* Centra los botones horizontalmente */
+    justify-content: center;
+    /* Centra los botones verticalmente dentro del contenedor */
+    gap: 20px;
+    /* Espaciado entre los botones */
+    margin-top: 30px;
+}
+
+
+.custom-button {
+    padding: 15px 50px;
+    /* Ajusta el tamaño del botón */
+    font-size: 1.5rem;
+    /* Aumenta el tamaño del texto */
+    font-weight: bold;
+    border-radius: 10px;
+    /* Bordes redondeados */
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+    /* Sombra para efecto visual */
+    transition: transform 0.3s, box-shadow 0.3s;
+    background-color: #0BB63E;
+    /* Verde para indicar acción positiva */
+    color: white;
+    border: none;
+    /* Sin bordes adicionales */
+    cursor: pointer;
+}
+
+
+.custom-button:hover {
+    transform: scale(1.1);
+    /* Efecto de agrandamiento */
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.4);
+    /* Sombra más prominente */
+}
+
+.custom-button:active {
+    transform: scale(0.95);
+    /* Efecto al presionar */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    /* Sombra reducida */
+}
+
+.cobins-block {
+    background: linear-gradient(145deg, #2c3e50, #34495e);
+    /* Efecto degradado */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    /* Sombra envolvente */
+    border-radius: 12px;
+    /* Bordes redondeados */
+    padding: 20px;
+    text-align: center;
+    margin-top: 20px;
+    width: 90%;
+    /* Ajusta el ancho relativo al contenedor */
+    max-width: 300px;
+    /* Tamaño máximo para pantallas grandes */
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    /* Fuente moderna */
+    transition: transform 0.3s ease-in-out;
+    /* Transición suave */
+}
+
+.cobins-block:hover {
+    transform: scale(1.05);
+    /* Ampliación al pasar el mouse */
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.8);
+    /* Sombra más prominente */
+}
+
+.cobins-title {
+    font-size: 1.8rem;
+    /* Tamaño del texto */
+    font-weight: bold;
+    color: #0BB63E;
+    /* Color verde brillante */
+    margin-bottom: 10px;
+}
+
+.cobins-value {
+    font-size: 2.5rem;
+    /* Tamaño grande para el valor */
+    font-weight: bold;
+    color: #ffffff;
+    /* Color blanco puro */
+}
+
+
+.user-info-block {
+    background: linear-gradient(145deg, #1c2833, #34495e);
+    /* Fondo degradado */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    /* Sombra */
+    border-radius: 12px;
+    /* Bordes redondeados */
+    padding: 20px;
+    text-align: center;
+    margin-top: 20px;
+    width: 90%;
+    /* Ajusta el ancho relativo al contenedor */
+    max-width: 300px;
+    /* Tamaño máximo para pantallas grandes */
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    /* Fuente moderna */
+    transition: transform 0.3s ease-in-out;
+    /* Animación suave */
+}
+
+.user-info-block:hover {
+    transform: scale(1.05);
+    /* Ampliación al pasar el mouse */
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.8);
+    /* Sombra más prominente */
+}
+
+.avatar-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.user-title {
+    font-size: 1.2rem;
+    /* Tamaño del texto */
+    font-weight: bold;
+    color: #0BB63E;
+    /* Color verde brillante */
+    margin-bottom: 10px;
+}
+
+.user-title span {
+    color: #ffffff;
+    /* Color blanco */
+    font-size: 1.1rem;
+}
+
+.user-role {
+    font-size: 1.2rem;
+    /* Tamaño del texto */
+    font-weight: bold;
+    color: #f39c12;
+    /* Color naranja */
+    margin-top: 10px;
+}
+
+.user-role span {
+    color: #ffffff;
+    /* Color blanco */
+    font-size: 1.1rem;
 }

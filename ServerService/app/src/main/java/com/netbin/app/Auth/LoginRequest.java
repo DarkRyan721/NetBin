@@ -1,6 +1,4 @@
 package com.netbin.app.Auth;
 
-import lombok.*;
-
-public record LoginRequest(String email, String password) {
+public record LoginRequest(String username, String password) {
 }

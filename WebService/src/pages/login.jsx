@@ -1,52 +1,46 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Input, Button } from "@nextui-org/react";
 import { EyeFilledIcon } from "../components/EyeFilledIcon";
 import { EyeSlashFilledIcon } from "../components/EyeSlashFilledIcon";
 import "./login.css";
-import { useNavigate } from 'react-router-dom'; // Componente para poder cambiar de pagina en un momento especifico.
+import { useNavigate } from "react-router-dom"; // Componente para poder cambiar de pagina en un momento especifico.
 
-export default function LoginPage() 
-{
+export default function LoginPage() {
   const navigate = useNavigate();
-  const [username, setUserName] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const [isVisible, setIsVisible] = React.useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
 
-  const LoginFunction = async() =>
-  {
-    try
-    {
-      // Se crea un plain object que contenga la informacion del usuario suministrada en los Inputs.
+  const LoginFunction = async () => {
+    try {
       const userData = { username, password };
 
       console.log("Datos enviados:", JSON.stringify(userData));
 
-      // Elemento que almacenara la respuesta de la solicitud POST hecha con la funcion fetch().
-      const response = await fetch(
-        "https://netbin.onrender.com/auth/register",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(userData),
-        }
-      );
+      const response = await fetch("http://localhost:80/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userData),
+      });
 
       console.log("Se enviaron los datos al Backend");
+      console.log("Response status:", response.status);
 
-      // Verifica si la respuesta del servidor BackEnd fue negativa para cortar el flujo y arrojar el error.
-      if(!response.ok)
-      {
-        throw new Error("Error en el registro.");
+      if (!response.ok) {
+        throw new Error(`Error en el registro: ${response.status}`);
       }
 
-      navigate('/home');
-    }
-    catch (error)
-    {
-      // Se establece un mensaje en caso de error.
-      setMessage("El registro ha fallado");
+      const data = await response.json(); // Asegúrate de parsear el JSON de la respuesta
+      console.log("Token recibido:", data.token); // Asegúrate de que el backend devuelva un `token`
+
+      localStorage.setItem("token", data.token); // Guarda el token en el localStorage
+      console.log("Token guardado en localStorage");
+
+      navigate("/home");
+    } catch (error) {
+      console.error("Error en la solicitud:", error.message);
     }
   };
 
@@ -55,53 +49,61 @@ export default function LoginPage()
       <div className="Login-Container">
         <h1 className="Login-Title">¡BIENVENIDO!</h1>
         <Input
-            isClearable
-            label="Correo"
-            variant="underlined"
-            className="Email-Input max-w-xs mb-4"
-            classNames={{
-                label:"custom-label-input"
-            }}
-            style={{
-                color: '#ffffff', // Color personalizado para el texto
-                fontWeight: 400,
-            }}
-            value={username}
-            onChange={(e) => setUserName(e.target.value)}
-            onClear={() => setUserName('')}
+          isClearable
+          label="Correo"
+          variant="underlined"
+          className="username-Input max-w-xs mb-4"
+          classNames={{
+            label: "custom-label-input",
+          }}
+          style={{
+            color: "#ffffff", // Color personalizado para el texto
+            fontWeight: 400,
+          }}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          onClear={() => setUsername("")}
         />
 
         <Input
-            label="Contraseña"
-            variant="underlined"
-            className="Password-Input max-w-xs mb-4"
-            classNames={{
-                label:"custom-label-input"
-            }}
-            style={{
-                color: '#ffffff', // Color personalizado para el texto
-                fontWeight: 400,
-            }}
-            // color="success"
-            endContent={
-                <button className="focus:outline-none" type="button" onClick={toggleVisibility} aria-label="toggle password visibility">
-                {isVisible ? (
-                    <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
-                ) : (
-                    <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
-                )}
-                </button>
-            }
-            type={isVisible ? "text" : "password"}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+          label="Contraseña"
+          variant="underlined"
+          className="Password-Input max-w-xs mb-4"
+          classNames={{
+            label: "custom-label-input",
+          }}
+          style={{
+            color: "#ffffff", // Color personalizado para el texto
+            fontWeight: 400,
+          }}
+          // color="success"
+          endContent={
+            <button
+              className="focus:outline-none"
+              type="button"
+              onClick={toggleVisibility}
+              aria-label="toggle password visibility"
+            >
+              {isVisible ? (
+                <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+              ) : (
+                <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+              )}
+            </button>
+          }
+          type={isVisible ? "text" : "password"}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
 
-        <Button className="Save-Button text-white bg-transparent border border-transparent px-4 py-2 text-lg font-bold hover:border-white transition m-4" onClick={LoginFunction}>
-            Guardar
+        <Button
+          className="Save-Button text-white bg-transparent border border-transparent px-4 py-2 text-lg font-bold hover:border-white transition m-4"
+          onClick={LoginFunction}
+        >
+          Guardar
         </Button>
       </div>
-        {/* <div className="SignUp-Container">
+      {/* <div className="SignUp-Container">
             <h1 className="SignUp-Title">Crear Cuenta</h1>
             <Input
                 isClearable
@@ -139,7 +141,7 @@ export default function LoginPage()
                 isClearable
                 label="Correo"
                 variant="underlined"
-                className="Email-Input max-w-xs mb-4"
+                className="username-Input max-w-xs mb-4"
                 classNames={{
                     label:"custom-label-input"
                 }}
@@ -147,9 +149,9 @@ export default function LoginPage()
                     color: '#ffffff', // Color personalizado para el texto
                     fontWeight: 400,
                 }}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                onClear={() => setEmail('')}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                onClear={() => setUsername('')}
             />
 
             <Input

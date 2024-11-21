@@ -305,7 +305,7 @@ export default function WelcomePage() {
             ASEGURAMOS El CORRECTO{"\n"}RECICLAJE.
           </h1>
           <button
-            class="Welcome-Container-Button"
+            className="Welcome-Container-Button"
             onClick={scrollToInformation}
           >
             <GravityUiTrashBin
@@ -313,10 +313,10 @@ export default function WelcomePage() {
               width="20"
               height="20"
             />
-            <span class="Text-WC-Button">Nuestro Producto</span>
+            <span className="Text-WC-Button">Nuestro Producto</span>
           </button>
           <button
-            class="Welcome-Container-Button"
+            className="Welcome-Container-Button"
             onClick={scrollToInstruction}
           >
             <FluentEmojiHighContrastThinkingFace
@@ -324,7 +324,7 @@ export default function WelcomePage() {
               width="20"
               height="20"
             />
-            <span class="Text-WC-Button">¿Como usar NetBin?</span>
+            <span className="Text-WC-Button">¿Como usar NetBin?</span>
           </button>
         </div>
 
@@ -334,7 +334,7 @@ export default function WelcomePage() {
               {/* From Uiverse.io by vinodjangid07 */}
               <button
                 type="button"
-                class="Close-PopUp-Button"
+                className="Close-PopUp-Button"
                 onClick={togglePopUp}
               >
                 <MdiCloseOutline className="svgIcon" />
@@ -452,12 +452,12 @@ export default function WelcomePage() {
               )}
               <button
                 type="button"
-                class="PopUp-Send-Button"
+                className="PopUp-Send-Button"
                 data-text="Awesome"
                 onClick={RegisterForm}
               >
-                <span class="actual-text">&nbsp;Enviar&nbsp;</span>
-                <span aria-hidden="true" class="hover-text">
+                <span className="actual-text">&nbsp;Enviar&nbsp;</span>
+                <span aria-hidden="true" className="hover-text">
                   &nbsp;Enviar&nbsp;
                 </span>
               </button>
@@ -469,9 +469,9 @@ export default function WelcomePage() {
       <div className="Information-Container" ref={informationRef}>
         <div className="Information-About-NetBin">
           {/* From Uiverse.io by alexruix */}
-          <div class="card">
-            <div class="card-info">
-              <h1 class="title">NETBIN</h1>
+          <div className="card">
+            <div className="card-info">
+              <h1 className="title">NETBIN</h1>
               <p className="Text">
                 NetBin es una caneca inteligente diseñada para guiar a las
                 personas en la correcta clasificación de los residuos de basura.
@@ -487,7 +487,7 @@ export default function WelcomePage() {
             </div>
           </div>
 
-          <button class="Information-Button" onClick={scrollToFeatures}>
+          <button className="Information-Button" onClick={scrollToFeatures}>
             ¡Quiero saber mas!
           </button>
         </div>
@@ -562,7 +562,7 @@ export default function WelcomePage() {
           </p>
           {/* From Uiverse.io by cssbuttons-io */}
           <button className="Register-Option-Button" onClick={scrollToWelcome}>
-            <span class="text">Registrate</span>
+            <span className="text">Registrate</span>
           </button>
         </div>
 
@@ -694,24 +694,24 @@ export default function WelcomePage() {
 
             <button
               type="button"
-              class="ContactUs-Send-Button"
+              className="ContactUs-Send-Button"
               onClick={ContactForm}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="2"
+                strokeWidth="2"
                 stroke="currentColor"
-                class="w-6 h-6"
+                className="w-6 h-6"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
                 ></path>
               </svg>
-              <div class="text">Enviar</div>
+              <div className="text">Enviar</div>
             </button>
           </div>
         </div>
