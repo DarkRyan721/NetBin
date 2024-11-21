@@ -83,8 +83,8 @@ export default function HomePage() {
   };
 
   const percent_No_reciclable =
-    data_graph[data_graph.length - 1]?.NotOrganic || 0;
-  const lastOrganicValue = data_graph[data_graph.length - 1]?.Organic || 0;
+    data_graph[data_graph.length - 1]?.variable_1 || 0;
+  const lastOrganicValue = data_graph[data_graph.length - 1]?.variable || 0;
 
   // Datos para el componente BarList
   const pages = [
@@ -98,7 +98,7 @@ export default function HomePage() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch("https://netbin.onrender.com/user/info", {
+        const response = await fetch("https:://https://netbin.onrender.com/user/info", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -183,8 +183,6 @@ export default function HomePage() {
             }`}
           ></div>
         </Card>
-
-
       </div>
 
       <div className="Benefits-column">

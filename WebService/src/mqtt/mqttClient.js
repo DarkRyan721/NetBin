@@ -1,7 +1,7 @@
 import mqtt from "mqtt";
 
 // Configuración del broker MQTT
-const url = 'wss://broker.emqx.io:8083/mqtt';
+const url = 'ws://broker.emqx.io:8083/mqtt';
 
 const options = {
   // Conexión limpia

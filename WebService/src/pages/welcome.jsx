@@ -132,7 +132,7 @@ export default function WelcomePage() {
 
         // Elemento que almacenara la respuesta de la solicitud POST hecha con la funcion fetch().
         const response = await fetch(
-          "https://netbin.onrender.com/auth/register",
+          "http://localhost/auth/register",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -187,14 +187,11 @@ export default function WelcomePage() {
       console.log("Datos enviados:", JSON.stringify(contactData));
 
       // Elemento que almacenara la respuesta de la solicitud POST hecha con la funcion fetch().
-      const response = await fetch(
-        "https://32a62b0f-344f-4868-b3b0-974f2047eba6.mock.pstmn.io/register",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(contactData),
-        }
-      );
+      const response = await fetch("http://localhost/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(contactData),
+      });
 
       // Verifica si la respuesta del servidor BackEnd fue negativa para cortar el flujo y arrojar el error.
       if (!response.ok) {

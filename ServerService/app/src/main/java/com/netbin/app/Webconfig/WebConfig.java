@@ -10,7 +10,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") // Aplica a todas las rutas
-                .allowedOrigins("https://netbin.vercel.app/") // Permitir el origen específico
+                .allowedOrigins("http://localhost:5173", "https://netbin.vercel.app/") // Permitir el origen específico
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Métodos permitidos
                 .allowedHeaders("*") // Todos los encabezados
                 .allowCredentials(true); // Permitir credenciales
