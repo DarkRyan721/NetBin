@@ -1,0 +1,27 @@
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Node
+node_modules/
+dist/
+.expo/
+
+# Java
+target/
+*.class
+
+# Runtime
+*.log
+*.db
+
+# Secrets / env
+broker.env
+web/.env
+hardware/.env
+.env
+
+# OS
+.DS_Store
+Thumbs.db
