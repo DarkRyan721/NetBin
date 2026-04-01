@@ -26,6 +26,8 @@ services:
         fromDatabase:
           name: netbin
           property: password
+      - key: CORS_ALLOWED_ORIGINS
+        value: https://netbin.vercel.app,http://localhost:5173
 
 databases:
   - name: netbin

@@ -19,9 +19,12 @@ target/
 # Secrets / env
 broker.env
 web/.env
+web/.env.development
+web/.env.production
 hardware/.env
 server/.env
 .env
+.env.*
 
 # OS
 .DS_Store
