@@ -19,7 +19,7 @@ export default function LoginPage() {
 
       console.log("Datos enviados:", JSON.stringify(userData));
 
-      const response = await fetch("http://localhost:80/auth/login", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userData),

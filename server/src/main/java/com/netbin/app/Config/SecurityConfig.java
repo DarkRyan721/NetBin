@@ -33,7 +33,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // Deshabilita CSRF (opcional)
                 .authorizeHttpRequests(authRequest ->
                         authRequest
-                                .requestMatchers("/auth/**").permitAll() // Permitir rutas públicas
+                                .requestMatchers("/auth/**", "/actuator/health").permitAll() // Permitir rutas públicas
                                 .anyRequest().authenticated() // Proteger otras rutas
                 )
                 .sessionManagement(sessionManager ->

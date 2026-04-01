@@ -132,7 +132,7 @@ export default function WelcomePage() {
 
         // Elemento que almacenara la respuesta de la solicitud POST hecha con la funcion fetch().
         const response = await fetch(
-          "http://localhost/auth/register",
+          `${import.meta.env.VITE_API_URL}/auth/register`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -187,7 +187,7 @@ export default function WelcomePage() {
       console.log("Datos enviados:", JSON.stringify(contactData));
 
       // Elemento que almacenara la respuesta de la solicitud POST hecha con la funcion fetch().
-      const response = await fetch("http://localhost/register", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(contactData),

@@ -1,0 +1,33 @@
+services:
+  - type: web
+    name: netbin-server
+    runtime: docker
+    dockerfilePath: ./server/Dockerfile
+    dockerContext: ./server
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: DB_HOST
+        fromDatabase:
+          name: netbin
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: netbin
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: netbin
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: netbin
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: netbin
+          property: password
+
+databases:
+  - name: netbin
+    databaseName: db_netbin
+    user: db_netbin_user
