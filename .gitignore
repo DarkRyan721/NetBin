@@ -20,6 +20,7 @@ target/
 broker.env
 web/.env
 hardware/.env
+server/.env
 .env
 
 # OS
