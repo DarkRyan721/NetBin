@@ -21,7 +21,6 @@ import {
   RiArrowUpLine,
   RiArrowDownLine,
   RiWifiLine,
-  RiWifiOffLine,
   RiLockLine,
   RiLockUnlockLine,
 } from '@remixicon/react';
@@ -29,14 +28,14 @@ import {
 /* ── Palette map ───────────────────────────────────────────────── */
 const PALETTE = {
   emerald: {
-    accent: '#10b981', lt: '#34d399',
+    accent: '#10b981', lt: '#059669',
     bg: 'rgba(16,185,129,0.06)',
     border: 'rgba(16,185,129,0.18)',
     glow: 'rgba(16,185,129,0.40)',
     icon: 'rgba(16,185,129,0.12)',
   },
   blue: {
-    accent: '#60a5fa', lt: '#93c5fd',
+    accent: '#60a5fa', lt: '#1d4ed8',
     bg: 'rgba(96,165,250,0.06)',
     border: 'rgba(96,165,250,0.18)',
     glow: 'rgba(96,165,250,0.38)',
@@ -50,7 +49,7 @@ const PALETTE = {
     icon: 'rgba(245,158,11,0.12)',
   },
   violet: {
-    accent: '#a78bfa', lt: '#c4b5fd',
+    accent: '#a78bfa', lt: '#7c3aed',
     bg: 'rgba(167,139,250,0.06)',
     border: 'rgba(167,139,250,0.18)',
     glow: 'rgba(167,139,250,0.38)',
@@ -68,7 +67,7 @@ function KpiCard({ icon, label, value, unit, color, delta }) {
       style={{
         position: 'relative',
         borderRadius: '14px',
-        background: `linear-gradient(145deg, ${p.bg} 0%, rgba(7,16,13,0) 100%)`,
+        background: `linear-gradient(145deg, ${p.bg} 0%, #ffffff 100%)`,
         border: `1px solid ${p.border}`,
         padding: '20px',
         overflow: 'hidden',
@@ -106,7 +105,7 @@ function KpiCard({ icon, label, value, unit, color, delta }) {
             style={{
               display: 'flex', alignItems: 'center', gap: '3px',
               fontSize: '11px', fontWeight: '600',
-              color: delta >= 0 ? '#34d399' : '#f87171',
+              color: delta >= 0 ? '#059669' : '#dc2626',
               background: delta >= 0 ? 'rgba(16,185,129,0.1)' : 'rgba(248,113,113,0.1)',
               border: `1px solid ${delta >= 0 ? 'rgba(16,185,129,0.2)' : 'rgba(248,113,113,0.2)'}`,
               borderRadius: '6px',
@@ -126,7 +125,7 @@ function KpiCard({ icon, label, value, unit, color, delta }) {
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: '28px',
             fontWeight: '600',
-            color: '#e2ede8',
+            color: '#0f172a',
             margin: 0,
             lineHeight: 1.1,
             letterSpacing: '-0.5px',
@@ -147,7 +146,7 @@ function KpiCard({ icon, label, value, unit, color, delta }) {
             </span>
           )}
         </p>
-        <p style={{ fontSize: '12px', color: '#3a5445', margin: '5px 0 0', fontFamily: "'Outfit', system-ui, sans-serif" }}>
+        <p style={{ fontSize: '12px', color: '#475569', margin: '5px 0 0', fontFamily: "'Outfit', system-ui, sans-serif" }}>
           {label}
         </p>
       </div>
@@ -160,8 +159,8 @@ const Panel = ({ children, style = {} }) => (
   <div
     style={{
       borderRadius: '14px',
-      background: 'linear-gradient(145deg, rgba(16,185,129,0.03) 0%, rgba(7,16,13,0) 70%)',
-      border: '1px solid rgba(16,185,129,0.1)',
+      background: 'linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)',
+      border: '1px solid rgba(15,23,42,0.10)',
       overflow: 'hidden',
       ...style,
     }}
@@ -175,15 +174,15 @@ const PanelHeader = ({ title, subtitle, right }) => (
     style={{
       display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       padding: '16px 20px 14px',
-      borderBottom: '1px solid rgba(16,185,129,0.07)',
+      borderBottom: '1px solid rgba(15,23,42,0.08)',
     }}
   >
     <div>
-      <p style={{ margin: 0, color: '#c8ddd4', fontWeight: '600', fontSize: '14px', fontFamily: "'Outfit', system-ui, sans-serif" }}>
+      <p style={{ margin: 0, color: '#0f172a', fontWeight: '600', fontSize: '14px', fontFamily: "'Outfit', system-ui, sans-serif" }}>
         {title}
       </p>
       {subtitle && (
-        <p style={{ margin: '2px 0 0', color: '#2d4038', fontSize: '11.5px', fontFamily: "'Outfit', system-ui, sans-serif" }}>
+        <p style={{ margin: '2px 0 0', color: '#64748b', fontSize: '11.5px', fontFamily: "'Outfit', system-ui, sans-serif" }}>
           {subtitle}
         </p>
       )}
@@ -196,12 +195,12 @@ const PanelHeader = ({ title, subtitle, right }) => (
 function GateButton({ label, desc, icon, isOpen, onClick, colorScheme }) {
   const colors = {
     emerald: {
-      open:   { bg: 'rgba(16,185,129,0.09)', border: 'rgba(16,185,129,0.28)', text: '#34d399', led: '#10b981', badge: 'rgba(16,185,129,0.14)' },
-      closed: { bg: 'rgba(255,255,255,0.02)', border: 'rgba(255,255,255,0.06)', text: '#3a5445', led: '#1e3a2a', badge: 'rgba(255,255,255,0.05)' },
+      open:   { bg: 'rgba(16,185,129,0.09)', border: 'rgba(16,185,129,0.28)', text: '#059669', led: '#10b981', badge: 'rgba(16,185,129,0.14)' },
+      closed: { bg: 'rgba(15,23,42,0.02)', border: 'rgba(15,23,42,0.10)', text: '#475569', led: '#94a3b8', badge: 'rgba(15,23,42,0.06)' },
     },
     blue: {
-      open:   { bg: 'rgba(96,165,250,0.09)', border: 'rgba(96,165,250,0.28)', text: '#93c5fd', led: '#60a5fa', badge: 'rgba(96,165,250,0.14)' },
-      closed: { bg: 'rgba(255,255,255,0.02)', border: 'rgba(255,255,255,0.06)', text: '#3a5445', led: '#1a2a38', badge: 'rgba(255,255,255,0.05)' },
+      open:   { bg: 'rgba(96,165,250,0.09)', border: 'rgba(96,165,250,0.28)', text: '#1d4ed8', led: '#60a5fa', badge: 'rgba(96,165,250,0.14)' },
+      closed: { bg: 'rgba(15,23,42,0.02)', border: 'rgba(15,23,42,0.10)', text: '#475569', led: '#1a2a38', badge: 'rgba(15,23,42,0.06)' },
     },
   };
   const c = (colors[colorScheme] ?? colors.emerald)[isOpen ? 'open' : 'closed'];
@@ -228,7 +227,7 @@ function GateButton({ label, desc, icon, isOpen, onClick, colorScheme }) {
           style={{
             width: '32px', height: '32px',
             borderRadius: '9px',
-            background: isOpen ? c.badge : 'rgba(255,255,255,0.03)',
+            background: isOpen ? c.badge : 'rgba(15,23,42,0.03)',
             border: `1px solid ${c.border}`,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             color: c.text,
@@ -239,7 +238,7 @@ function GateButton({ label, desc, icon, isOpen, onClick, colorScheme }) {
         </div>
         <div style={{ textAlign: 'left' }}>
           <p style={{ margin: 0, fontSize: '13px', fontWeight: '600', color: c.text }}>{label}</p>
-          <p style={{ margin: '1px 0 0', fontSize: '11px', color: '#2d4038' }}>{desc}</p>
+          <p style={{ margin: '1px 0 0', fontSize: '11px', color: '#64748b' }}>{desc}</p>
         </div>
       </div>
 
@@ -328,15 +327,15 @@ export default function OverviewPage() {
         display: 'flex', alignItems: 'center', gap: '6px',
         padding: '4px 10px',
         borderRadius: '999px',
-        border: `1px solid ${mqttConnected ? 'rgba(16,185,129,0.25)' : 'rgba(255,255,255,0.08)'}`,
-        background: mqttConnected ? 'rgba(16,185,129,0.08)' : 'rgba(255,255,255,0.03)',
+        border: `1px solid ${mqttConnected ? 'rgba(16,185,129,0.25)' : 'rgba(15,23,42,0.14)'}`,
+        background: mqttConnected ? 'rgba(16,185,129,0.08)' : 'rgba(15,23,42,0.03)',
       }}
     >
       <div
         style={{
           width: '6px', height: '6px',
           borderRadius: '50%',
-          background: mqttConnected ? '#10b981' : '#3a5445',
+          background: mqttConnected ? '#10b981' : '#475569',
           animation: mqttConnected ? 'nb-breathe 1.8s ease-in-out infinite' : 'none',
           flexShrink: 0,
         }}
@@ -344,7 +343,7 @@ export default function OverviewPage() {
       <span
         style={{
           fontSize: '11px', fontWeight: '600',
-          color: mqttConnected ? '#34d399' : '#3a5445',
+          color: mqttConnected ? '#059669' : '#475569',
           fontFamily: "'Outfit', system-ui, sans-serif",
         }}
       >
@@ -356,9 +355,9 @@ export default function OverviewPage() {
   /* Empty state */
   const EmptyState = ({ icon, text, sub }) => (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '48px 20px', textAlign: 'center' }}>
-      <div style={{ color: '#1e3a2a', marginBottom: '10px' }}>{icon}</div>
-      <p style={{ margin: 0, color: '#3a5445', fontSize: '13.5px', fontWeight: '600', fontFamily: "'Outfit', system-ui, sans-serif" }}>{text}</p>
-      <p style={{ margin: '4px 0 0', color: '#1e3a2a', fontSize: '11.5px', fontFamily: "'Outfit', system-ui, sans-serif" }}>{sub}</p>
+      <div style={{ color: '#94a3b8', marginBottom: '10px' }}>{icon}</div>
+      <p style={{ margin: 0, color: '#475569', fontSize: '13.5px', fontWeight: '600', fontFamily: "'Outfit', system-ui, sans-serif" }}>{text}</p>
+      <p style={{ margin: '4px 0 0', color: '#94a3b8', fontSize: '11.5px', fontFamily: "'Outfit', system-ui, sans-serif" }}>{sub}</p>
     </div>
   );
 
@@ -416,18 +415,18 @@ export default function OverviewPage() {
               style={{
                 marginTop: '20px',
                 paddingTop: '16px',
-                borderTop: '1px solid rgba(16,185,129,0.07)',
+                borderTop: '1px solid rgba(15,23,42,0.08)',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '10px',
               }}
             >
               {[
-                { label: 'Capacidad total', value: `${reciclableLevel + noReciclableLevel}%`, color: '#c8ddd4' },
-                { label: 'Disponible',      value: `${Math.max(0, 100 - reciclableLevel - noReciclableLevel)}%`, color: '#34d399' },
+                { label: 'Capacidad total', value: `${reciclableLevel + noReciclableLevel}%`, color: '#0f172a' },
+                { label: 'Disponible',      value: `${Math.max(0, 100 - reciclableLevel - noReciclableLevel)}%`, color: '#059669' },
               ].map(({ label, value, color }) => (
                 <div key={label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontSize: '12px', color: '#3a5445', fontFamily: "'Outfit', system-ui, sans-serif" }}>{label}</span>
+                  <span style={{ fontSize: '12px', color: '#475569', fontFamily: "'Outfit', system-ui, sans-serif" }}>{label}</span>
                   <span style={{ fontSize: '12.5px', fontWeight: '600', color, fontFamily: "'JetBrains Mono', monospace" }}>{value}</span>
                 </div>
               ))}
@@ -453,7 +452,7 @@ export default function OverviewPage() {
               <TableHead>
                 <TableRow>
                   {['Item', 'Clasificación', 'Timestamp'].map((col) => (
-                    <TableHeaderCell key={col} className="text-xs bg-transparent" style={{ color: '#2d4038', fontFamily: "'Outfit', system-ui, sans-serif", fontWeight: '600', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                    <TableHeaderCell key={col} className="text-xs bg-transparent" style={{ color: '#64748b', fontFamily: "'Outfit', system-ui, sans-serif", fontWeight: '600', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
                       {col}
                     </TableHeaderCell>
                   ))}
@@ -461,8 +460,8 @@ export default function OverviewPage() {
               </TableHead>
               <TableBody>
                 {aiData.map((item, i) => (
-                  <TableRow key={i} className="border-gray-800/50">
-                    <TableCell className="py-3" style={{ color: '#c8ddd4', fontSize: '13px', fontFamily: "'Outfit', system-ui, sans-serif" }}>{item.variable_1}</TableCell>
+                  <TableRow key={i} className="border-slate-200">
+                    <TableCell className="py-3" style={{ color: '#0f172a', fontSize: '13px', fontFamily: "'Outfit', system-ui, sans-serif" }}>{item.variable_1}</TableCell>
                     <TableCell className="py-3">
                       <Badge
                         color={item.value_1?.toLowerCase().includes('recicl') ? 'emerald' : 'orange'}
@@ -471,7 +470,7 @@ export default function OverviewPage() {
                         {item.value_1}
                       </Badge>
                     </TableCell>
-                    <TableCell className="py-3" style={{ color: '#2d4038', fontSize: '11.5px', fontFamily: "'JetBrains Mono', monospace" }}>{item.timestamp_1}</TableCell>
+                    <TableCell className="py-3" style={{ color: '#64748b', fontSize: '11.5px', fontFamily: "'JetBrains Mono', monospace" }}>{item.timestamp_1}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -503,7 +502,7 @@ export default function OverviewPage() {
               style={{
                 marginTop: '8px',
                 paddingTop: '14px',
-                borderTop: '1px solid rgba(16,185,129,0.07)',
+                borderTop: '1px solid rgba(15,23,42,0.08)',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '8px',
@@ -513,13 +512,13 @@ export default function OverviewPage() {
                 style={{
                   width: '6px', height: '6px',
                   borderRadius: '50%',
-                  background: mqttConnected ? '#10b981' : '#1e3a2a',
+                  background: mqttConnected ? '#10b981' : '#94a3b8',
                   boxShadow: mqttConnected ? '0 0 0 2px rgba(16,185,129,0.2)' : 'none',
                   animation: mqttConnected ? 'nb-breathe 2s ease-in-out infinite' : 'none',
                   flexShrink: 0,
                 }}
               />
-              <p style={{ margin: 0, fontSize: '11.5px', color: '#2d4038', fontFamily: "'Outfit', system-ui, sans-serif" }}>
+              <p style={{ margin: 0, fontSize: '11.5px', color: '#64748b', fontFamily: "'Outfit', system-ui, sans-serif" }}>
                 {mqttConnected ? 'Broker MQTT conectado' : 'Broker MQTT desconectado'}
               </p>
             </div>

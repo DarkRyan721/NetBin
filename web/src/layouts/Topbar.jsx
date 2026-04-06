@@ -66,7 +66,7 @@ export default function Topbar() {
             <p
               style={{
                 margin: 0,
-                color: '#2d4038',
+                color: '#9db5a8',
                 fontSize: '11.5px',
                 lineHeight: 1.3,
                 marginTop: '2px',
@@ -122,7 +122,7 @@ export default function Topbar() {
           </span>
           <span
             style={{
-              color: '#3a5445',
+              color: '#9ab6a6',
               fontSize: '11px',
               fontWeight: '500',
             }}
@@ -151,7 +151,7 @@ export default function Topbar() {
             <p
               style={{
                 margin: 0,
-                color: '#c8ddd4',
+                color: '#e3f0ea',
                 fontSize: '13px',
                 fontWeight: '600',
                 lineHeight: 1.2,
@@ -163,7 +163,7 @@ export default function Topbar() {
             <p
               style={{
                 margin: '2px 0 0',
-                color: '#2d4038',
+                color: '#97b1a3',
                 fontSize: '11px',
                 textTransform: 'capitalize',
                 fontFamily: "'Outfit', system-ui, sans-serif",

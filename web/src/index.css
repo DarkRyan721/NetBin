@@ -40,6 +40,16 @@
   --nb-info:      #60a5fa;
   --nb-info-bg:   rgba(96,165,250,0.08);
 
+  /* Light dashboard content area */
+  --nb-main-bg: #ffffff;
+  --nb-main-surface: #ffffff;
+  --nb-main-surface-alt: #f8fafc;
+  --nb-main-brd: rgba(15,23,42,0.10);
+  --nb-main-brd-soft: rgba(15,23,42,0.07);
+  --nb-main-t1: #0f172a;
+  --nb-main-t2: #475569;
+  --nb-main-t3: #64748b;
+
   /* Transitions */
   --t-fast: 110ms ease;
   --t-base: 210ms ease;
@@ -148,6 +158,33 @@ body {
   background: linear-gradient(180deg, rgba(16,185,129,0.46) 0%, rgba(16,185,129,0.26) 100%);
 }
 
+/* ── Dashboard main (light) controls ──────────────────────────── */
+.nb-shell main .nb-btn {
+  border: 1px solid rgba(148,163,184,0.45);
+  background: var(--nb-main-surface);
+  color: #334155;
+}
+
+.nb-shell main .nb-btn:hover {
+  border-color: rgba(100,116,139,0.55);
+  background: var(--nb-main-surface-alt);
+  color: var(--nb-main-t1);
+  transform: translateY(-1px);
+}
+
+.nb-shell main .nb-btn-primary {
+  border-color: rgba(16,185,129,0.30);
+  background: rgba(16,185,129,0.12);
+  color: #065f46;
+  box-shadow: none;
+}
+
+.nb-shell main .nb-btn-primary:hover {
+  border-color: rgba(16,185,129,0.44);
+  background: rgba(16,185,129,0.18);
+  color: #064e3b;
+}
+
 .nb-input,
 .nb-select {
   background: rgba(10, 17, 14, 0.9);
@@ -157,6 +194,17 @@ body {
   color: #d9ebe1;
   font-size: 13px;
   transition: border-color var(--t-base), box-shadow var(--t-base), background var(--t-base);
+}
+
+.nb-shell main .nb-input,
+.nb-shell main .nb-select {
+  background: #ffffff;
+  border: 1px solid rgba(148,163,184,0.45);
+  color: var(--nb-main-t1);
+}
+
+.nb-shell main .nb-input::placeholder {
+  color: var(--nb-main-t3);
 }
 
 .nb-input:focus,

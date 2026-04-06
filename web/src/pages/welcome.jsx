@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useCallback } from "react";
 import "./welcome.css";
 import {
     Button,
@@ -20,17 +20,29 @@ import { IoTerminal } from "react-icons/io5";
 import { MdiCloseOutline } from "../components/Close_Icon";
 import RegisterUiverseForm from "../components/RegisterUiverseForm";
 import { Link } from "react-router-dom";
-import heroImage from "../assets/Gemini_Generated_Image_hoi32mhoi32mhoi3.png";
+import heroBg from "../assets/qingbao-meng-01_igFr7hd4-unsplash.jpg";
+import GridDistortion from "../components/GridDistortion";
 import { apiUrl } from "../config/env";
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PASSWORD_UPPER = /[A-Z]/;
+const PASSWORD_SYMBOL = /[!@#$%^&*(),.?":{}|<>]/;
+const FIELD_PROPS = {
+    variant: "outlined",
+    fullWidth: true,
+    className: "mui-field",
+    size: "medium",
+};
+
 export default function WelcomePage() {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     const informationRef = useRef(null);
     const featuresRef = useRef(null);
     const instructionRef = useRef(null);
     const welcomeRef = useRef(null);
     const contactUsRef = useRef(null);
+    const navLinksRef = useRef(null);
+    const pillRef = useRef(null);
 
     const [isOpen, setIsOpen] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
@@ -53,9 +65,27 @@ export default function WelcomePage() {
     const [registerMessage, setRegisterMessage] = useState("");
     const [contactStatusMessage, setContactStatusMessage] = useState("");
 
-    const scrollTo = (ref) =>
-        ref.current?.scrollIntoView({ behavior: "smooth" });
-    const togglePopUp = () =>
+    const scrollTo = useCallback(
+        (ref) => ref.current?.scrollIntoView({ behavior: "smooth" }),
+        [],
+    );
+
+    const movePill = useCallback((e) => {
+        const pill = pillRef.current;
+        const container = navLinksRef.current;
+        if (!pill || !container) return;
+        const btnRect = e.currentTarget.getBoundingClientRect();
+        const containerRect = container.getBoundingClientRect();
+        pill.style.left = `${btnRect.left - containerRect.left}px`;
+        pill.style.width = `${btnRect.width}px`;
+        pill.style.opacity = "1";
+    }, []);
+
+    const hidePill = useCallback(() => {
+        if (pillRef.current) pillRef.current.style.opacity = "0";
+    }, []);
+
+    const togglePopUp = useCallback(() =>
         setIsOpen((prev) => {
             const next = !prev;
             if (next) {
@@ -63,59 +93,43 @@ export default function WelcomePage() {
                 setShowSuccess(false);
             }
             return next;
-        });
+        }), []);
 
-    const handleEmailChange = (e) => {
+    const handleEmailChange = useCallback((e) => {
         const value = e.target.value;
         setUserName(value);
-
-        if (!emailRegex.test(value)) {
+        if (!EMAIL_REGEX.test(value)) {
             setUserNameError("Correo no válido");
             setIsUsernameValid(false);
-            return;
+        } else {
+            setUserNameError("");
+            setIsUsernameValid(true);
         }
+    }, []);
 
-        setUserNameError("");
-        setIsUsernameValid(true);
-    };
-
-    const handlePasswordChange = (e) => {
+    const handlePasswordChange = useCallback((e) => {
         const value = e.target.value;
         setPassword(value);
+        const valid =
+            value.length >= 8 &&
+            PASSWORD_UPPER.test(value) &&
+            PASSWORD_SYMBOL.test(value);
+        setPasswordError(valid ? "" : "Mínimo 8 caracteres, una mayúscula y un símbolo.");
+        setIsPasswordValid(valid);
+        setConfirmPasswordError(
+            confirmPassword && confirmPassword !== value
+                ? "Las contraseñas no coinciden."
+                : "",
+        );
+    }, [confirmPassword]);
 
-        const hasMinLength = value.length >= 8;
-        const hasUpperCase = /[A-Z]/.test(value);
-        const hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(value);
-
-        if (!hasMinLength || !hasUpperCase || !hasSymbol) {
-            setPasswordError(
-                "Mínimo 8 caracteres, una mayúscula y un símbolo.",
-            );
-            setIsPasswordValid(false);
-            return;
-        }
-
-        setPasswordError("");
-        setIsPasswordValid(true);
-
-        if (confirmPassword && confirmPassword !== value) {
-            setConfirmPasswordError("Las contraseñas no coinciden.");
-        } else {
-            setConfirmPasswordError("");
-        }
-    };
-
-    const handleConfirmPasswordChange = (e) => {
+    const handleConfirmPasswordChange = useCallback((e) => {
         const value = e.target.value;
         setConfirmPassword(value);
-
-        if (value && value !== password) {
-            setConfirmPasswordError("Las contraseñas no coinciden.");
-            return;
-        }
-
-        setConfirmPasswordError("");
-    };
+        setConfirmPasswordError(
+            value && value !== password ? "Las contraseñas no coinciden." : "",
+        );
+    }, [password]);
 
     const RegisterForm = async () => {
         try {
@@ -169,7 +183,7 @@ export default function WelcomePage() {
         }
     };
 
-    const ContactForm = () => {
+    const ContactForm = useCallback(() => {
         setContactStatusMessage(
             "¡Mensaje recibido! Pronto nos pondremos en contacto contigo.",
         );
@@ -177,79 +191,71 @@ export default function WelcomePage() {
         setContactEmail("");
         setContactMessage("");
         setContactFileName("");
-    };
-
-    const fieldProps = {
-        variant: "outlined",
-        fullWidth: true,
-        className: "mui-field",
-        size: "medium",
-    };
+    }, []);
 
     return (
         <div className="landing-page">
             <header className="landing-nav">
-                <button
-                    type="button"
-                    className="uiverse-btn brand"
-                    onClick={() => scrollTo(welcomeRef)}
-                >
-                    <LogoNetBin className="brand-logo" />
-                    <div className="brand-letter-wrap">
-                        <LetterNetBin />
+                <nav className="nav-island">
+                    {/* ── Brand ── */}
+                    <button
+                        type="button"
+                        className="nav-brand"
+                        onClick={() => scrollTo(welcomeRef)}
+                    >
+                        <div className="nav-brand-icon">
+                            <LogoNetBin />
+                        </div>
+                        <span className="nav-brand-name">NetBin</span>
+                    </button>
+
+                    {/* ── Links con píldora ── */}
+                    <div
+                        className="nav-links"
+                        ref={navLinksRef}
+                        onMouseLeave={hidePill}
+                    >
+                        <span className="nav-pill" ref={pillRef} />
+                        <button type="button" className="nav-btn" onClick={() => scrollTo(informationRef)} onMouseEnter={movePill}>Producto</button>
+                        <button type="button" className="nav-btn" onClick={() => scrollTo(featuresRef)} onMouseEnter={movePill}>Beneficios</button>
+                        <button type="button" className="nav-btn" onClick={() => scrollTo(instructionRef)} onMouseEnter={movePill}>Uso</button>
+                        <button type="button" className="nav-btn" onClick={() => scrollTo(contactUsRef)} onMouseEnter={movePill}>Contáctanos</button>
                     </div>
-                </button>
 
-                <div className="nav-actions">
-                    <button
-                        type="button"
-                        className="uiverse-btn nav-btn"
-                        onClick={() => scrollTo(informationRef)}
-                    >
-                        Producto
-                    </button>
-                    <button
-                        type="button"
-                        className="uiverse-btn nav-btn"
-                        onClick={() => scrollTo(featuresRef)}
-                    >
-                        Beneficios
-                    </button>
-                    <button
-                        type="button"
-                        className="uiverse-btn nav-btn"
-                        onClick={() => scrollTo(instructionRef)}
-                    >
-                        Uso
-                    </button>
-                    <button
-                        type="button"
-                        className="uiverse-btn nav-btn"
-                        onClick={() => scrollTo(contactUsRef)}
-                    >
-                        Contáctanos
-                    </button>
-
-                    <Button
-                        className="uiverse-btn mui-btn cta-ghost"
-                        onClick={togglePopUp}
-                        startIcon={<UserIcon height="16" />}
-                    >
-                        Registrarse
-                    </Button>
-
-                    <Button
-                        className="uiverse-btn mui-btn cta-primary"
-                        component={Link}
-                        to="/login"
-                    >
-                        Ingresar
-                    </Button>
-                </div>
+                    {/* ── CTA ── */}
+                    <div className="nav-cta">
+                        <button
+                            type="button"
+                            className="nav-register-btn"
+                            onClick={togglePopUp}
+                        >
+                            Registrarse
+                        </button>
+                        <Button
+                            className="nav-ingresar-btn"
+                            component={Link}
+                            to="/login"
+                        >
+                            Ingresar
+                        </Button>
+                    </div>
+                </nav>
             </header>
 
-            <main>
-                <section className="hero" ref={welcomeRef}>
+            {/* ── Hero full-bleed ── */}
+            <section className="hero" ref={welcomeRef}>
+                <div className="hero-bg-distortion">
+                    <GridDistortion
+                        imageSrc={heroBg}
+                        grid={10}
+                        mouse={0.1}
+                        strength={0.15}
+                        relaxation={0.9}
+                    />
+                </div>
+                <div className="hero-overlay" />
+
+                <div className="hero-inner">
                     <div className="hero-content">
                         <p className="hero-tag">
                             Sostenibilidad + IA + Recompensas
@@ -266,13 +272,13 @@ export default function WelcomePage() {
 
                         <div className="hero-cta-row">
                             <Button
-                                className="uiverse-btn mui-btn solid-btn"
+                                className="uiverse-btn mui-btn hero-solid-btn"
                                 onClick={() => scrollTo(informationRef)}
                             >
                                 Conocer NetBin
                             </Button>
                             <Button
-                                className="uiverse-btn mui-btn outline-btn"
+                                className="uiverse-btn mui-btn hero-outline-btn"
                                 onClick={() => scrollTo(instructionRef)}
                             >
                                 ¿Cómo funciona?
@@ -294,18 +300,14 @@ export default function WelcomePage() {
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div className="hero-visual">
-                        <img src={heroImage} alt="Caneca inteligente NetBin" />
-                        <div className="floating-card">
-                            <p>Clasificación asistida por IA</p>
-                            <strong>
-                                Reciclable / No reciclable en segundos
-                            </strong>
-                        </div>
-                    </div>
-                </section>
+                <div className="hero-scroll-hint" onClick={() => scrollTo(informationRef)}>
+                    <span />
+                </div>
+            </section>
 
+            <main>
                 <section className="info-section" ref={informationRef}>
                     <div className="section-heading">
                         <p>Producto</p>
@@ -505,7 +507,7 @@ export default function WelcomePage() {
                             <Divider />
                             <CardContent className="contact-card">
                                 <TextField
-                                    {...fieldProps}
+                                    {...FIELD_PROPS}
                                     required
                                     label="Nombre"
                                     placeholder="Tu nombre completo"
@@ -515,7 +517,7 @@ export default function WelcomePage() {
                                     }
                                 />
                                 <TextField
-                                    {...fieldProps}
+                                    {...FIELD_PROPS}
                                     required
                                     label="Correo"
                                     placeholder="tu-correo@empresa.com"
@@ -525,7 +527,7 @@ export default function WelcomePage() {
                                     }
                                 />
                                 <TextField
-                                    {...fieldProps}
+                                    {...FIELD_PROPS}
                                     required
                                     multiline
                                     minRows={4}

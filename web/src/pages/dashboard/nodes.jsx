@@ -7,37 +7,37 @@ const ffMono = "'JetBrains Mono', monospace";
 
 const panelStyle = {
   borderRadius: '18px',
-  background: 'linear-gradient(160deg, rgba(19,31,24,0.92) 0%, rgba(10,18,14,0.72) 100%)',
-  border: '1px solid rgba(255,255,255,0.06)',
+  background: 'linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)',
+  border: '1px solid rgba(15,23,42,0.10)',
   overflow: 'hidden',
-  boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.04), 0 20px 40px -28px rgba(0,0,0,0.95)',
+  boxShadow: '0 12px 28px -22px rgba(15,23,42,0.28)',
 };
 
 const statCardStyle = (textColor) => ({
   borderRadius: '16px',
-  background: 'linear-gradient(160deg, rgba(20,34,26,0.9) 0%, rgba(11,20,15,0.7) 100%)',
-  border: '1px solid rgba(255,255,255,0.06)',
+  background: '#ffffff',
+  border: '1px solid rgba(15,23,42,0.10)',
   padding: '16px 18px',
-  boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.04), 0 10px 30px -24px rgba(16,185,129,0.55)',
+  boxShadow: '0 10px 24px -22px rgba(15,23,42,0.25)',
 });
 
 function ActionButton({ onClick, variant = 'default', icon, children }) {
   const styles = {
     default: {
-      background: 'rgba(255,255,255,0.03)',
-      border: '1px solid rgba(255,255,255,0.08)',
-      color: '#3a5445',
-      hoverBg: 'rgba(255,255,255,0.06)',
-      hoverColor: '#7aa88e',
-      hoverBorder: 'rgba(255,255,255,0.12)',
+      background: '#ffffff',
+      border: '1px solid rgba(148,163,184,0.45)',
+      color: '#334155',
+      hoverBg: '#f8fafc',
+      hoverColor: '#0f172a',
+      hoverBorder: 'rgba(100,116,139,0.55)',
     },
     primary: {
       background: 'rgba(16,185,129,0.12)',
-      border: '1px solid rgba(16,185,129,0.28)',
-      color: '#34d399',
+      border: '1px solid rgba(16,185,129,0.32)',
+      color: '#065f46',
       hoverBg: 'rgba(16,185,129,0.18)',
-      hoverColor: '#34d399',
-      hoverBorder: 'rgba(16,185,129,0.4)',
+      hoverColor: '#064e3b',
+      hoverBorder: 'rgba(16,185,129,0.46)',
     },
   };
   const s = styles[variant];
@@ -74,9 +74,9 @@ export default function NodesPage() {
   const inactive = nodes.filter((n) => n.status !== 'ACTIVE').length;
 
   const stats = [
-    { label: 'Total nodos', value: nodes.length, color: '#ddeee5' },
-    { label: 'Activos',     value: active,        color: '#34d399' },
-    { label: 'Inactivos',   value: inactive,      color: '#f87171' },
+    { label: 'Total nodos', value: nodes.length, color: '#0f172a' },
+    { label: 'Activos',     value: active,        color: '#059669' },
+    { label: 'Inactivos',   value: inactive,      color: '#dc2626' },
   ];
 
   return (
@@ -85,10 +85,10 @@ export default function NodesPage() {
       {/* Page header */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div>
-          <h2 style={{ margin: 0, color: '#ddeee5', fontWeight: '700', fontSize: '18px', fontFamily: ff, letterSpacing: '-0.015em' }}>
+          <h2 style={{ margin: 0, color: '#0f172a', fontWeight: '700', fontSize: '18px', fontFamily: ff, letterSpacing: '-0.015em' }}>
             Nodos IoT
           </h2>
-          <p style={{ margin: '3px 0 0', color: '#3a5445', fontSize: '13px', fontFamily: ff }}>
+          <p style={{ margin: '3px 0 0', color: '#475569', fontSize: '13px', fontFamily: ff }}>
             Gestiona los nodos de la red NetBin
           </p>
         </div>
@@ -105,7 +105,7 @@ export default function NodesPage() {
             <p style={{ margin: 0, fontFamily: ffMono, fontSize: '26px', fontWeight: '600', color, lineHeight: 1.1 }}>
               {value}
             </p>
-            <p style={{ margin: '5px 0 0', fontSize: '12px', color: '#3a5445', fontFamily: ff }}>
+            <p style={{ margin: '5px 0 0', fontSize: '12px', color: '#475569', fontFamily: ff }}>
               {label}
             </p>
           </div>
@@ -119,10 +119,10 @@ export default function NodesPage() {
           style={{
             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
             padding: '14px 20px',
-            borderBottom: '1px solid rgba(16,185,129,0.07)',
+            borderBottom: '1px solid rgba(15,23,42,0.08)',
           }}
         >
-          <p style={{ margin: 0, color: '#c8ddd4', fontWeight: '600', fontSize: '14px', fontFamily: ff }}>
+          <p style={{ margin: 0, color: '#0f172a', fontWeight: '600', fontSize: '14px', fontFamily: ff }}>
             Lista de Nodos
           </p>
           <input
@@ -144,7 +144,7 @@ export default function NodesPage() {
 
         <table style={{ width: '100%', borderCollapse: 'collapse' }}>
           <thead>
-            <tr style={{ borderBottom: '1px solid rgba(16,185,129,0.07)' }}>
+            <tr style={{ borderBottom: '1px solid rgba(15,23,42,0.08)' }}>
               {['ID', 'Nombre', 'Estado', 'Ubicación'].map((col) => (
                 <th
                   key={col}
@@ -152,7 +152,7 @@ export default function NodesPage() {
                     textAlign: 'left',
                     padding: '10px 20px',
                     fontSize: '11px',
-                    color: '#2d4038',
+                    color: '#64748b',
                     fontWeight: '700',
                     textTransform: 'uppercase',
                     letterSpacing: '0.08em',
@@ -168,9 +168,9 @@ export default function NodesPage() {
             {nodes.length === 0 ? (
               <tr>
                 <td colSpan={4} style={{ padding: '56px 20px', textAlign: 'center' }}>
-                  <RiMapPinLine size={36} style={{ color: '#1e3a2a', margin: '0 auto 10px', display: 'block' }} />
-                  <p style={{ margin: 0, color: '#3a5445', fontSize: '13.5px', fontWeight: '600', fontFamily: ff }}>Sin nodos registrados</p>
-                  <p style={{ margin: '4px 0 0', color: '#1e3a2a', fontSize: '12px', fontFamily: ff }}>
+                  <RiMapPinLine size={36} style={{ color: '#94a3b8', margin: '0 auto 10px', display: 'block' }} />
+                  <p style={{ margin: 0, color: '#475569', fontSize: '13.5px', fontWeight: '600', fontFamily: ff }}>Sin nodos registrados</p>
+                  <p style={{ margin: '4px 0 0', color: '#94a3b8', fontSize: '12px', fontFamily: ff }}>
                     Los nodos aparecerán aquí una vez conectados al sistema
                   </p>
                 </td>
@@ -185,13 +185,13 @@ export default function NodesPage() {
                   <tr
                     key={node.node_id}
                     style={{
-                      borderBottom: i < arr.length - 1 ? '1px solid rgba(16,185,129,0.05)' : 'none',
+                      borderBottom: i < arr.length - 1 ? '1px solid rgba(15,23,42,0.06)' : 'none',
                     }}
                   >
-                    <td style={{ padding: '12px 20px', color: '#2d4038', fontSize: '12.5px', fontFamily: ffMono }}>
+                    <td style={{ padding: '12px 20px', color: '#64748b', fontSize: '12.5px', fontFamily: ffMono }}>
                       #{node.node_id}
                     </td>
-                    <td style={{ padding: '12px 20px', color: '#c8ddd4', fontSize: '13px', fontFamily: ff }}>
+                    <td style={{ padding: '12px 20px', color: '#0f172a', fontSize: '13px', fontFamily: ff }}>
                       {node.node_name}
                     </td>
                     <td style={{ padding: '12px 20px' }}>
@@ -207,21 +207,21 @@ export default function NodesPage() {
                           fontFamily: ff,
                           background: node.status === 'ACTIVE' ? 'rgba(16,185,129,0.1)' : 'rgba(248,113,113,0.1)',
                           border: node.status === 'ACTIVE' ? '1px solid rgba(16,185,129,0.25)' : '1px solid rgba(248,113,113,0.25)',
-                          color: node.status === 'ACTIVE' ? '#34d399' : '#f87171',
+                          color: node.status === 'ACTIVE' ? '#059669' : '#dc2626',
                         }}
                       >
                         <span
                           style={{
                             width: '5px', height: '5px',
                             borderRadius: '50%',
-                            background: node.status === 'ACTIVE' ? '#10b981' : '#f87171',
+                            background: node.status === 'ACTIVE' ? '#10b981' : '#dc2626',
                             flexShrink: 0,
                           }}
                         />
                         {node.status}
                       </span>
                     </td>
-                    <td style={{ padding: '12px 20px', color: '#3a5445', fontSize: '13px', fontFamily: ff }}>
+                    <td style={{ padding: '12px 20px', color: '#475569', fontSize: '13px', fontFamily: ff }}>
                       {node.location}
                     </td>
                   </tr>

@@ -18,16 +18,21 @@ export default function DashboardLayout() {
       }}
     >
       <AppSidebar collapsed={collapsed} setCollapsed={setCollapsed} />
-      <div style={{ display: 'flex', flexDirection: 'column', flex: 1, minWidth: 0, overflow: 'hidden' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', flex: 1, minWidth: 0, overflow: 'hidden', background: '#ffffff' }}>
         <Topbar />
         <main
           style={{
             flex: 1,
             overflowY: 'auto',
-            padding: '28px',
+            padding: '24px 24px 28px',
+            boxSizing: 'border-box',
+            background: '#ffffff',
+            color: '#0f172a',
+            fontFamily: "'Outfit', system-ui, sans-serif",
+            lineHeight: 1.45,
           }}
         >
-          <div style={{ maxWidth: '1440px', margin: '0 auto' }}>
+          <div style={{ maxWidth: '1440px', margin: '0 auto', minHeight: '100%', width: '100%', background: '#ffffff' }}>
             <Outlet />
           </div>
         </main>
