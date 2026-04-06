@@ -29,3 +29,6 @@ server/.env
 # OS
 .DS_Store
 Thumbs.db
+
+# Local scripts
+server/run_docker.sh
