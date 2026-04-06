@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { RiLeafLine, RiShieldCheckLine, RiWifiLine } from "@remixicon/react";
+import { apiUrl } from "../config/env";
 
 const FEATURES = [
     { icon: <RiWifiLine size={15} />,        text: "Monitoreo de canecas en tiempo real" },
@@ -32,7 +33,7 @@ export default function LoginPage() {
         setLoading(true);
 
         try {
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
+            const res = await fetch(apiUrl("/auth/login"), {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ username, password, rememberMe }),

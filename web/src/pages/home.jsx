@@ -14,6 +14,7 @@ import {
 } from "@tremor/react";
 import { useMqttSub } from "../hooks/useMqtt";
 import { BarList } from "@tremor/react";
+import { apiUrl } from "../config/env";
 import { LogosNetflixIcon } from "../components/Netflix_Icon.jsx";
 import { FlatColorIconsGoogle } from "../components/Google_Icon.jsx";
 import { SimpleIconsMcdonalds } from "../components/Mcdonalds_Icon.jsx";
@@ -101,7 +102,7 @@ export default function HomePage() {
         const fetchUserData = async () => {
             try {
                 const response = await fetch(
-                    `${import.meta.env.VITE_API_URL}/user/info`,
+                    apiUrl("/user/info"),
                     {
                         method: "GET",
                         headers: {

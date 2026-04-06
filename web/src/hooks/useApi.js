@@ -1,8 +1,9 @@
 import { useAuth } from '../context/AuthContext';
+import { API_BASE_URL } from '../config/env';
 
 export function useApi() {
   const { token, logout } = useAuth();
-  const base = import.meta.env.VITE_API_URL;
+  const base = API_BASE_URL;
 
   const request = async (method, path, body) => {
     const headers = { 'Content-Type': 'application/json' };

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { Input, Button, Chip } from '@nextui-org/react';
 import { RiUserLine, RiShieldLine, RiGlobalLine } from '@remixicon/react';
+import { API_BASE_URL, API_URL_FROM_ENV } from '../../config/env';
 
 function SectionCard({ icon, title, children }) {
   return (
@@ -108,8 +109,13 @@ export default function SettingsPage() {
           <div>
             <div className="flex items-center justify-between py-2">
               <p className="text-gray-600 text-xs font-mono">VITE_API_URL</p>
-              <p className="text-gray-400 text-xs font-mono">{import.meta.env.VITE_API_URL}</p>
+              <p className="text-gray-400 text-xs font-mono">{API_BASE_URL}</p>
             </div>
+            {!API_URL_FROM_ENV && (
+              <p className="text-amber-300/80 text-xs mt-1">
+                Usando fallback local (define VITE_API_URL en tu entorno).
+              </p>
+            )}
           </div>
         </SectionCard>
       )}

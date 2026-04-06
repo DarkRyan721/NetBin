@@ -21,6 +21,7 @@ import { MdiCloseOutline } from "../components/Close_Icon";
 import RegisterUiverseForm from "../components/RegisterUiverseForm";
 import { Link } from "react-router-dom";
 import heroImage from "../assets/Gemini_Generated_Image_hoi32mhoi32mhoi3.png";
+import { apiUrl } from "../config/env";
 
 export default function WelcomePage() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -136,14 +137,11 @@ export default function WelcomePage() {
 
             const userData = { username, password, firstname, lastname };
 
-            const response = await fetch(
-                `${import.meta.env.VITE_API_URL}/auth/register`,
-                {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(userData),
-                },
-            );
+            const response = await fetch(apiUrl("/auth/register"), {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(userData),
+            });
 
             if (!response.ok) {
                 throw new Error("Error en el registro.");

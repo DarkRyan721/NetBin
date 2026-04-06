@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { apiUrl } from '../config/env';
 
 const AuthContext = createContext(null);
 
@@ -19,7 +20,7 @@ export function AuthProvider({ children }) {
   const fetchUser = async (t) => {
     setLoading(true);
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/user/info`, {
+      const res = await fetch(apiUrl('/user/info'), {
         headers: { Authorization: `Bearer ${t}` },
       });
       if (res.ok) {
