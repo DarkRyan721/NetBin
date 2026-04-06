@@ -119,7 +119,7 @@ OPENAI_API_KEY=...
 | Servicio | Plataforma | Detalles |
 |---|---|---|
 | `broker/` | Fly.io | Región: `bog` (Bogotá), puerto 1883 |
-| `server/` | Azure Web App | Nombre: `netbinws`, CI/CD via `.github/workflows/main_netbinws.yml` |
+| `server/` | Render | URL: `https://netbin.onrender.com`, CI/CD via `.github/workflows/deploy-server.yml` |
 | `web/` | Pendiente | Sin pipeline definido |
 | `mobile/` | Expo / EAS Build | — |
 
@@ -128,12 +128,12 @@ OPENAI_API_KEY=...
 > ⚠️ Estos problemas deben corregirse antes de pasar a producción.
 
 1. `server/src/main/resources/application.properties` tiene credenciales de DB en texto plano — migrar a variables de entorno
-2. `hardware/sending_data.py` tiene Azure IoT connection string hardcodeada — migrar a variables de entorno
+2. `hardware/sending_data.py` tiene IoT connection string hardcodeada — migrar a variables de entorno
 3. `broker/config/mosquitto.conf` tiene `allow_anonymous true` — la config TLS está comentada
 4. El token JWT se guarda en `localStorage` (web) — considerar `httpOnly` cookies
 
 ## Archivos que NO deben hacer commit
 Ver `.gitignore` en la raíz. Adicionalmente, nunca commitear:
 - Credenciales reales en `application.properties`
-- Azure IoT connection strings
+- IoT connection strings
 - Claves privadas TLS (`.key`, `.pem`)
