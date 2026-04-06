@@ -442,29 +442,20 @@ export default function WelcomePage() {
                             <CardContent className="contact-banner-body">
                                 <div className="contact-points">
                                     <div className="contact-point">
-                                        <span>📧</span>
                                         <div>
                                             <strong>Correo</strong>
-                                            <p>contacto@netbin.co</p>
+                                            <p>miguelangelcera@outlook.com</p>
+                                            <p>collinandrey@gmail.com</p>
                                         </div>
                                     </div>
                                     <div className="contact-point">
-                                        <span>📞</span>
                                         <div>
                                             <strong>Teléfono</strong>
-                                            <p>+57 300 000 0000</p>
+                                            <p>+57 3194753814</p>
+                                            <p>+57 315 0930885</p>
                                         </div>
                                     </div>
-                                    <div className="contact-point">
-                                        <span>🕒</span>
-                                        <div>
-                                            <strong>Horario</strong>
-                                            <p>
-                                                Lunes a viernes · 8:00 a.m. –
-                                                6:00 p.m.
-                                            </p>
-                                        </div>
-                                    </div>
+
                                 </div>
 
                                 <div className="contact-chip-row">
