@@ -1,718 +1,632 @@
 import React, { useRef, useState } from "react";
-import "./welcome.css"; // CSS para welcome.jsx
-import { Button, Input, Textarea } from "@nextui-org/react"; // Importacion del componente Button e Input para la pagina web.
-import { UserIcon } from "../components/UserIcon"; // Importacion del diseño del simbolo de usuario para los botones de registro e ingreso.
-import { LetterNetBin, LogoNetBin } from "../components/Logo_NetBin"; // logo y nombres de la empresa
-import { ArcticonsOpenaiChatgpt } from "../components/ChatGpt_Icon"; // Logo ChatGpt
-import { EpMoney } from "../components/Rewards_Icon"; // Icono de billetes
-import { GravityUiTrashBin } from "../components/Bin_Icon"; // Icono de caneca de basura
-import { MdiCloseOutline } from "../components/Close_Icon"; // Icono de X(Usado para cerrar el Pop-Up).
-import { FluentEmojiHighContrastThinkingFace } from "../components/Thinking_Icon.jsx";
-import { LogosNetflixIcon } from "../components/Netflix_Icon.jsx";
-import { FlatColorIconsGoogle } from "../components/Google_Icon.jsx";
-import { SimpleIconsMcdonalds } from "../components/Mcdonalds_Icon.jsx";
-import { SimpleIconsCocacola } from "../components/CocaCola_Icon.jsx";
-import { SimpleIconsWalmart } from "../components/Walmart_Icon.jsx";
-import { EyeFilledIcon } from "../components/EyeFilledIcon"; // Componente grafico para la opcion de ocultar la contraseña.
-import { EyeSlashFilledIcon } from "../components/EyeSlashFilledIcon"; // Componente grafico para la opcion de ocultar la contraseña.
-import { Link } from "react-router-dom"; // Importacion de Link, componente que permite cambiar de pagina web.
-import { motion } from "framer-motion"; // Importacion de motion, herramienta para generar animaciones.
+import "./welcome.css";
+import {
+    Button,
+    Card,
+    CardContent,
+    Chip,
+    Divider,
+    TextField,
+} from "@mui/material";
+import { UserIcon } from "../components/UserIcon";
+import { LetterNetBin, LogoNetBin } from "../components/Logo_NetBin";
+import {
+    SiOpenai as OpenAI,
+    SiClaude as Claude,
+    SiOllama as Ollama,
+} from "react-icons/si";
+import { PiCoins } from "react-icons/pi";
+import { IoTerminal } from "react-icons/io5";
+import { MdiCloseOutline } from "../components/Close_Icon";
+import RegisterUiverseForm from "../components/RegisterUiverseForm";
+import { Link } from "react-router-dom";
+import heroImage from "../assets/Gemini_Generated_Image_hoi32mhoi32mhoi3.png";
 
 export default function WelcomePage() {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  // Referencia al div:features-Container
-  const featuresRef = useRef(null);
-  const informationRef = useRef(null);
-  const instructionRef = useRef(null);
-  const welcomeRef = useRef(null);
-  const contactUsRef = useRef(null);
+    const informationRef = useRef(null);
+    const featuresRef = useRef(null);
+    const instructionRef = useRef(null);
+    const welcomeRef = useRef(null);
+    const contactUsRef = useRef(null);
 
-  // Funcion para generar el desplazamiento que ejecuta el Button:Product-Button
-  const scrollToInformation = () => {
-    if (informationRef.current) {
-      informationRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+    const [isOpen, setIsOpen] = useState(false);
+    const [showSuccess, setShowSuccess] = useState(false);
 
-  const scrollToFeatures = () => {
-    if (featuresRef.current) {
-      featuresRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+    const [firstname, setFirstName] = useState("");
+    const [lastname, setLastname] = useState("");
+    const [username, setUserName] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [passwordError, setPasswordError] = useState("");
+    const [confirmPasswordError, setConfirmPasswordError] = useState("");
+    const [usernameError, setUserNameError] = useState("");
+    const [isUsernameValid, setIsUsernameValid] = useState(false);
+    const [isPasswordValid, setIsPasswordValid] = useState(false);
 
-  const scrollToInstruction = () => {
-    if (instructionRef.current) {
-      instructionRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+    const [contactName, setContactName] = useState("");
+    const [contactEmail, setContactEmail] = useState("");
+    const [contactMessage, setContactMessage] = useState("");
+    const [contactFileName, setContactFileName] = useState("");
+    const [registerMessage, setRegisterMessage] = useState("");
+    const [contactStatusMessage, setContactStatusMessage] = useState("");
 
-  const scrollToWelcome = () => {
-    if (welcomeRef.current) {
-      welcomeRef.current.scrollIntoView({ behavior: "smooth" });
-      togglePopUp();
-    }
-  };
+    const scrollTo = (ref) =>
+        ref.current?.scrollIntoView({ behavior: "smooth" });
+    const togglePopUp = () =>
+        setIsOpen((prev) => {
+            const next = !prev;
+            if (next) {
+                setRegisterMessage("");
+                setShowSuccess(false);
+            }
+            return next;
+        });
 
-  const scrollToContactUs = () => {
-    if (contactUsRef.current) {
-      contactUsRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+    const handleEmailChange = (e) => {
+        const value = e.target.value;
+        setUserName(value);
 
-  // Elementos creados para abrir/cerrar la ventana emergente(Pop-Up) de registro
-  const [isOpen, setIsOpen] = useState(false);
-
-  // Funcion que alterna el estado de la ventana Pop-up(oculto/visible)
-  const togglePopUp = () => setIsOpen(!isOpen);
-
-  // Elementos creados para activar/desactivar la animacion del mensaje relacionado al registro
-  const [showSuccess, setShowSuccess] = useState(false);
-
-  //________________________________________________________________________________________________
-  // Lista de variables que el usuario registrara en la base de datos para la creacion de su cuenta.
-
-  const [firstname, setFirstName] = useState("");
-  const [lastname, setlastname] = useState("");
-  const [username, setUserName] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [usernameError, setUserNameError] = useState("");
-  const [isUsernameValid, setisUsernameValid] = useState(false);
-  const [isPasswordValid, setIsPasswordValid] = useState(false);
-
-  const handleEmailChange = (e) => {
-    setUserName(e.target.value);
-    if (!emailRegex.test(e.target.value)) {
-      setUserNameError("Correo no válido");
-      setisUsernameValid(false);
-    } else {
-      setUserNameError("");
-      setisUsernameValid(true);
-    }
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-
-    if (
-      password.length < 8 &&
-      !/[A-Z]/.test(password) &&
-      !/[!@#$%^&*(),.?":{}|<>]/.test(password)
-    ) {
-      setPasswordError("La contraseña no es valida.");
-      setIsPasswordValid(false);
-    } else {
-      setPasswordError("");
-      setIsPasswordValid(true);
-    }
-  };
-
-  //________________________________________________________________________________________________
-
-  // Variable que permite el intercambio de mensajes entre el BackEnd y el FrontEnd.
-  const [message, setMessage] = useState("");
-
-  //_____________________________________________________________________________________________________________________________
-  // Variables y funcion necesarias para ocultar o dejar visible la contraseña(Recuperada de la documentacion oficial de NextUI).
-
-  const [isVisible, setIsVisible] = React.useState(false);
-  const toggleVisibility = () => setIsVisible(!isVisible);
-
-  //_____________________________________________________________________________________________________________________________
-
-  // Funcion encargada del registro de usuarios y la comunicacion con el servidor BackEnd.
-  const RegisterForm = async () => {
-    try {
-      if (isUsernameValid && isPasswordValid) {
-        // Se crea un plain object que contenga la informacion del usuario suministrada en los Inputs.
-        const userData = { username, password, firstname, lastname };
-
-        console.log("Datos enviados:", JSON.stringify(userData));
-
-        // Elemento que almacenara la respuesta de la solicitud POST hecha con la funcion fetch().
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/auth/register`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(userData),
-          }
-        );
-
-        console.log("Se enviaron los datos al Backend");
-
-        // Verifica si la respuesta del servidor BackEnd fue negativa para cortar el flujo y arrojar el error.
-        if (!response.ok) {
-          throw new Error("Error en el registro.");
+        if (!emailRegex.test(value)) {
+            setUserNameError("Correo no válido");
+            setIsUsernameValid(false);
+            return;
         }
 
-        const data = await response.json();
+        setUserNameError("");
+        setIsUsernameValid(true);
+    };
 
-        console.log(data);
+    const handlePasswordChange = (e) => {
+        const value = e.target.value;
+        setPassword(value);
 
-        // Se establece el mensaje de un correcto registro para el usuario.
-        setMessage("Registro exitoso");
+        const hasMinLength = value.length >= 8;
+        const hasUpperCase = /[A-Z]/.test(value);
+        const hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(value);
 
-        // Se activa la bandera que permite una animacion.
-        setShowSuccess(true);
+        if (!hasMinLength || !hasUpperCase || !hasSymbol) {
+            setPasswordError(
+                "Mínimo 8 caracteres, una mayúscula y un símbolo.",
+            );
+            setIsPasswordValid(false);
+            return;
+        }
 
-        //Después de 2 segundos de la animación, se re-dirige al WelcomePage
-        setTimeout(() => {
-          // Se reinicia el estado de las variables para un nuevo registro.
-          setShowSuccess(false);
-          setUserName("");
-          setFirstName("");
-          setlastname("");
-          setPassword("");
+        setPasswordError("");
+        setIsPasswordValid(true);
 
-          // Se desactiva la ventana Pop-Up
-          togglePopUp();
-        }, 2000);
-      } else {
-        console.log("Faltan datos");
-      }
-    } catch (error) {
-      // Se establece un mensaje en caso de error.
-      setMessage("El registro ha fallado");
-    }
-  };
+        if (confirmPassword && confirmPassword !== value) {
+            setConfirmPasswordError("Las contraseñas no coinciden.");
+        } else {
+            setConfirmPasswordError("");
+        }
+    };
 
-  // Funcion encargada del registro de usuarios y la comunicacion con el servidor BackEnd.
-  const ContactForm = async () => {
-    try {
-      // Se crea un plain object que contenga la informacion del usuario suministrada en los Inputs.
-      const contactData = { firstname, username, message };
+    const handleConfirmPasswordChange = (e) => {
+        const value = e.target.value;
+        setConfirmPassword(value);
 
-      console.log("Datos enviados:", JSON.stringify(contactData));
+        if (value && value !== password) {
+            setConfirmPasswordError("Las contraseñas no coinciden.");
+            return;
+        }
 
-      // Elemento que almacenara la respuesta de la solicitud POST hecha con la funcion fetch().
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(contactData),
-      });
+        setConfirmPasswordError("");
+    };
 
-      // Verifica si la respuesta del servidor BackEnd fue negativa para cortar el flujo y arrojar el error.
-      if (!response.ok) {
-        throw new Error("Error en el registro.");
-      }
+    const RegisterForm = async () => {
+        try {
+            if (
+                !isUsernameValid ||
+                !isPasswordValid ||
+                !firstname ||
+                !lastname ||
+                !confirmPassword
+            ) {
+                setRegisterMessage("Completa los campos correctamente.");
+                return;
+            }
 
-      // Se establece el mensaje de un correcto registro para el usuario.
-      //setMessage("Registro exitoso");
+            if (password !== confirmPassword) {
+                setConfirmPasswordError("Las contraseñas no coinciden.");
+                return;
+            }
 
-      // Se activa la bandera que permite una animacion.
-      //setShowSuccess(true);
+            const userData = { username, password, firstname, lastname };
 
-      setUserName("");
-      setFirstName("");
-      setlastname("");
-      setPassword("");
-      setMessage("");
+            const response = await fetch(
+                `${import.meta.env.VITE_API_URL}/auth/register`,
+                {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(userData),
+                },
+            );
 
-      //Después de 2 segundos de la animación, se re-dirige al WelcomePage
-      // setTimeout(() =>
-      // {
-      //   // Se reinicia el estado de las variables para un nuevo registro.
-      //   //setShowSuccess(false);
+            if (!response.ok) {
+                throw new Error("Error en el registro.");
+            }
 
-      //   // Se desactiva la ventana Pop-Up
-      //   togglePopUp();
-      // }, 2000);
-    } catch (error) {
-      // Se establece un mensaje en caso de error.
-      setMessage("El registro ha fallado");
-    }
-  };
+            setRegisterMessage("Registro exitoso");
+            setShowSuccess(true);
 
-  /*
-    Welcome-Background: es el Div encargado de cargar la imagen y por medio de ::after se aplica la capa de opacidad sobre esta.
-    Welcom-Bar: es el Div que contendra todo los elementos de la barra principal(Logo, Nombre de la empresa, Iniciar sesion...).
+            setTimeout(() => {
+                setShowSuccess(false);
+                setUserName("");
+                setFirstName("");
+                setLastname("");
+                setPassword("");
+                setConfirmPassword("");
+                setUserNameError("");
+                setPasswordError("");
+                setConfirmPasswordError("");
+                setIsUsernameValid(false);
+                setIsPasswordValid(false);
+                togglePopUp();
+            }, 1800);
+        } catch (error) {
+            setRegisterMessage("El registro ha fallado");
+        }
+    };
 
-      Logo-NetBin: es un Div que permitira desplegar el logo y nombre de la compañia en la barra principal.
-        LogoNetBin: es el elemento recuperado de la carpeta components del proyecto que contiene el logo de la empresa.
-        LetterNetBin: es un elemento extraido de la carpeta components el cual contiene el nombre de NetBin.
+    const ContactForm = () => {
+        setContactStatusMessage(
+            "¡Mensaje recibido! Pronto nos pondremos en contacto contigo.",
+        );
+        setContactName("");
+        setContactEmail("");
+        setContactMessage("");
+        setContactFileName("");
+    };
 
-      Button-Container: es el div que contendra los diferentes botones de la barra principal. Aquellos elementos encerrados en los componentes
-      Links son aquellos que desviaran al usuario a otras paginas.
-        SignUp-Button: es el boton que llevara al SignUpPage o mejor dicho, encargado del registro de usuarios.
-        LogIn-Button: es el boton encargado de llevar a los empresarios a su pagina(AdminPage).
+    const fieldProps = {
+        variant: "outlined",
+        fullWidth: true,
+        className: "mui-field",
+        size: "medium",
+    };
 
-    Welcome-Container: es el div restante de WelcomePage, encargado de contener la informacion del producto.
-
-      Company-Phrase: es la frase motivacional de la compañia, basada en la campaña de 3R.
-      Initial-Phrase: es la frase de calidad de la compañia.
-      Product-Button: es el boton que re-dirige a la informacion de la caneca NetBin(AUN PENDIENTE).
-
-  */
-
-  return (
-    <div className="WelcomePage-Container">
-      <div className="Welcome-Background" ref={welcomeRef}>
-        <div className="Welcome-Bar">
-          <div className="NetBin-Logo-Container">
-            <LogoNetBin className="Logo-NetBin" />
-            <LetterNetBin className="Letter-NetBin" />
-          </div>
-          <div className="Button-Container">
-            <Button
-              className="Bar-Button text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition"
-              startContent={<GravityUiTrashBin />}
-              onClick={scrollToContactUs}
-            >
-              Contactanos
-            </Button>
-            <Button
-              className="Bar-Button text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition"
-              startContent={<GravityUiTrashBin />}
-              onClick={scrollToInformation}
-            >
-              Productos
-            </Button>
-            <Button
-              type="button"
-              className="Bar-Button text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition"
-              startContent={<UserIcon height="80%" />}
-              onClick={togglePopUp}
-            >
-              Registrarse
-            </Button>
-            <Link to="/login" className="link-no-style">
-              <Button
-                className="Bar-Button text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition"
-                startContent={<UserIcon height="80%" />}
-              >
-                Ingresar
-              </Button>
-            </Link>
-            <Link to="/home" className="link-no-style">
-              <Button
-                className="Bar-Button text-white bg-transparent border-0 border-transparent px-4 py-2 text-lg font-bold hover:text-black transition"
-                startContent={<UserIcon height="80%" />}
-              >
-                Pagina DashBoard
-              </Button>
-            </Link>
-          </div>
-        </div>
-
-        <div className="Welcome-Container">
-          <h1 className="Company-Phrase">Reduce, Reusa y Recicla</h1>
-          <h1 className="Initial-Phrase">
-            ASEGURAMOS El CORRECTO{"\n"}RECICLAJE.
-          </h1>
-          <button
-            className="Welcome-Container-Button"
-            onClick={scrollToInformation}
-          >
-            <GravityUiTrashBin
-              className="Icon-WC-Button"
-              width="20"
-              height="20"
-            />
-            <span className="Text-WC-Button">Nuestro Producto</span>
-          </button>
-          <button
-            className="Welcome-Container-Button"
-            onClick={scrollToInstruction}
-          >
-            <FluentEmojiHighContrastThinkingFace
-              className="Icon-WC-Button"
-              width="20"
-              height="20"
-            />
-            <span className="Text-WC-Button">¿Como usar NetBin?</span>
-          </button>
-        </div>
-
-        {isOpen && (
-          <div className="SignUp-Back">
-            <div className="SignUp-Container">
-              {/* From Uiverse.io by vinodjangid07 */}
-              <button
-                type="button"
-                className="Close-PopUp-Button"
-                onClick={togglePopUp}
-              >
-                <MdiCloseOutline className="svgIcon" />
-              </button>
-              <h1 className="SignUp-Title">Crear Cuenta</h1>
-              <Input
-                isClearable
-                label="Nombre"
-                variant="underlined"
-                className="Name-Input max-w-xs mb-4"
-                classNames={{
-                  label: "custom-label-input",
-                }}
-                style={{
-                  color: "#ffffff",
-                  fontWeight: 400,
-                }}
-                value={firstname}
-                onChange={(e) => setFirstName(e.target.value)}
-                onClear={() => setFirstName("")}
-              />
-              <Input
-                isClearable
-                label="Apellido"
-                variant="underlined"
-                className="LastName-Input max-w-xs mb-4"
-                classNames={{
-                  label: "custom-label-input",
-                }}
-                style={{
-                  color: "#ffffff", // Color personalizado para el texto
-                  fontWeight: 400,
-                }}
-                value={lastname}
-                onChange={(e) => setlastname(e.target.value)}
-                onClear={() => setlastname("")}
-              />
-              <Input
-                isClearable
-                label="Correo"
-                variant="underlined"
-                className="Email-Input max-w-xs mb-4"
-                description={usernameError}
-                classNames={{
-                  label: "custom-label-input",
-                }}
-                style={{
-                  color: "#ffffff", // Color personalizado para el texto
-                  fontWeight: 400,
-                }}
-                value={username}
-                onChange={handleEmailChange}
-                onClear={() => setUserName("")}
-              />
-
-              <Input
-                label="Contraseña"
-                variant="underlined"
-                className="Password-Input max-w-xs mb-4"
-                description={passwordError}
-                classNames={{
-                  label: "custom-label-input",
-                }}
-                style={{
-                  color: "#ffffff", // Color personalizado para el texto
-                  fontWeight: 400,
-                }}
-                // color="success"
-                endContent={
-                  <button
-                    className="focus:outline-none"
+    return (
+        <div className="landing-page">
+            <header className="landing-nav">
+                <button
                     type="button"
-                    onClick={toggleVisibility}
-                    aria-label="toggle password visibility"
-                  >
-                    {isVisible ? (
-                      <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
-                    ) : (
-                      <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
-                    )}
-                  </button>
-                }
-                type={isVisible ? "text" : "password"}
-                value={password}
-                onChange={handlePasswordChange}
-              />
-              {showSuccess && (
-                <motion.div
-                  initial={{
-                    opacity: 0,
-                    scale: 0.7,
-                    backgroundPosition: "0% 100%",
-                  }}
-                  animate={{
-                    opacity: 1,
-                    scale: 0.9,
-                    backgroundPosition: "100% 100%", // El gradiente se moverá de izquierda a derecha
-                  }}
-                  transition={{
-                    duration: 2, // Duración total de la animación
-                    ease: "easeInOut",
-                  }}
-                  style={{
-                    padding: "20px",
-                    borderRadius: "10px",
-                    border: "4px solid transparent", // Borde transparente para no interferir
-                    background:
-                      "linear-gradient(90deg, transparent 45%, #d0d3d4 50%, transparent 55%) no-repeat", // Gradiente ajustado para una línea verde más delgada
-                    backgroundSize: "200% 5%",
-                  }}
-                  className="Success-Message"
+                    className="uiverse-btn brand"
+                    onClick={() => scrollTo(welcomeRef)}
                 >
-                  <h2>¡{message}!</h2>
-                </motion.div>
-              )}
-              <button
-                type="button"
-                className="PopUp-Send-Button"
-                data-text="Awesome"
-                onClick={RegisterForm}
-              >
-                <span className="actual-text">&nbsp;Enviar&nbsp;</span>
-                <span aria-hidden="true" className="hover-text">
-                  &nbsp;Enviar&nbsp;
-                </span>
-              </button>
-            </div>
-          </div>
-        )}
-      </div>
+                    <LogoNetBin className="brand-logo" />
+                    <div className="brand-letter-wrap">
+                        <LetterNetBin />
+                    </div>
+                </button>
 
-      <div className="Information-Container" ref={informationRef}>
-        <div className="Information-About-NetBin">
-          {/* From Uiverse.io by alexruix */}
-          <div className="card">
-            <div className="card-info">
-              <h1 className="title">NETBIN</h1>
-              <p className="Text">
-                NetBin es una caneca inteligente diseñada para guiar a las
-                personas en la correcta clasificación de los residuos de basura.
-                A través de la inteligencia artificial, NetBin te ayudará si no
-                estás seguro a que categoria corresponde lo que deseas desechar.
-                Además de contribuir al cuidado del medio ambiente, serás
-                recompensado con CoBins, nuestra moneda virtual. Estas CoBins
-                pueden ser canjeadas en nuestras empresas aliadas, comprometidas
-                con la responsabilidad ambiental, como una forma de agradecer tu
-                participación y esfuerzo en el reciclaje responsable. ¡Juntos
-                podemos hacer una gran diferencia para el planeta!
-              </p>
-            </div>
-          </div>
+                <div className="nav-actions">
+                    <button
+                        type="button"
+                        className="uiverse-btn nav-btn"
+                        onClick={() => scrollTo(informationRef)}
+                    >
+                        Producto
+                    </button>
+                    <button
+                        type="button"
+                        className="uiverse-btn nav-btn"
+                        onClick={() => scrollTo(featuresRef)}
+                    >
+                        Beneficios
+                    </button>
+                    <button
+                        type="button"
+                        className="uiverse-btn nav-btn"
+                        onClick={() => scrollTo(instructionRef)}
+                    >
+                        Uso
+                    </button>
+                    <button
+                        type="button"
+                        className="uiverse-btn nav-btn"
+                        onClick={() => scrollTo(contactUsRef)}
+                    >
+                        Contáctanos
+                    </button>
 
-          <button className="Information-Button" onClick={scrollToFeatures}>
-            ¡Quiero saber mas!
-          </button>
+                    <Button
+                        className="uiverse-btn mui-btn cta-ghost"
+                        onClick={togglePopUp}
+                        startIcon={<UserIcon height="16" />}
+                    >
+                        Registrarse
+                    </Button>
+
+                    <Button
+                        className="uiverse-btn mui-btn cta-primary"
+                        component={Link}
+                        to="/login"
+                    >
+                        Ingresar
+                    </Button>
+                </div>
+            </header>
+
+            <main>
+                <section className="hero" ref={welcomeRef}>
+                    <div className="hero-content">
+                        <p className="hero-tag">
+                            Sostenibilidad + IA + Recompensas
+                        </p>
+                        <h1>
+                            Reciclaje inteligente con experiencia premium para
+                            usuarios y empresas.
+                        </h1>
+                        <p>
+                            NetBin moderniza la gestión de residuos con
+                            clasificación guiada por IA, validación NFC y
+                            métricas para impacto ambiental real.
+                        </p>
+
+                        <div className="hero-cta-row">
+                            <Button
+                                className="uiverse-btn mui-btn solid-btn"
+                                onClick={() => scrollTo(informationRef)}
+                            >
+                                Conocer NetBin
+                            </Button>
+                            <Button
+                                className="uiverse-btn mui-btn outline-btn"
+                                onClick={() => scrollTo(instructionRef)}
+                            >
+                                ¿Cómo funciona?
+                            </Button>
+                        </div>
+
+                        <div className="hero-metrics">
+                            <div>
+                                <strong>+90%</strong>
+                                <span>de precisión en clasificación</span>
+                            </div>
+                            <div>
+                                <strong>24/7</strong>
+                                <span>disponibilidad operativa</span>
+                            </div>
+                            <div>
+                                <strong>CoBins</strong>
+                                <span>incentivos para reciclar mejor</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="hero-visual">
+                        <img src={heroImage} alt="Caneca inteligente NetBin" />
+                        <div className="floating-card">
+                            <p>Clasificación asistida por IA</p>
+                            <strong>
+                                Reciclable / No reciclable en segundos
+                            </strong>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="info-section" ref={informationRef}>
+                    <div className="section-heading">
+                        <p>Producto</p>
+                        <h2>
+                            Producto con IA, IoT y recompensas en un solo flujo
+                        </h2>
+                    </div>
+
+                    <div className="info-grid">
+                        <article className="assistant-ai-card">
+                            <div
+                                className="ai-provider-logo-row"
+                                aria-label="Logos de OpenAI, Claude y Ollama"
+                            >
+                                <OpenAI size={32} />
+                                <Claude size={32} />
+                                <Ollama size={32} />
+                            </div>
+                            <h3>Asistente IA (NLP + Voz)</h3>
+                            <p>
+                                Modelos integrables como GPT-4o mini / Llama 3.1
+                                para guía conversacional y Whisper para
+                                transcripción de voz en tiempo real.
+                            </p>
+                        </article>
+                        <article>
+                            <PiCoins size={32} style={{ color: "#333333" }} />
+                            <h3>CoBins</h3>
+                            <p>
+                                Puntos digitales que se otorgan por
+                                clasificación correcta y pueden canjearse por
+                                beneficios, campañas o programas de fidelización
+                                ambiental.
+                            </p>
+                        </article>
+                        <article>
+                            <IoTerminal size={32}  style={{ color: "#333333" }}/>
+                            <h3>IoT + Telemetría</h3>
+                            <p>
+                                Sensores de nivel/uso y eventos enviados por
+                                MQTT para monitoreo en dashboard, alertas
+                                operativas y trazabilidad de rendimiento.
+                            </p>
+                        </article>
+                    </div>
+                </section>
+
+                <section className="features-section" ref={featuresRef}>
+                    <div className="section-heading">
+                        <p>Beneficios</p>
+                        <h2>Beneficios concretos para operación y adopción</h2>
+                    </div>
+
+                    <div className="feature-cards">
+                        <article>
+                            <h3>Usuarios finales</h3>
+                            <p>
+                                Clasifican mejor en segundos, reciben
+                                retroalimentación inmediata y acumulan CoBins.
+                            </p>
+                        </article>
+                        <article>
+                            <h3>Operación y mantenimiento</h3>
+                            <p>
+                                Alertas por llenado, seguimiento por nodo y
+                                menor tiempo de respuesta en campo.
+                            </p>
+                        </article>
+                        <article>
+                            <h3>Gestión ambiental</h3>
+                            <p>
+                                Datos trazables para reportes ESG, indicadores
+                                de reciclaje y decisiones de expansión.
+                            </p>
+                        </article>
+                    </div>
+                </section>
+
+                <section className="instructions" ref={instructionRef}>
+                    <div className="section-heading">
+                        <p>Experiencia</p>
+                        <h2>Uso en 3 pasos claros</h2>
+                    </div>
+
+                    <div className="steps-grid">
+                        <article>
+                            <span>01</span>
+                            <h3>Identificación</h3>
+                            <p>
+                                El usuario se acerca y, si aplica, valida su
+                                cuenta por NFC para asociar recompensas.
+                            </p>
+                        </article>
+                        <article>
+                            <span>02</span>
+                            <h3>Clasificación asistida</h3>
+                            <p>
+                                La IA interpreta voz/texto y sugiere categoría
+                                para abrir el compartimento correcto.
+                            </p>
+                        </article>
+                        <article>
+                            <span>03</span>
+                            <h3>Registro y recompensa</h3>
+                            <p>
+                                El evento se registra en IoT y el usuario recibe
+                                CoBins si realizó una disposición correcta.
+                            </p>
+                        </article>
+                    </div>
+                </section>
+
+                <section className="contact-section" ref={contactUsRef}>
+                    <div className="section-heading">
+                        <p>Contacto</p>
+                        <h2>Canales de contacto y activación de cuenta</h2>
+                    </div>
+
+                    <div className="contact-layout">
+                        <Card className="contact-banner-card" elevation={0}>
+                            <CardContent className="contact-banner-header">
+                                <p className="contact-kicker">
+                                    Soporte comercial y técnico
+                                </p>
+                                <h3>Hablemos de tu implementación NetBin</h3>
+                                <p className="contact-subtitle">
+                                    Atendemos pilotos, despliegues empresariales
+                                    y acompañamiento operativo.
+                                </p>
+                            </CardContent>
+                            <Divider />
+                            <CardContent className="contact-banner-body">
+                                <div className="contact-points">
+                                    <div className="contact-point">
+                                        <span>📧</span>
+                                        <div>
+                                            <strong>Correo</strong>
+                                            <p>contacto@netbin.co</p>
+                                        </div>
+                                    </div>
+                                    <div className="contact-point">
+                                        <span>📞</span>
+                                        <div>
+                                            <strong>Teléfono</strong>
+                                            <p>+57 300 000 0000</p>
+                                        </div>
+                                    </div>
+                                    <div className="contact-point">
+                                        <span>🕒</span>
+                                        <div>
+                                            <strong>Horario</strong>
+                                            <p>
+                                                Lunes a viernes · 8:00 a.m. –
+                                                6:00 p.m.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="contact-chip-row">
+                                    <Chip
+                                        label="Respuesta inicial en 24h"
+                                        className="contact-chip"
+                                    />
+                                    <Chip
+                                        label="Soporte para empresas"
+                                        className="contact-chip"
+                                    />
+                                </div>
+
+                                <div className="contact-actions">
+                                    <Button
+                                        className="uiverse-btn mui-btn cta-primary contact-action-btn"
+                                        component="a"
+                                        href="mailto:contacto@netbin.co"
+                                    >
+                                        Enviar correo
+                                    </Button>
+                                    <button
+                                        type="button"
+                                        className="uiverse-btn"
+                                        onClick={togglePopUp}
+                                    >
+                                        <span>Crear cuenta</span>
+                                    </button>
+                                </div>
+                            </CardContent>
+                        </Card>
+
+                        <Card className="contact-form-card" elevation={0}>
+                            <CardContent className="contact-form-header">
+                                <p className="contact-kicker">
+                                    Formulario rápido
+                                </p>
+                                <h3>Cuéntanos tu necesidad</h3>
+                            </CardContent>
+                            <Divider />
+                            <CardContent className="contact-card">
+                                <TextField
+                                    {...fieldProps}
+                                    required
+                                    label="Nombre"
+                                    placeholder="Tu nombre completo"
+                                    value={contactName}
+                                    onChange={(e) =>
+                                        setContactName(e.target.value)
+                                    }
+                                />
+                                <TextField
+                                    {...fieldProps}
+                                    required
+                                    label="Correo"
+                                    placeholder="tu-correo@empresa.com"
+                                    value={contactEmail}
+                                    onChange={(e) =>
+                                        setContactEmail(e.target.value)
+                                    }
+                                />
+                                <TextField
+                                    {...fieldProps}
+                                    required
+                                    multiline
+                                    minRows={4}
+                                    label="Mensaje"
+                                    placeholder="Ejemplo: quiero implementar 15 estaciones NetBin en mi campus."
+                                    value={contactMessage}
+                                    onChange={(e) =>
+                                        setContactMessage(e.target.value)
+                                    }
+                                />
+
+                                <div className="file-field-block">
+                                    <Button
+                                        component="label"
+                                        className="uiverse-btn mui-btn file-upload-btn"
+                                    >
+                                        Adjuntar archivo (opcional)
+                                        <input
+                                            hidden
+                                            type="file"
+                                            onChange={(event) =>
+                                                setContactFileName(
+                                                    event.target.files?.[0]
+                                                        ?.name || "",
+                                                )
+                                            }
+                                        />
+                                    </Button>
+                                    <p className="file-field-name">
+                                        {contactFileName ||
+                                            "Ningún archivo seleccionado"}
+                                    </p>
+                                </div>
+
+                                <button
+                                    type="button"
+                                    className="uiverse-btn uiverse-wide"
+                                    onClick={ContactForm}
+                                >
+                                    <span>Enviar mensaje</span>
+                                </button>
+                            </CardContent>
+                        </Card>
+                    </div>
+                </section>
+            </main>
+
+            <footer className="landing-footer">
+                <p>
+                    © {new Date().getFullYear()} NetBin · Innovación para un
+                    reciclaje inteligente.
+                </p>
+            </footer>
+
+            {isOpen && (
+                <div className="modal-backdrop">
+                    <div className="modal-card register-modal-card">
+                        <button
+                            type="button"
+                            className="uiverse-btn close-modal register-close"
+                            onClick={togglePopUp}
+                        >
+                            <MdiCloseOutline className="svgIcon" />
+                        </button>
+                        <RegisterUiverseForm
+                            firstname={firstname}
+                            lastname={lastname}
+                            email={username}
+                            password={password}
+                            confirmPassword={confirmPassword}
+                            onFirstnameChange={(e) =>
+                                setFirstName(e.target.value)
+                            }
+                            onLastnameChange={(e) =>
+                                setLastname(e.target.value)
+                            }
+                            onEmailChange={handleEmailChange}
+                            onPasswordChange={handlePasswordChange}
+                            onConfirmPasswordChange={
+                                handleConfirmPasswordChange
+                            }
+                            onSubmit={RegisterForm}
+                            emailError={usernameError}
+                            passwordError={passwordError}
+                            confirmPasswordError={confirmPasswordError}
+                            message={registerMessage}
+                            showSuccess={showSuccess}
+                        />
+                    </div>
+                </div>
+            )}
+
+            <Link to="/dashboard/overview" className="floating-dashboard-link">
+                Ir al dashboard
+            </Link>
+
+            {contactStatusMessage && !isOpen && (
+                <div className="toast-message">{contactStatusMessage}</div>
+            )}
         </div>
-
-        <div className="Image-Container">
-          <div className="Image-NetBin" />
-          <div className="Companies-Container">
-            <h1 className="Image-Container-Title">Compañias aliadas:</h1>
-            <div className="Companies-List-Container">
-              <LogosNetflixIcon width="50" height="50" />
-              <SimpleIconsCocacola width="70" height="70" />
-              <SimpleIconsMcdonalds width="50" height="50" color="yellow" />
-              <SimpleIconsWalmart width="100" height="100" />
-              <FlatColorIconsGoogle width="50" height="50" />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="features-Container" ref={featuresRef}>
-        <div className="features-About-NetBin">
-          <h1 className="features-Title-About-NetBin">Sobre NetBin</h1>
-          <p className="features-Text-About-NetBin">
-            NetBin es una propuesta innovadora encargada de la gestión de
-            residuos que utiliza tecnología de vanguardia como inteligencia
-            artificial, IoT, reconocimiento de voz y NFC para ayudar a los
-            usuarios a clasificar correctamente su basura. NetBin se rige en
-            tres aspectos fundamentales para su funcionamiento:
-          </p>
-        </div>
-
-        <div className="Product-Description-Container">
-          <motion.div className="Product-Cards" whileHover={{ scale: 1.1 }}>
-            <ArcticonsOpenaiChatgpt width="50" height="50" />
-            <p className="Product-Text">
-              Usando la tecnologia de ChatGpt y el reconocimiento de voz NetBin,
-              adquiere la capacidad de escucharte, comprenderte y actuar por ti.
-              Apoyado por IA podras clasificar correctamente la basura.
-            </p>
-          </motion.div>
-
-          <motion.div className="Product-Cards" whileHover={{ scale: 1.1 }}>
-            <EpMoney width="50" height="50" color="black" />
-            <p className="Product-Text">
-              Integrado con NFC, cada una de nuestras canecas tiene la capacidad
-              de reconocerte. Esto nos permitira a nosotros y las compañias
-              aliadas, recompensarte con CoBins y productos por tu compromiso
-              con el medio ambiente.
-            </p>
-          </motion.div>
-
-          <motion.div className="Product-Cards" whileHover={{ scale: 1.1 }}>
-            <GravityUiTrashBin width="50" height="50" color="black" />
-            <p className="Product-Text">
-              NetBin se preocupa por el medio ambiente y la sostenibilidad. Este
-              producto esta pensado para continuar con la responsabilidad
-              ambiental, no solo incentiva sino lo mas importante, enseña.
-            </p>
-          </motion.div>
-        </div>
-      </div>
-
-      <div className="Instruction-Container" ref={instructionRef}>
-        <div className="Register-Option-Container">
-          <h1 className="Register-Option-Title">
-            ¡Usa una de nuestras canecas!
-          </h1>
-          <p className="Register-Option-Text">
-            Si quieres utilizar una de nuestras canecas y ganar CoBins, puedes
-            registrarte ahora mismo, descargar nuestra aplicacion en tu celular
-            y usar el NFC que este dispone &#x1f60a;.
-          </p>
-          {/* From Uiverse.io by cssbuttons-io */}
-          <button className="Register-Option-Button" onClick={scrollToWelcome}>
-            <span className="text">Registrate</span>
-          </button>
-        </div>
-
-        <div className="User-Container">
-          <div className="User-Icon-Container">
-            <GravityUiTrashBin width="50" height="50" color="#00eb18" />
-          </div>
-          <div className="User-Information-Container">
-            <h1 className="User-IC-Title">¿Ya sabes donde botar tu basura?</h1>
-            <ol className="User-Ic-Text">
-              <li>1] Acércate a una de nuestras canecas</li>
-              <li>
-                2] Aproxima tu residuo de basura al compartimento
-                correspondiente.
-              </li>
-              <li>
-                3] Nuestro sensor de proximidad te detectará y podrás botar tu
-                basura.
-              </li>
-            </ol>
-          </div>
-        </div>
-
-        <div className="User-Container">
-          <div className="User-Icon-Container">
-            <EpMoney width="50" height="50" color="#00eb18" />
-          </div>
-          <div className="User-Information-Container">
-            <h1 className="User-IC-Title">
-              ¿Quieres obtener CoBins por seccionar bien la basura?
-            </h1>
-            <ol className="User-Ic-Text">
-              <li>1] Acércate a una de nuestras canecas</li>
-              <li>
-                2] Coloca tu celular en nuestro sensor NFC para verificar tu
-                cuenta
-              </li>
-              <li>3] ¡Habla con nuestra IA! dile que residuo llevas contigo</li>
-              <li>
-                4] Se te abrira la seccion correspondiente y podras botar tu
-                basura
-              </li>
-              <li>5] Revisa tu celular y mira cuantos CoBins ganaste</li>
-            </ol>
-          </div>
-        </div>
-
-        <div className="User-Container">
-          <div className="User-Icon-Container">
-            <FluentEmojiHighContrastThinkingFace
-              width="50"
-              height="50"
-              color="#00eb18"
-            />
-          </div>
-          <div className="User-Information-Container">
-            <h1 className="User-IC-Title">
-              ¿Solo quieres saber donde botar tu basura?
-            </h1>
-            <ol className="User-Ic-Text">
-              <li>1] Acércate a una de nuestras canecas</li>
-              <li>
-                2] Aproxima tu mano al microfono de la caneca para activarlo
-              </li>
-              <li>3] ¡Habla con nuestra IA! dile que residuo llevas contigo</li>
-              <li>
-                4] Se te abrira la seccion correspondiente y podras botar tu
-                basura
-              </li>
-            </ol>
-          </div>
-        </div>
-      </div>
-
-      <div className="ContactUs-Container" ref={contactUsRef}>
-        <div className="ContactUs-Img-Container">
-          <div className="ContactUs-Form-Container">
-            <h1 className="ContactUs-FC-Title">Contactanos</h1>
-            <Input
-              isClearable
-              label="Nombre"
-              variant="bordered"
-              className="Name-Input max-w-xs mb-4"
-              classNames={{
-                label: "custom-label-input",
-                inputWrapper: "custom-wrapper-contactUs",
-              }}
-              style={{
-                color: "#ffffff",
-                fontWeight: 400,
-              }}
-              value={firstname}
-              onChange={(e) => setFirstName(e.target.value)}
-              onClear={() => setFirstName("")}
-            />
-            <Input
-              isClearable
-              label="Correo"
-              variant="bordered"
-              className="Email-Input max-w-xs mb-4"
-              classNames={{
-                label: "custom-label-input",
-                inputWrapper: "custom-wrapper-contactUs",
-              }}
-              style={{
-                color: "#ffffff", // Color personalizado para el texto
-                fontWeight: 400,
-              }}
-              value={username}
-              onChange={(e) => setUserName(e.target.value)}
-              onClear={() => setUserName("")}
-            />
-            <Textarea
-              variant="bordered"
-              label="Mensaje"
-              placeholder="Ingresa tu mensaje..."
-              className="max-w-xs"
-              classNames={{
-                label: "custom-label-input",
-                inputWrapper: "custom-wrapper-contactUs",
-              }}
-              style={{
-                color: "#ffffff", // Color personalizado para el texto
-                fontWeight: 400,
-              }}
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-            />
-
-            <button
-              type="button"
-              className="ContactUs-Send-Button"
-              onClick={ContactForm}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="2"
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
-                ></path>
-              </svg>
-              <div className="text">Enviar</div>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+    );
 }

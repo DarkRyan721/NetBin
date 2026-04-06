@@ -1,25 +1,61 @@
-import React from "react";
-import "./App.css"; // Estilo CSS general de la pagina web
-import { HashRouter as Router, Routes, Route } from "react-router-dom"; // Libreria para el cambiar entre paginas del DOM
-import LoginPage from "./pages/login"; // Pagina Inicio de sesion
-import WelcomePage from "./pages/welcome"; // Pagina de Bienvenida
-import HomePage from "./pages/home";
-/*
-  Router: es el elemento que encapsula toda la aplicacion web y permite navegar entre sus paginas.
-  Routes: Contiene todas las rutas de la aplicación, cada una de ellas con un path o identificador y el componente que la contiene.
-  Route: Define cada ruta individual por ejemplo "/" para el WelcomePage.
-*/
+import React, { Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import PrivateRoute from './router/PrivateRoute';
+import './App.css';
+
+const DashboardLayout = lazy(() => import('./layouts/DashboardLayout'));
+const WelcomePage = lazy(() => import('./pages/welcome'));
+const LoginPage = lazy(() => import('./pages/login'));
+const OverviewPage = lazy(() => import('./pages/dashboard/overview'));
+const NodesPage = lazy(() => import('./pages/dashboard/nodes'));
+const SensorsPage = lazy(() => import('./pages/dashboard/sensors'));
+const WastePage = lazy(() => import('./pages/dashboard/waste'));
+const UsersPage = lazy(() => import('./pages/dashboard/users'));
+const SettingsPage = lazy(() => import('./pages/dashboard/settings'));
+
+function RouteLoader() {
+  return (
+    <div style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', color: 'var(--nb-t2)' }}>
+      Cargando…
+    </div>
+  );
+}
 
 export default function App() {
   return (
-    <Router>
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<WelcomePage/>}/>
-          <Route path="/login" element={<LoginPage/>}/>
-          <Route path="/home" element={<HomePage/>}/>
-        </Routes>
-      </div>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Suspense fallback={<RouteLoader />}>
+          <Routes>
+            {/* Rutas públicas */}
+            <Route path="/" element={<WelcomePage />} />
+            <Route path="/login" element={<LoginPage />} />
+
+            {/* Dashboard — rutas protegidas */}
+            <Route
+              path="/dashboard"
+              element={
+                <PrivateRoute>
+                  <DashboardLayout />
+                </PrivateRoute>
+              }
+            >
+              <Route index element={<Navigate to="overview" replace />} />
+              <Route path="overview"  element={<OverviewPage />} />
+              <Route path="nodes"     element={<NodesPage />} />
+              <Route path="sensors"   element={<SensorsPage />} />
+              <Route path="waste"     element={<WastePage />} />
+              <Route path="users"     element={<UsersPage />} />
+              <Route path="settings"  element={<SettingsPage />} />
+            </Route>
+
+            {/* Redirecciones de compatibilidad */}
+            <Route path="/home" element={<Navigate to="/dashboard/overview" replace />} />
+            <Route path="*"     element={<Navigate to="/" replace />} />
+          </Routes>
+        </Suspense>
+      </Router>
+    </AuthProvider>
   );
 }

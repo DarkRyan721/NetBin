@@ -83,7 +83,7 @@ export default function Example() {
               </div>
               <Button
                 variant="ghost"
-                className="p-1 text-gray-500 hover:text-gray-700 dark:text-gray-500 hover:dark:text-gray-300"
+                className="uiverse-btn p-1 text-gray-500 hover:text-gray-700 dark:text-gray-500 hover:dark:text-gray-300"
                 onClick={() => setIsOpen(false)}
                 aria-label="Close"
               >

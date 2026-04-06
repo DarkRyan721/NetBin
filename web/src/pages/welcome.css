@@ -1,1217 +1,938 @@
-.WelcomePage-Container
-{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+/* ── Landing page CSS variables ────────────────────────────────── */
+:root {
+  --nb-l-base-rgb: 8, 30, 20;
+  --nb-l-base:  #082415;
+  --nb-l-900:   #0d2b1c;
+  --nb-l-800:   #1a4530;
+  --nb-l-700:   #245e42;
+  --nb-l-600:   #2d7554;
+  --nb-l-300:   #7ac49e;
+  --nb-l-200:   #b8d9ca;
+  --nb-l-100:   #dceee6;
+  --nb-l-50:    #f1f8f4;
+  --nb-l-25:    #f8fbf9;
+
+  --nb-l-tx1:  #082415;
+  --nb-l-tx2:  #3a5548;
+  --nb-l-tx3:  #7a9588;
+  --nb-l-bd:   #c2d8cc;
 }
 
-.Welcome-Background
-{
-  position: relative;
-  margin: 0;
-  padding: 0;
-  background-image: url('../assets/Img_Fondo1.jpg');
-  background-size: cover;
-  background-position: center;
-  min-height: 100vh; /* Ocupa al menos toda la altura de la ventana */
-  width: 100%;
-  background-repeat: no-repeat;
-  flex-direction: column;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* ── Root ───────────────────────────────────────────────────────── */
+.landing-page {
+  min-height: 100vh;
+  color-scheme: light;
+  color: var(--nb-l-tx1);
+  font-family: 'Outfit', system-ui, sans-serif;
+  background: #f8fbf9;
 }
-.Welcome-Background::after
-{
+
+/* ── Navigation ─────────────────────────────────────────────────── */
+.landing-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 2.2rem;
+  height: 64px;
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  background: rgba(248,251,249,0.88);
+  border-bottom: 1px solid var(--nb-l-bd);
+  box-shadow: 0 1px 0 rgba(8,30,20,0.03), 0 8px 32px -16px rgba(8,30,20,0.10);
+}
+
+/* ── Brand ──────────────────────────────────────────────────────── */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.brand-logo {
+  width: 36px;
+  height: 36px;
+  filter: drop-shadow(0 3px 7px rgba(8,30,20,0.14));
+}
+
+.brand-letter-wrap {
+  width: 118px;
+  height: 22px;
+}
+
+/* ── Nav actions ────────────────────────────────────────────────── */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+/* ── Nav buttons ────────────────────────────────────────────────── */
+.nav-btn {
+  position: relative;
+  border: none;
+  background: transparent;
+  color: var(--nb-l-tx2);
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-size: 0.88rem;
+  font-weight: 500;
+  padding: 0.45rem 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: color 0.18s ease, background 0.18s ease;
+  overflow: hidden;
+}
+
+.nav-btn::after {
   content: '';
   position: absolute;
-  height: 100%;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
+  bottom: 5px;
+  left: 50%;
+  width: 0;
+  height: 1.5px;
+  background: var(--nb-l-base);
+  transform: translateX(-50%);
+  transition: width 0.22s ease;
+  border-radius: 99px;
 }
 
-.Welcome-Bar
-{
-  display: flex;
-  justify-content: space-between;
+.nav-btn:hover {
+  color: var(--nb-l-base);
+  background: var(--nb-l-50);
+}
+
+.nav-btn:hover::after {
+  width: calc(100% - 1.6rem);
+}
+
+/* ── MUI button base ────────────────────────────────────────────── */
+.mui-btn {
+  text-transform: none !important;
+  border-radius: 10px !important;
+  font-family: 'Outfit', system-ui, sans-serif !important;
+  font-weight: 600 !important;
+  padding: 0.48rem 1.05rem !important;
+  font-size: 0.875rem !important;
+  transition: all 0.2s ease !important;
+  letter-spacing: 0 !important;
+}
+
+/* ── CTA Primary (MUI) ──────────────────────────────────────────── */
+.cta-primary {
+  background: var(--nb-l-base) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 16px -6px rgba(8,30,20,0.48) !important;
+}
+
+.cta-primary:hover {
+  background: var(--nb-l-900) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 8px 20px -8px rgba(8,30,20,0.52) !important;
+}
+
+/* ── CTA Ghost (MUI) ────────────────────────────────────────────── */
+.cta-ghost {
+  background: rgba(8,30,20,0.05) !important;
+  color: var(--nb-l-base) !important;
+  border: 1px solid var(--nb-l-bd) !important;
+}
+
+.cta-ghost:hover {
+  background: var(--nb-l-100) !important;
+  border-color: var(--nb-l-300) !important;
+}
+
+/* ── Primary uiverse button ─────────────────────────────────────── */
+.uiverse-btn {
   position: relative;
-  width: 100%;
-  height: 4.5rem;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: none;
+  border-radius: 10px;
+  padding: 0.68rem 1.3rem;
+  background: var(--nb-l-base);
+  color: #fff;
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.07) inset,
+    0 6px 18px -8px rgba(8,30,20,0.45);
+  text-decoration: none;
+}
+
+.uiverse-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    108deg,
+    transparent 30%,
+    rgba(255,255,255,0.15) 50%,
+    transparent 70%
+  );
+  transform: translateX(-140%) skewX(-15deg);
+  transition: transform 0.5s ease;
+  pointer-events: none;
+}
+
+.uiverse-btn:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.07) inset,
+    0 10px 24px -8px rgba(8,30,20,0.5);
+  background: var(--nb-l-900);
+}
+
+.uiverse-btn:hover::before {
+  transform: translateX(160%) skewX(-15deg);
+}
+
+.uiverse-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 10px -6px rgba(8,30,20,0.38);
+}
+
+.uiverse-btn span {
+  position: relative;
   z-index: 1;
 }
-.Welcome-Bar::after
-{
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 5%;
-  width: 90%;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.8);
-}
 
-.NetBin-Logo-Container
-{
-  display: flex;
-  height: 100%;
-  min-width: 15%;
-  align-items: center;
-  justify-content: space-evenly !important;
-}
+.uiverse-wide { width: 100%; }
 
-.Logo-NetBin
-{
-  height: 50px;
-}
-
-#letters-netbin
-{
-  margin: 10px;
-  width: 50% !important;
-  height: 50% !important;
-}
-
-.Button-Container
-{
-  display: flex;
-  gap: 20px;
-  height: 100%;
-  align-items: center;
-  justify-content: right;
-  flex-grow: 1;
-}
-
-.Welcome-Container
-{
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;  /* Asegura que los elementos dentro se alineen a la izquierda */
-  flex-grow: 1;  /* Permite que el contenedor crezca y ocupe todo el ancho disponible */
-  width: 100%;  /* Aseguramos que ocupe el 100% del ancho disponible */
-  padding-top: 20px;
-  padding-left: 150px;
-}
-
-.SignUp-Back
-{
-  display: none;
-  content: '';
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(10px); /* Aplica desenfoque al fondo */
-  z-index: 10; /* Asegura que el fondo difuminado esté detrás del contenido */
-}
-
-.SignUp-Container 
-{
-  position: fixed;
-  z-index: 15;
-  width: 400px;
-  height: 550px;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
-  flex-direction: column;
-  justify-content: top;
-  align-items: center;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+/* ── Main container ─────────────────────────────────────────────── */
+main {
+  width: min(1160px, 92vw);
   margin: 0 auto;
-  animation: moveUp 0.5s ease forwards;
+  padding: 0 0 5rem;
 }
 
-@keyframes moveUp 
-{
-  from {
-    transform: translateY(-10%);  /* Posición inicial */
-  }
-  to {
-    transform: translateY(0);    /* Posición final */
-  }
-}
-
-/* From Uiverse.io by vinodjangid07 */
-.Close-PopUp-Button
-{
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: rgb(72, 72, 72);
-  border: none;
-  font-weight: 600;
-  display: flex;
+/* ── Hero ───────────────────────────────────────────────────────── */
+.hero {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 2.5rem;
   align-items: center;
-  justify-content: center;
-  box-shadow: 0px 0px 0px 4px rgba(69, 69, 69, 0.253);
-  cursor: pointer;
-  transition-duration: 0.3s;
-  overflow: hidden;
-  margin-left: 275px;
-}
-.svgIcon 
-{
-  width: 18px;
-  transition-duration: 0.3s;
-}
-.svgIcon path 
-{
-  fill: white;
-}
-.Close-PopUp-Button:hover 
-{
-  width: 100px;
-  border-radius: 50px;
-  transition-duration: 0.3s;
-  background-color: rgb(147, 0, 0);
-  align-items: center;
-}
-.Close-PopUp-Button:hover .svgIcon 
-{
-  /* width: 20px; */
-  transition-duration: 0.3s;
-  transform: translateY(-200%);
-}
-.Close-PopUp-Button::before 
-{
-  position: absolute;
-  bottom: -20px;
-  content: "Cerrar";
-  color: white;
-  /* transition-duration: .3s; */
-  font-size: 0px;
-}
-.Close-PopUp-Button:hover::before 
-{
-  font-size: 13px;
-  opacity: 1;
-  bottom: unset;
-  /* transform: translateY(-30px); */
-  transition-duration: 0.3s;
-}
-
-.SignUp-Title
-{
-  font-size: 30px;
-  font-weight: bold;
-  color: #ffffff;
-  margin-bottom: 20px;
-}
-
-.custom-label-input
-{
-  color: #1e8449 !important;
-  font-weight: bold !important;
-}
-
-/* From Uiverse.io by satyamchaudharydev */
-  /* button styling */
-.PopUp-Send-Button 
-{
-  --border-right: 6px;
-  --text-stroke-color: rgba(255,255,255,0.6);
-  --animation-color: #37FF8B;
-  --fs-size: 1.5em;
-  letter-spacing: 3px;
-  text-decoration: none;
-  font-size: var(--fs-size);
-  font-family: "Arial";
+  padding: 3.5rem 0 3rem;
   position: relative;
-  text-transform: uppercase;
-  color: transparent;
-  -webkit-text-stroke: 1px var(--text-stroke-color);
-  margin-top: 20px;
-}
-/* this is the text, when you hover on button */
-.hover-text 
-{
-  position: absolute;
-  box-sizing: border-box;
-  content: attr(data-text);
-  color: var(--animation-color);
-  width: 0%;
-  inset: 0;
-  border-right: var(--border-right) solid var(--animation-color);
-  overflow: hidden;
-  transition: 0.5s;
-  -webkit-text-stroke: 1px var(--animation-color);
-}
-/* hover */
-.PopUp-Send-Button:hover .hover-text 
-{
-  width: 100%;
-  filter: drop-shadow(0 0 23px var(--animation-color))
 }
 
-.PopUp-Send-Button:active .hover-text 
-{
-  color: white;  /* Cambia el color de las letras a blanco mientras el botón está presionado */
-  -webkit-text-stroke: none;  /* Elimina el stroke para hacer el texto completamente blanco */
-  filter: none;  /* Opcional: Elimina el filtro de sombra mientras haces click */
-  transition: 0.1s;  /* Suaviza la transición del clic */
-}
-
-.Company-Phrase
-{
-  font-size: 2rem;  /* Escalable con `rem` */
-  font-weight: bold;
-  color: #f9f9f9;
-  margin-bottom: 20px;  /* Espacio entre los textos */
-}
-
-.Initial-Phrase
-{
-  white-space: pre-wrap;  /* Para permitir saltos de línea automáticos */
-  font-size: 4rem;  /* Tamaño grande, pero escalable */
-  font-weight: bold;
-  color: #ffffff;
-  margin-bottom: 50px;
-}
-
-
-/* From Uiverse.io by AlimurtuzaCodes */
-.Welcome-Container-Button 
-{
-  border: none;
-  width: 16em;
-  height: 3em;
-  border-radius: 3em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-  background: #1C1A1C;
-  cursor: pointer;
-  transition: all 450ms ease-in-out;
-  margin-bottom: 20px;
-}
-
-.Icon-WC-Button 
-{
-  fill: #AAAAAA;
-  transition: all 800ms ease;
-}
-
-.Text-WC-Button 
-{
-  font-weight: 600;
-  color: #AAAAAA;
-  font-size: 16px;
-}
-
-.Welcome-Container-Button:hover 
-{
-  background: linear-gradient(0deg, #4CAF50, #1e8449);
-  transform: translateY(-2px);
-}
-.Welcome-Container-Button:hover .Text-WC-Button 
-{
-  color: white;
-}
-.Welcome-Container-Button:hover .Icon-WC-Button 
-{
-  fill: white;
-  transform: scale(1.2);
-}
-
-.Information-Container
-{
-  position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: flex-start;
-  flex-grow: 1;
-  width: 100%;
-  min-height: 100vh;
-  background: #202020;
-}
-
-.Information-About-NetBin
-{
-  /* background-color: #1e8449; */
-  width: 50%;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-direction: column;
-  padding-top: 40px;
-}
-
-/* From Uiverse.io by alexruix */
-.card
-{
-  --background: linear-gradient(to left, #c2a84c 0%, #5dd661 50%);
-  width: 70%;
-  height: 75%;
-  padding: 5px;
-  border-radius: 1rem;
-  overflow: visible;
-  background: #f7ba2b;
-  background: var(--background);
-  position: relative;
-  transition: transform 0.5s ease;
-  margin-bottom: 30px;
-}
-.card::after
-{
-  position: absolute;
-  content: "";
-  top: 30px;
-  left: 0;
-  right: 0;
-  z-index: -1;
-  height: 100%;
-  width: 100%;
-  transform: scale(0.8);
-  filter: blur(45px);
-  background: var(--background);
-  transition: opacity .5s;
-}
-.card-info
-{
-  --color: #181818;
-  background: var(--color);
-  color: var(--color);
-  display: flex;
-  flex-direction: column;
-  justify-content: top;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  border-radius: .7rem;
-  padding: 20px 30px 30px 30px;
-}
-.card .title
-{
-  color: #82f788;
-  font-weight: bold;
-  letter-spacing: .1em;
-  font-size: 32px;
-  margin-bottom: 25px;
-  transition: color 0.5s;
-}
-.card .Text
-{
-  color: #ffffff;
-  font-weight: 500;
-  font-size: 14px;
-  text-align: justify;
-
-}
-.card:hover
-{
-  transform: scale(1.05);
-}
-.card:hover::after
-{
-opacity: 0;
-}
-.card:hover .title
-{
-color: #eaf1eb;
-}
-
-.Information-Button
-{
-  position: relative;
-  display: inline-block;
-  margin: 15px;
-  padding: 15px 30px;
-  text-align: center;
-  font-size: 18px;
-  letter-spacing: 1px;
-  text-decoration: none;
-  color: #ecffe6;
-  font-weight: 500;
-  background: transparent;
-  cursor: pointer;
-  transition: ease-out 0.5s;
-  border: 3px solid #ecffe6;
-  border-radius: 10px;
-  box-shadow: inset 0 0 0 0 #5dd661;
-}
-.Information-Button:hover
-{
-  color: rgb(0, 0, 0);
-  border: 3px solid #5dd661;
-  box-shadow: inset 0 -100px 0 0 #5dd661;
-}
-.Information-Button:active
-{
-  transform: scale(0.9);
-}
-
-.Image-Container
-{
-  /* background-color: #471e84; */
-  height: 100vh;
-  width: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-direction: column;
-  padding-top: 40px;
-}
-
-.Image-NetBin
-{
-  position: relative;
-  background-image: url('../assets/Img_NetBin.jpg');
-  background-size: cover;
-  background-position: center;
-  width: 70%;
-  height: 70%;
-  background-repeat: no-repeat;
-  object-fit: cover;
-  border-radius: 15px;
-  margin-bottom: 25px;
-}
-
-.Companies-Container
-{
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  flex-grow: 1;
-}
-
-.Image-Container-Title
-{
-  color: #ffffff;
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 15px;
-}
-
-.Companies-List-Container
-{
-  display: flex;
-  background-color: #161616;
-  width: 80%;
-  height: 50%;
-  border-radius: 30px;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
-  transition: all 0.5s ease;
-}
-.Companies-List-Container:hover
-{
-  transform: scale(1.05);
-}
-
-.features-Container
-{
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-grow: 1;
-  width: 100%;
-  background-color: #ffffff;
-  min-height: 100vh;
-}
-
-.features-About-NetBin
-{
-  position: relative;
-  background-color: #cbc1af;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  height: 200px;
-  padding-top: 50px;
-  padding-left: 200px;
-  padding-right: 200px;
-  border-radius: 0px;
-}
-.features-About-NetBin::after
-{
+.hero::after {
   content: '';
   position: absolute;
-  bottom: 0;
-  left: 5%;
-  width: 90%;
-  border-bottom: 2px solid rgb(0, 0, 0);
+  top: -8%;
+  right: -5%;
+  width: 52%;
+  height: 130%;
+  background: radial-gradient(
+    ellipse at 55% 38%,
+    rgba(16,185,129,0.07) 0%,
+    transparent 65%
+  );
+  pointer-events: none;
+  z-index: 0;
 }
 
-.features-Title-About-NetBin
-{
-  color: #000000;
-  font-size: 24px;
-  font: bold;
-  padding-bottom: 10px;
-  font-weight: bold;
-}
-
-.features-Text-About-NetBin
-{
-  color: #000000;
-  font-size: 16px;
-  text-align: center;
-  white-space: pre-wrap;
-}
-
-.Product-Description-Container
-{
+.hero-content {
   position: relative;
-  display: flex;
-  justify-content: space-between; /*Mantiene un espacio uniforme entre los componentes*/
+  z-index: 1;
+}
+
+.hero-tag {
+  display: inline-flex;
   align-items: center;
-  flex-grow: 1;
-  width: 100%;
-  padding-left: 100px;
-  padding-right: 100px;
+  gap: 5px;
+  padding: 0.28rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--nb-l-bd);
+  background: rgba(45,117,84,0.07);
+  color: var(--nb-l-700);
+  font-weight: 700;
+  font-size: 0.76rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin: 0;
 }
 
-.Product-Cards
-{
-  background: #cbc1af;
-  border-radius: 30px;
-  width: 250px;
-  height: 300px;
-  padding: 15px;
+.hero-content h1 {
+  margin: 0.75rem 0 1rem;
+  font-size: clamp(2rem, 3.8vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.05;
+  color: var(--nb-l-base);
+  letter-spacing: -0.03em;
+}
+
+.hero-content > p {
+  margin: 0;
+  max-width: 58ch;
+  color: var(--nb-l-tx2);
+  font-size: 0.98rem;
+  line-height: 1.68;
+}
+
+.hero-cta-row {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1.5rem 0 1.75rem;
 }
 
-.Product-Text
-{
-  color: #000000;
-  padding-top: 10px;
-  text-align: center;
+/* ── Hero buttons ───────────────────────────────────────────────── */
+.solid-btn {
+  background: var(--nb-l-base) !important;
+  color: #fff !important;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px -8px rgba(8,30,20,0.5) !important;
+  transition: all 0.2s ease !important;
 }
 
-.Instruction-Container
-{
-  position: relative;
-  z-index: 2;
+.solid-btn:hover {
+  background: var(--nb-l-900) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 10px 22px -8px rgba(8,30,20,0.55) !important;
+}
+
+.outline-btn {
+  border: 1.5px solid var(--nb-l-200) !important;
+  color: var(--nb-l-base) !important;
+  background: rgba(255,255,255,0.85) !important;
+  border-radius: 10px;
+  transition: all 0.2s ease !important;
+}
+
+.outline-btn:hover {
+  border-color: var(--nb-l-300) !important;
+  background: var(--nb-l-50) !important;
+}
+
+/* ── Hero metrics ───────────────────────────────────────────────── */
+.hero-metrics {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 columnas iguales */
-  grid-template-rows: repeat(2, 1fr); /* 2 filas iguales */
-  align-items: stretch; /* Asegurar que las grillas se estiren */
-  flex-grow: 1;
-  width: 100%;
-  height: 100vh;
-  background: #14141C;
-  grid-gap: 20px; /* Espacio entre los elementos */
-  padding: 20px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
 }
 
-.Register-Option-Container
-{
-  display: flex;
-  /* background-color: #e71111; */
-  text-align: left;
-  height: 100%;
-  width: 100%;
-  flex-direction: column;
-  padding: 0px 50px;
-  gap: 20px;
+.hero-metrics div {
+  border: 1px solid var(--nb-l-bd);
+  background: rgba(255,255,255,0.85);
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  backdrop-filter: blur(4px);
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.Register-Option-Title
-{
-  color: white;
-  font-weight: bold;
-  font-size: 30px;
+.hero-metrics div:hover {
+  border-color: var(--nb-l-300);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px -10px rgba(8,30,20,0.14);
 }
 
-.Register-Option-Text
-{
-  color: white;
-  font-size: 18px;
-  margin-bottom: 20px;
+.hero-metrics strong {
+  color: var(--nb-l-base);
+  font-size: 1.18rem;
+  font-weight: 800;
+  display: block;
+  line-height: 1.2;
+  font-family: 'Outfit', system-ui, sans-serif;
 }
 
-/* From Uiverse.io by cssbuttons-io */ 
-.Register-Option-Button {
-  align-items: center;
-  background-image: linear-gradient(144deg, #a3ff40, #6ef342 50%, #00eb18);
-  border: 0;
-  border-radius: 8px;
-  box-shadow: rgba(65, 252, 68, 0.2) 0 15px 30px -5px;
-  box-sizing: border-box;
-  color: #ffffff;
-  display: flex;
-  font-size: 18px;
-  justify-content: center;
-  line-height: 1em;
-  width: 140px;
-  padding: 3px;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-.Register-Option-Button:active,
-.Register-Option-Button:hover {
-  outline: 0;
-}
-.Register-Option-Button span {
-  background-color: rgb(6, 45, 5);
-  padding: 16px 24px;
-  border-radius: 6px;
-  width: 100%;
-  height: 100%;
-  transition: 300ms;
-  font-weight: bold;
-}
-.Register-Option-Button:hover span {
-  background: none;
-  color: #000000;
-}
-.Register-Option-Button:active {
-  transform: scale(0.9);
+.hero-metrics span {
+  color: var(--nb-l-tx3);
+  font-size: 0.77rem;
+  margin-top: 3px;
+  display: block;
 }
 
-
-.User-Container 
-{
-  background-color: #171721; /* color de fondo oscuro */
-  padding: 20px;
-  border-radius: 8px;
-  color: white; /* texto blanco */
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* sombra para darle algo de profundidad */
-  display: flex;
-  /* height: 100%; */
-  flex-direction: row;
-}
-
-.User-Icon-Container
-{
-  /* background-color: #eb0000; */
-  width: 25%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.User-Information-Container
-{
-  display: flex;
-  text-align: left;
-  flex-direction: column;
-  /* background-color: #00d8eb; */
-  flex-grow: 1;
-  height: 100%;
-}
-
-.User-IC-Title
-{
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-.User-Ic-Text li 
-{
-  margin-bottom: 10px; /* Espacio entre los elementos de la lista */
-  color: rgb(246, 246, 246); /* Cambia el color del texto si es necesario */
-  font-size: 16px; /* Ajusta el tamaño de la fuente */
-}
-
-.User-Icon
-{
-  width: 50px;
-  height: 50px;
-}
-
-.ContactUs-Container
-{
+/* ── Hero visual ────────────────────────────────────────────────── */
+.hero-visual {
   position: relative;
-  z-index: 2;
+  z-index: 1;
+}
+
+.hero-visual img {
+  width: 100%;
+  border-radius: 20px;
+  border: 1px solid var(--nb-l-bd);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.55) inset,
+    0 20px 48px -20px rgba(8,30,20,0.28),
+    0 3px 0 -1px rgba(8,30,20,0.05);
+  display: block;
+}
+
+.floating-card {
+  position: absolute;
+  right: -0.5rem;
+  bottom: 1rem;
+  background: rgba(255,255,255,0.97);
+  border: 1px solid var(--nb-l-bd);
+  border-radius: 14px;
+  padding: 0.5rem 0.9rem;
+  width: min(44%, 210px);
+  text-align: center;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 28px -12px rgba(8,30,20,0.24);
+  animation: nb-fade-up 0.5s 0.3s ease both;
+}
+
+.floating-card p {
+  margin: 0 0 0.15rem;
+  color: var(--nb-l-700);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.floating-card strong {
+  color: var(--nb-l-base);
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.3;
+  display: block;
+}
+
+/* ── Section wrappers ───────────────────────────────────────────── */
+.info-section,
+.features-section,
+.instructions,
+.contact-section {
+  margin-top: 4rem;
+}
+
+/* ── Section headings ───────────────────────────────────────────── */
+.section-heading {
+  margin-bottom: 1.5rem;
+}
+
+.section-heading p {
+  margin: 0;
+  color: var(--nb-l-600);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.74rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-heading p::before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 2px;
+  background: var(--nb-l-600);
+  border-radius: 99px;
+  flex-shrink: 0;
+}
+
+.section-heading h2 {
+  margin: 0.4rem 0 0;
+  color: var(--nb-l-base);
+  font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.14;
+}
+
+/* ── Info / Feature / Steps grids ──────────────────────────────── */
+.info-grid,
+.feature-cards,
+.steps-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.info-grid article,
+.feature-cards article,
+.steps-grid article {
+  border: 1px solid var(--nb-l-bd);
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.4rem;
+  box-shadow: 0 1px 3px rgba(8,30,20,0.03), 0 6px 18px -14px rgba(8,30,20,0.10);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.info-grid article::before,
+.feature-cards article::before,
+.steps-grid article::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(16,185,129,0.5), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+
+.info-grid article:hover,
+.feature-cards article:hover,
+.steps-grid article:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 2px 6px rgba(8,30,20,0.04), 0 14px 30px -14px rgba(8,30,20,0.16);
+  border-color: var(--nb-l-300);
+}
+
+.info-grid article:hover::before,
+.feature-cards article:hover::before,
+.steps-grid article:hover::before {
+  opacity: 1;
+}
+
+.info-grid h3,
+.feature-cards h3,
+.steps-grid h3 {
+  margin: 0.75rem 0 0.45rem;
+  color: var(--nb-l-base);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.info-grid p,
+.feature-cards p,
+.steps-grid p {
+  margin: 0;
+  color: var(--nb-l-tx2);
+  font-size: 0.88rem;
+  line-height: 1.65;
+}
+
+.assistant-ai-card {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.ai-provider-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  color: var(--nb-l-base);
+}
+
+/* ── Steps number badges ────────────────────────────────────────── */
+.steps-grid span {
+  display: inline-flex;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: rgba(45,117,84,0.08);
+  color: var(--nb-l-700);
+  border: 1px solid var(--nb-l-200);
+  font-weight: 800;
+  font-size: 0.85rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ── Contact section ────────────────────────────────────────────── */
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 1rem;
+}
+
+.contact-banner-card,
+.contact-form-card {
+  border: 1px solid var(--nb-l-bd) !important;
+  background: #fff !important;
+  box-shadow: 0 1px 3px rgba(8,30,20,0.04), 0 10px 28px -18px rgba(8,30,20,0.14) !important;
+  border-radius: 18px !important;
+  overflow: hidden;
+}
+
+.contact-banner-header,
+.contact-form-header {
+  padding: 1.2rem 1.3rem 1rem !important;
+}
+
+.contact-banner-header h3,
+.contact-form-header h3 {
+  margin: 0.3rem 0 0;
+  color: var(--nb-l-base);
+  font-size: 1.18rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.contact-kicker {
+  margin: 0;
+  color: var(--nb-l-600);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.contact-subtitle {
+  margin: 0.5rem 0 0;
+  color: var(--nb-l-tx2);
+  font-size: 0.9rem;
+  line-height: 1.62;
+}
+
+.contact-banner-body {
+  display: grid;
+  gap: 1.1rem;
+  padding: 1rem 1.3rem 1.3rem !important;
+}
+
+.contact-points { display: grid; gap: 0.9rem; }
+
+.contact-point {
   display: flex;
   align-items: flex-start;
-  flex-grow: 1;
-  width: 100%;
-  min-height: 100vh;
-  background: #202020;
+  gap: 0.65rem;
 }
 
-.ContactUs-Img-Container
-{
-  position: relative;
+.contact-point span {
+  font-size: 1rem;
+  line-height: 1.5;
+  flex-shrink: 0;
+}
+
+.contact-point strong {
+  color: var(--nb-l-base);
+  font-size: 0.88rem;
+  font-weight: 600;
+  display: block;
+}
+
+.contact-point p {
+  margin: 0.1rem 0 0;
+  color: var(--nb-l-tx2);
+  font-size: 0.84rem;
+}
+
+.contact-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.contact-chip {
+  background: rgba(45,117,84,0.07) !important;
+  color: var(--nb-l-700) !important;
+  border: 1px solid var(--nb-l-200) !important;
+  border-radius: 8px !important;
+  font-size: 0.77rem !important;
+}
+
+.contact-chip .MuiChip-label {
+  font-weight: 600;
+  padding: 0 8px !important;
+}
+
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.contact-action-btn {
+  min-width: 155px !important;
+}
+
+.contact-card {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem 1.3rem 1.3rem !important;
+}
+
+.file-field-block { display: grid; gap: 0.4rem; }
+
+.file-upload-btn {
+  justify-content: flex-start !important;
+  background: rgba(241,248,244,0.8) !important;
+  color: var(--nb-l-base) !important;
+  border: 1.5px dashed var(--nb-l-300) !important;
+  border-radius: 10px !important;
+  font-weight: 500 !important;
+  font-family: 'Outfit', system-ui, sans-serif !important;
+}
+
+.file-upload-btn:hover {
+  background: var(--nb-l-100) !important;
+  border-color: var(--nb-l-600) !important;
+}
+
+.file-field-name {
   margin: 0;
-  padding: 0;
-  background-image: url('../assets/Img_ContactUs.jpg');
-  background-size: cover;
-  background-position: center;
-  min-height: 100vh; /* Ocupa al menos toda la altura de la ventana */
-  width: 100%;
-  background-repeat: no-repeat;
-  flex-direction: column;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-size: 0.78rem;
+  color: var(--nb-l-tx3);
 }
 
-.ContactUs-Form-Container
-{
-  background-color: rgba(0, 0, 0, 0.9);
-  display: flex;
-  width: 50%;
-  height: 80vh;
+/* ── MUI form fields ────────────────────────────────────────────── */
+.mui-field .MuiInputLabel-root {
+  color: var(--nb-l-tx2);
+  font-family: 'Outfit', system-ui, sans-serif !important;
+  font-weight: 500;
+}
+
+.mui-field .MuiInputLabel-root.Mui-focused {
+  color: var(--nb-l-700);
+}
+
+.mui-field .MuiOutlinedInput-root {
+  background: rgba(248,251,249,0.8);
+  border-radius: 10px;
+  font-family: 'Outfit', system-ui, sans-serif !important;
+}
+
+.mui-field .MuiOutlinedInput-notchedOutline {
+  border-color: var(--nb-l-bd);
+  transition: border-color 0.18s ease;
+}
+
+.mui-field .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: var(--nb-l-300);
+}
+
+.mui-field .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: var(--nb-l-700);
+  border-width: 1.5px;
+}
+
+.mui-field .MuiInputBase-input,
+.mui-field .MuiInputBase-inputMultiline {
+  color: var(--nb-l-base);
+  font-weight: 500;
+  font-family: 'Outfit', system-ui, sans-serif !important;
+}
+
+.mui-field .MuiInputBase-input::placeholder,
+.mui-field .MuiInputBase-inputMultiline::placeholder {
+  color: var(--nb-l-tx3);
+  opacity: 1;
+}
+
+.password-icon-btn { color: var(--nb-l-base) !important; }
+
+.password-visibility-icon {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+/* ── Footer ─────────────────────────────────────────────────────── */
+.landing-footer {
+  border-top: 1px solid var(--nb-l-bd);
+  margin-top: 3rem;
+  padding: 1.5rem 2rem;
+  text-align: center;
+  color: var(--nb-l-tx3);
+  font-size: 0.84rem;
+  background: rgba(248,251,249,0.7);
+}
+
+/* ── Modal backdrop ─────────────────────────────────────────────── */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(8,30,20,0.48);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: grid;
+  place-items: center;
+  z-index: 60;
+  padding: 1rem;
+  animation: nb-fade-up 0.18s ease;
+}
+
+.modal-card {
+  width: min(480px, 92vw);
+  background: #fff;
   border-radius: 20px;
-  justify-content: flex-start;
-  flex-direction: column;
-  align-items: center;
-  gap: 30px;
+  border: 1px solid var(--nb-l-bd);
+  padding: 1rem;
+  display: grid;
+  gap: 0.7rem;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.5) inset,
+    0 32px 64px -28px rgba(8,30,20,0.48);
+  animation: nb-fade-up 0.28s ease;
 }
 
-.ContactUs-FC-Title
-{
-  color: white;
-  font-weight: bold;
-  font-size: 30px;
+.register-modal-card {
+  width: auto;
+  max-width: none;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  position: relative;
 }
 
-.custom-wrapper-contactUs
-{
-  border-color: rgba(255, 255, 255, 0.158) !important;
-  transition: all 0.5s ease !important;
-}
-.custom-wrapper-contactUs:focus-within
-{
-  border-color: #ffffff !important;
+.modal-card h3 {
+  margin: 0.1rem 0 0.3rem;
+  color: var(--nb-l-base);
 }
 
-/* From Uiverse.io by reshades */ 
-.ContactUs-Send-Button 
-{
-  background-color: transparent;
-  color: #fff;
-  width: 8.5em;
-  height: 2.9em;
-  border: #1e8449 0.2em solid;
-  border-radius: 11px;
-  text-align: right;
-  transition: all 0.6s ease;
-}
-.ContactUs-Send-Button:hover 
-{
-  background-color: #1e8449;
+/* ── Close button ───────────────────────────────────────────────── */
+.close-modal {
+  justify-self: end;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 1px solid var(--nb-l-bd);
+  background: rgba(255,255,255,0.98);
+  color: var(--nb-l-tx2);
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  transition: all 0.22s ease;
+  box-shadow: 0 2px 8px -4px rgba(8,30,20,0.16);
 }
-.ContactUs-Send-Button:active
-{
-  background-color: #ffffff;
-}
-.ContactUs-Send-Button svg 
-{
-  width: 1.6em;
-  margin: -0 1em;
+
+.register-close {
   position: absolute;
-  display: flex;
-  transition: all 0.4s ease;
-}
-.ContactUs-Send-Button:hover svg 
-{
-  transform: translateX(5px);
-}
-.text 
-{
-  margin: 0 1.5em;
-  font-weight: bold;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  box-shadow: 0 6px 14px -8px rgba(8,30,20,0.48);
 }
 
-/* Media Queries para tablets */
-@media (min-width: 768px) and (max-width: 1024px)
-{
-  .Welcome-Background
-  {
-      background-position: center;
-      background-size: cover;  /* Aseguramos que el fondo no se corte en pantallas medianas */
+.register-close .svgIcon {
+  width: 17px;
+  height: 17px;
+}
+
+.register-close:hover {
+  background: var(--nb-l-base);
+  color: #fff;
+  transform: translateY(-1px) rotate(90deg);
+  box-shadow: 0 8px 16px -8px rgba(8,30,20,0.55);
+  border-color: transparent;
+}
+
+.success-chip {
+  border: 1px solid rgba(45,117,84,0.28);
+  background: rgba(45,117,84,0.07);
+  color: var(--nb-l-700);
+  border-radius: 10px;
+  padding: 0.65rem;
+  font-weight: 700;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.message-note {
+  margin: 0;
+  color: var(--nb-l-tx2);
+  font-size: 0.85rem;
+}
+
+/* ── Floating dashboard link ────────────────────────────────────── */
+.floating-dashboard-link {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  text-decoration: none;
+  background: var(--nb-l-base);
+  color: #fff;
+  padding: 0.6rem 1.1rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: 'Outfit', system-ui, sans-serif;
+  z-index: 40;
+  box-shadow: 0 6px 18px -8px rgba(8,30,20,0.55);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.floating-dashboard-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px -8px rgba(8,30,20,0.6);
+}
+
+/* ── Toast ──────────────────────────────────────────────────────── */
+.toast-message {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 1.2rem;
+  background: #fff;
+  border: 1px solid var(--nb-l-bd);
+  color: var(--nb-l-base);
+  border-radius: 12px;
+  padding: 0.7rem 1.2rem;
+  z-index: 55;
+  font-weight: 600;
+  font-size: 0.88rem;
+  box-shadow: 0 10px 28px -14px rgba(8,30,20,0.22);
+  animation: nb-fade-up 0.28s ease;
+}
+
+/* ── Responsive ─────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .hero,
+  .contact-layout {
+    grid-template-columns: 1fr;
   }
 
-  .Logo-NetBin
-  {
-    height: 40px;
-    margin-left: 5px;
-  }
-  #letters-netbin
-  {
-    margin: 10px;
-    width: 45% !important;
-    height: 45% !important;
+  .hero-visual {
+    max-width: 520px;
+    margin: 0 auto;
   }
 
-  .Bar-Button
-  {
-    font-size: 16px !important;
-  }
-
-  .Welcome-Container 
-  {
-      padding-left: 10vw;  /* Cambiamos el margen izquierdo a un 10% del ancho de la ventana */
-  }
-
-  .Information-Container
-  {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    flex-grow: 1;
-    max-width: 100%;
-    max-height: 100vh;
-    background: #202020;
-  }
-
-  .Information-About-NetBin
-  {
-    /* background-color: #1e8449; */
-    width: 100%;
-    height: 50vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-direction: row;
-  }
-
-  .card
-  {
-    width: 60%;
-    height: 110%;
-    transition: transform 0.5s ease;
-  }
-  .card::after
-  {
-    height: 80%;
-    width: 100%;
-  }
-  .card .Text
-  {
-    font-size: 12.5px;
-  }
-  .card:hover
-  {
-    transform: scale(1.02);
-  }
-
-  .Information-Button
-  {
-    padding: 15px 15px;
-    font-size: 16px;
-  }
-
-  .Image-Container
-  {
-    /* background-color: #471e84; */
-    height: 50vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-direction: row;
-    padding: 20px 0px 0px 30px;  
-  }
-
-  .Image-NetBin
-  {
-    width: 60%;
-    height: 70%;
-  }
-
-  .Companies-Container
-  {
-    width: 60%;
-  }
-
-  .Companies-List-Container
-  {
-    width: 90%;
-  }
-  .Companies-List-Container svg
-  {
-    width: 50%;
-  }
-
-  .features-Container
-  {
-    max-height: 100vh;
-  }
-
-  .features-About-NetBin
-  {
-    margin-bottom: 0px;
-    padding-left: 50px;
-    padding-right: 50px;
-    padding-top: 30px;
-  }
-
-  .Product-Description-Container
-  {
-    width: 100%;
-    padding-left: 5vw;
-    padding-right: 5vw;
-    flex-direction: row;
-    gap: 10px;
-  }
-
-  .Product-Cards
-  {
-    width: 200px;
-    height: 400px;
-    padding: 15px;
-  }
-
-  .User-IC-Title
-  {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-
-  .User-Icon-Container
-  {
-    padding-right: 10px;
-  }
-
-  .ContactUs-Form-Container
-  {
-    width: 80%;
-    gap: 30px;
-    padding-top: 50px;
+  .info-grid,
+  .feature-cards,
+  .steps-grid {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
-/* Media Queries para dispositivos móviles */
-@media (max-width: 767px)
-{
-  .Welcome-Background
-  {
-      background-position: top;  /* Ajustar el fondo en dispositivos más pequeños */
-      background-size: cover;
-      height: auto;   /* Permitir que el contenido crezca */
-      max-width: 100vw;
+@media (max-width: 768px) {
+  .landing-nav {
+    padding: 0 1rem;
+    height: 56px;
   }
 
-  .Welcome-Bar
-  {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* Alinea los elementos hacia arriba */
-    align-items: flex-start; /* Alinea los elementos hacia la izquierda */
-    width: 100%; /* Asegura que el contenedor ocupe todo el ancho */
-  }
-  .Welcome-Bar::after
-  {
-      width: 90%; /* Reducir el ancho de la línea inferior */
-      left: 5%; /* Ajustar el centrado de la línea inferior */
+  .nav-actions { gap: 0.25rem; }
+
+  .nav-btn {
+    font-size: 0.84rem;
+    padding: 0.4rem 0.6rem;
   }
 
-  .NetBin-Logo-Container
-  {
-    display: flex;
-    height: 100%;
-    min-width: 100%;
-    align-items: center;
-    justify-content: flex-start !important;
-    height: 2.5rem;
+  main { width: min(1160px, 94vw); }
+
+  .hero { padding: 2.5rem 0 2rem; }
+
+  .hero-metrics,
+  .info-grid,
+  .feature-cards,
+  .steps-grid {
+    grid-template-columns: 1fr;
   }
 
-  .Logo-NetBin
-  {
-    height: 25px;
-    padding-left: 5px;
-  }
-  #letters-netbin
-  {
-    margin: 10px;
-    width: 30% !important;
-    height: 30% !important;
+  .hero-content h1 {
+    font-size: clamp(1.85rem, 9vw, 2.4rem);
   }
 
-  .Button-Container
-  {
-    display: flex;
-    height: 100%;
-    width: 100%;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-grow: 1;
-    gap: 0;
-  }
-
-  .Bar-Button
-  {
-    font-size: 12px !important;
-  }
-  .Bar-Button svg
-  {
-    height: 0%;
-  }
-
-  .Welcome-Container 
-  {
-    width: 100%;  /* Asegura que ocupe todo el ancho en móviles */
-    padding-left: 5vw;  /* Reducimos el margen izquierdo aún más en pantallas pequeñas */
-    padding-right: 5vw;  /* También ajustamos el margen derecho */
-    padding-top: 10vw;
-  }
-
-  .Company-Phrase 
-  {
-      font-size: 1.5rem;
-  }
-
-  .Initial-Phrase 
-  {
-      font-size: 2.5rem;
-  }
-
-  .Product-Button 
-  {
-      width: 180px;
-  }
-
-  .Information-Container
-  {
-    display: flex;
-    flex-direction: column;
-    max-width: 100vw;
-  }
-
-  .Information-About-NetBin
-  {
-    width: 100%;
-    justify-content: center;
-    padding-top: 0;
-  }
-
-  .card
-  {
-    width: 90%;
-    height: 60%;
-  }
-
-  .card .Text
-  {
-    color: #ffffff;
-    font-weight: 500;
-    font-size: 12px;
-    text-align: justify;
-  }
-
-  .Image-Container
-  {
-    width: 100%;
-    padding-top: 0px;
-  }
-
-  .Companies-List-Container
-  {
-    width: 90%;
-  }
-
-  .Companies-List-Container svg
-  {
-    width: 40%;
-    height: 50%;
-  }
-
-  .features-Container
-  {
-    max-width: 100vw;
-  }
-
-  .features-About-NetBin
-  {
-    padding-top: 30px;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin-bottom: 25px;
-    height: 250px;
-  }
-
-  .Product-Description-Container
-  {
-    width: 100%;  /* Asegura que ocupe todo el ancho en móviles */
-    padding-left: 5vw;  /* Reducimos el margen izquierdo aún más en pantallas pequeñas */
-    padding-right: 5vw;  /* También ajustamos el margen derecho */
-    flex-direction: column;
-    gap: 15px;
-    padding-bottom: 15px;
-  }
-
-  .features-Text-About-NetBin
-  {
-    color: #000000;
-    font-size: 14px;
-    text-align: center;
-    white-space: pre-wrap;
-  }
-
-  .Instruction-Container
-  {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    background: #14141C;
-    grid-gap: 20px; /* Espacio entre los elementos */
-    padding: 20px;
-    min-height: 100vh;
-    height: auto;
-  }
-
-  .Register-Option-Title
-  {
-    font-size: 24px;
-  }
-
-  .Register-Option-Text
-  {
-    margin-bottom: 10px;
-  }
-
-  .Register-Option-Button
-  {
-    margin-bottom: 20px;
-  }
-
-  .User-IC-Title
-  {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-
-  .User-Icon-Container
-  {
-    padding-right: 10px;
-  }
-
-  .ContactUs-Container 
-  {
-    min-height: 100vh; /* Permite que el contenedor crezca con el contenido en pantallas pequeñas */
-    overflow-y: scroll;
-  }
-
-  .ContactUs-Form-Container
-  {
-    width: 100%;
-    min-height: 80vh;
-    gap: 30px;
-    padding-top: 50px;
+  .register-close {
+    top: 8px;
+    right: 8px;
   }
 }
