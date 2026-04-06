@@ -2,28 +2,208 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Design Tokens ─────────────────────────────────────────────── */
 :root {
-  line-height: 1.5;
+  --ff-ui:   'Outfit', system-ui, sans-serif;
+  --ff-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Dashboard surfaces */
+  --nb-bg:       #07100d;
+  --nb-surface:  #0b1510;
+  --nb-elevated: #101e14;
+  --nb-overlay:  #152119;
+
+  /* Borders */
+  --nb-brd-0: rgba(255,255,255,0.03);
+  --nb-brd-1: rgba(16,185,129,0.10);
+  --nb-brd-2: rgba(16,185,129,0.22);
+  --nb-brd-3: rgba(16,185,129,0.44);
+
+  /* Accent */
+  --nb-accent:    #10b981;
+  --nb-accent-lt: #34d399;
+  --nb-accent-dk: #059669;
+  --nb-glow-sm:   rgba(16,185,129,0.10);
+  --nb-glow-md:   rgba(16,185,129,0.18);
+  --nb-glow-lg:   rgba(16,185,129,0.32);
+
+  /* Text */
+  --nb-t1: #ddeee5;
+  --nb-t2: #6fa385;
+  --nb-t3: #384f42;
+
+  /* Status */
+  --nb-danger:    #f87171;
+  --nb-danger-bg: rgba(248,113,113,0.08);
+  --nb-warn:      #fbbf24;
+  --nb-warn-bg:   rgba(251,191,36,0.08);
+  --nb-info:      #60a5fa;
+  --nb-info-bg:   rgba(96,165,250,0.08);
+
+  /* Transitions */
+  --t-fast: 110ms ease;
+  --t-base: 210ms ease;
+  --t-slow: 360ms ease;
+
+  font-family: var(--ff-ui);
   font-weight: 400;
-  color-scheme: light dark;
-  color: rgb(255, 255, 255);
-  background-color: #242424;
+  line-height: 1.5;
+  color-scheme: dark;
+  color: var(--nb-t1);
+  background-color: var(--nb-bg);
   font-synthesis: none;
   text-rendering: geometricPrecision;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-html {
-  scroll-behavior: smooth;
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  font-family: var(--ff-ui);
 }
 
-body{
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* Centra verticalmente */
-  align-items: center; /* Centra horizontalmente */
-  width: 100%; /* Ocupa todo el ancho del contenedor */
-  height: 100%; /* Ocupa toda la altura del contenedor */
+#root { width: 100%; height: 100%; }
+
+.nb-shell {
+  position: relative;
+  isolation: isolate;
 }
 
+.nb-shell::before {
+  content: '';
+  position: fixed;
+  inset: -20% -10% auto -10%;
+  height: 52vh;
+  background:
+    radial-gradient(circle at 22% 22%, rgba(16,185,129,0.14), transparent 48%),
+    radial-gradient(circle at 82% 14%, rgba(96,165,250,0.10), transparent 44%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.nb-panel {
+  border-radius: 18px;
+  background: linear-gradient(160deg, rgba(19, 31, 24, 0.9) 0%, rgba(11, 21, 16, 0.7) 100%);
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.04),
+    0 20px 45px -30px rgba(0,0,0,0.85),
+    0 10px 30px -20px rgba(16,185,129,0.35);
+  backdrop-filter: blur(8px);
+}
+
+.nb-stat-card {
+  border-radius: 16px;
+  background: linear-gradient(160deg, rgba(22, 36, 28, 0.88) 0%, rgba(10, 19, 14, 0.7) 100%);
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 12px 30px -24px rgba(16,185,129,0.45);
+}
+
+.nb-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  height: 38px;
+  padding: 0 14px;
+  border-radius: 11px;
+  border: 1px solid rgba(255,255,255,0.09);
+  background: rgba(255,255,255,0.03);
+  color: #93b9a2;
+  font-weight: 600;
+  font-size: 13px;
+  transition: transform var(--t-base), border-color var(--t-base), background var(--t-base), color var(--t-base), box-shadow var(--t-base);
+}
+
+.nb-btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255,255,255,0.16);
+  color: #d4e9dc;
+  background: rgba(255,255,255,0.06);
+}
+
+.nb-btn:active {
+  transform: translateY(0);
+}
+
+.nb-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(16,185,129,0.22);
+}
+
+.nb-btn-primary {
+  border-color: rgba(16,185,129,0.34);
+  color: #d8fff0;
+  background: linear-gradient(180deg, rgba(16,185,129,0.35) 0%, rgba(16,185,129,0.2) 100%);
+  box-shadow: 0 10px 24px -16px rgba(16,185,129,0.7), inset 0 1px 0 rgba(255,255,255,0.16);
+}
+
+.nb-btn-primary:hover {
+  border-color: rgba(16,185,129,0.55);
+  background: linear-gradient(180deg, rgba(16,185,129,0.46) 0%, rgba(16,185,129,0.26) 100%);
+}
+
+.nb-input,
+.nb-select {
+  background: rgba(10, 17, 14, 0.9);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 11px;
+  padding: 8px 12px;
+  color: #d9ebe1;
+  font-size: 13px;
+  transition: border-color var(--t-base), box-shadow var(--t-base), background var(--t-base);
+}
+
+.nb-input:focus,
+.nb-select:focus {
+  outline: none;
+  border-color: rgba(16,185,129,0.42);
+  box-shadow: 0 0 0 3px rgba(16,185,129,0.15);
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────────── */
+::-webkit-scrollbar         { width: 5px; height: 5px; }
+::-webkit-scrollbar-track   { background: transparent; }
+::-webkit-scrollbar-thumb   { background: var(--nb-brd-1); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--nb-brd-2); }
+
+/* ── Selection ─────────────────────────────────────────────────── */
+::selection { background: var(--nb-glow-lg); color: var(--nb-accent-lt); }
+
+/* ── Keyframes ─────────────────────────────────────────────────── */
+@keyframes nb-fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes nb-shimmer {
+  from { transform: translateX(-130%) skewX(-15deg); }
+  to   { transform: translateX(230%)  skewX(-15deg); }
+}
+
+@keyframes nb-pulse-ring {
+  0%   { transform: scale(1);   opacity: 0.7; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+@keyframes nb-breathe {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 1;   }
+}
+
+@keyframes nb-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Stagger animation helpers ─────────────────────────────────── */
+.nb-a1 { animation: nb-fade-up .32s        ease both; }
+.nb-a2 { animation: nb-fade-up .32s .06s   ease both; }
+.nb-a3 { animation: nb-fade-up .32s .12s   ease both; }
+.nb-a4 { animation: nb-fade-up .32s .18s   ease both; }
+.nb-a5 { animation: nb-fade-up .32s .24s   ease both; }
+.nb-a6 { animation: nb-fade-up .32s .30s   ease both; }
