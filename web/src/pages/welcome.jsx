@@ -1,4 +1,5 @@
 import React, { useRef, useState, useCallback } from "react";
+import emailjs from '@emailjs/browser';
 import "./welcome.css";
 import {
     Button,
@@ -14,14 +15,20 @@ import {
     SiOpenai as OpenAI,
     SiClaude as Claude,
     SiOllama as Ollama,
+    SiRaspberrypi,
+    SiPython,
 } from "react-icons/si";
 import { PiCoins } from "react-icons/pi";
-import { IoTerminal } from "react-icons/io5";
+import { RiUserSmileLine, RiBuilding2Line, RiLeafLine } from "react-icons/ri";
+import binImage from "../assets/Gemini_Generated_Image_hoi32mhoi32mhoi3.png";
 import { MdiCloseOutline } from "../components/Close_Icon";
 import RegisterUiverseForm from "../components/RegisterUiverseForm";
 import { Link } from "react-router-dom";
 import heroBg from "../assets/qingbao-meng-01_igFr7hd4-unsplash.jpg";
 import GridDistortion from "../components/GridDistortion";
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useLenis } from '../hooks/useLenis';
+import { Reveal } from '../components/Reveal';
 import { apiUrl } from "../config/env";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -44,6 +51,12 @@ export default function WelcomePage() {
     const navLinksRef = useRef(null);
     const pillRef = useRef(null);
 
+    useLenis();
+    const { scrollYProgress } = useScroll({ target: welcomeRef, offset: ['start start', 'end start'] });
+    const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '22%']);
+    const innerY = useTransform(scrollYProgress, [0, 1], ['0%', '10%']);
+    const innerOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
+
     const [isOpen, setIsOpen] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
 
@@ -64,6 +77,7 @@ export default function WelcomePage() {
     const [contactFileName, setContactFileName] = useState("");
     const [registerMessage, setRegisterMessage] = useState("");
     const [contactStatusMessage, setContactStatusMessage] = useState("");
+    const [isSending, setIsSending] = useState(false);
 
     const scrollTo = useCallback(
         (ref) => ref.current?.scrollIntoView({ behavior: "smooth" }),
@@ -183,15 +197,38 @@ export default function WelcomePage() {
         }
     };
 
-    const ContactForm = useCallback(() => {
-        setContactStatusMessage(
-            "¡Mensaje recibido! Pronto nos pondremos en contacto contigo.",
-        );
-        setContactName("");
-        setContactEmail("");
-        setContactMessage("");
-        setContactFileName("");
-    }, []);
+    const ContactForm = useCallback(async () => {
+        if (!contactName || !contactEmail || !contactMessage) {
+            setContactStatusMessage("Por favor completa todos los campos requeridos.");
+            return;
+        }
+
+        setIsSending(true);
+        setContactStatusMessage("");
+
+        try {
+            await emailjs.send(
+                import.meta.env.VITE_EMAILJS_SERVICE_ID,
+                import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+                {
+                    from_name: contactName,
+                    from_email: contactEmail,
+                    message: contactMessage,
+                },
+                import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+            );
+
+            setContactStatusMessage("¡Mensaje enviado! Pronto nos pondremos en contacto.");
+            setContactName("");
+            setContactEmail("");
+            setContactMessage("");
+            setContactFileName("");
+        } catch {
+            setContactStatusMessage("Error al enviar. Intenta de nuevo o escríbenos directamente.");
+        } finally {
+            setIsSending(false);
+        }
+    }, [contactName, contactEmail, contactMessage]);
 
     return (
         <div className="landing-page">
@@ -244,7 +281,7 @@ export default function WelcomePage() {
 
             {/* ── Hero full-bleed ── */}
             <section className="hero" ref={welcomeRef}>
-                <div className="hero-bg-distortion">
+                <motion.div className="hero-bg-distortion" style={{ y: bgY }}>
                     <GridDistortion
                         imageSrc={heroBg}
                         grid={10}
@@ -252,10 +289,10 @@ export default function WelcomePage() {
                         strength={0.15}
                         relaxation={0.9}
                     />
-                </div>
+                </motion.div>
                 <div className="hero-overlay" />
 
-                <div className="hero-inner">
+                <motion.div className="hero-inner" style={{ y: innerY, opacity: innerOpacity }}>
                     <div className="hero-content">
                         <p className="hero-tag">
                             Sostenibilidad + IA + Recompensas
@@ -300,7 +337,7 @@ export default function WelcomePage() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </motion.div>
 
                 <div className="hero-scroll-hint" onClick={() => scrollTo(informationRef)}>
                     <span />
@@ -309,124 +346,155 @@ export default function WelcomePage() {
 
             <main>
                 <section className="info-section" ref={informationRef}>
+                    <Reveal>
                     <div className="section-heading">
                         <p>Producto</p>
                         <h2>
-                            Producto con IA, IoT y recompensas en un solo flujo
+                            IA de frontera, hardware inteligente y recompensas reales
                         </h2>
                     </div>
+                    </Reveal>
 
                     <div className="info-grid">
-                        <article className="assistant-ai-card">
-                            <div
-                                className="ai-provider-logo-row"
-                                aria-label="Logos de OpenAI, Claude y Ollama"
-                            >
-                                <OpenAI size={32} />
-                                <Claude size={32} />
-                                <Ollama size={32} />
+                        <motion.article
+                            initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: '-80px' }}
+                            transition={{ duration: 0.72, ease: [0.16,1,0.3,1], delay: 0 }}>
+                            <div className="product-icon-row">
+                                <OpenAI size={28} />
+                                <Claude size={28} />
+                                <Ollama size={26} />
                             </div>
-                            <h3>Asistente IA (NLP + Voz)</h3>
-                            <p>
-                                Modelos integrables como GPT-4o mini / Llama 3.1
-                                para guía conversacional y Whisper para
-                                transcripción de voz en tiempo real.
-                            </p>
-                        </article>
-                        <article>
-                            <PiCoins size={32} style={{ color: "#333333" }} />
-                            <h3>CoBins</h3>
-                            <p>
-                                Puntos digitales que se otorgan por
-                                clasificación correcta y pueden canjearse por
-                                beneficios, campañas o programas de fidelización
-                                ambiental.
-                            </p>
-                        </article>
-                        <article>
-                            <IoTerminal size={32}  style={{ color: "#333333" }}/>
+                            <h3>Modelos de Frontera</h3>
+                            <p>GPT-4o, Claude y Whisper — voz a clasificación sin tocar pantalla.</p>
+                        </motion.article>
+                        <motion.article
+                            initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: '-80px' }}
+                            transition={{ duration: 0.72, ease: [0.16,1,0.3,1], delay: 0.1 }}>
+                            <div className="product-icon-row">
+                                <PiCoins size={30} />
+                            </div>
+                            <h3>CoBins — Tu moneda verde</h3>
+                            <p>Canjeable en billeteras digitales, cripto y tiendas aliadas.</p>
+                        </motion.article>
+                        <motion.article
+                            initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: '-80px' }}
+                            transition={{ duration: 0.72, ease: [0.16,1,0.3,1], delay: 0.2 }}>
+                            <div className="product-icon-row">
+                                <SiRaspberrypi size={26} />
+                                <SiPython size={26} />
+                            </div>
                             <h3>IoT + Telemetría</h3>
-                            <p>
-                                Sensores de nivel/uso y eventos enviados por
-                                MQTT para monitoreo en dashboard, alertas
-                                operativas y trazabilidad de rendimiento.
-                            </p>
-                        </article>
+                            <p>Edge computing en Raspberry Pi con MQTT — telemetría y control en tiempo real.</p>
+                        </motion.article>
                     </div>
                 </section>
 
                 <section className="features-section" ref={featuresRef}>
+                    <Reveal>
                     <div className="section-heading">
                         <p>Beneficios</p>
-                        <h2>Beneficios concretos para operación y adopción</h2>
+                        <h2>Diseñado para las personas. Construido para el impacto.</h2>
                     </div>
+                    </Reveal>
 
                     <div className="feature-cards">
-                        <article>
-                            <h3>Usuarios finales</h3>
-                            <p>
-                                Clasifican mejor en segundos, reciben
-                                retroalimentación inmediata y acumulan CoBins.
-                            </p>
-                        </article>
-                        <article>
-                            <h3>Operación y mantenimiento</h3>
-                            <p>
-                                Alertas por llenado, seguimiento por nodo y
-                                menor tiempo de respuesta en campo.
-                            </p>
-                        </article>
-                        <article>
-                            <h3>Gestión ambiental</h3>
-                            <p>
-                                Datos trazables para reportes ESG, indicadores
-                                de reciclaje y decisiones de expansión.
-                            </p>
-                        </article>
+                        <motion.article
+                            initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: '-80px' }}
+                            transition={{ duration: 0.72, ease: [0.16,1,0.3,1], delay: 0 }}>
+                            <div className="feature-icon-wrap">
+                                <RiUserSmileLine size={22} />
+                            </div>
+                            <h3>Recicla sin fricciones</h3>
+                            <p>Solo habla, bota y recibe CoBins al instante. Sin apps ni carteles.</p>
+                        </motion.article>
+                        <motion.article
+                            initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: '-80px' }}
+                            transition={{ duration: 0.72, ease: [0.16,1,0.3,1], delay: 0.1 }}>
+                            <div className="feature-icon-wrap">
+                                <RiBuilding2Line size={22} />
+                            </div>
+                            <h3>Tu campus, bajo control</h3>
+                            <p>Alertas de llenado y rutas de recolección optimizadas en tiempo real.</p>
+                        </motion.article>
+                        <motion.article
+                            initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: '-80px' }}
+                            transition={{ duration: 0.72, ease: [0.16,1,0.3,1], delay: 0.2 }}>
+                            <div className="feature-icon-wrap">
+                                <RiLeafLine size={22} />
+                            </div>
+                            <h3>Impacto que se mide</h3>
+                            <p>Reportes ESG automáticos y huella de carbono verificable por área.</p>
+                        </motion.article>
                     </div>
                 </section>
 
                 <section className="instructions" ref={instructionRef}>
+                    <Reveal>
                     <div className="section-heading">
                         <p>Experiencia</p>
-                        <h2>Uso en 3 pasos claros</h2>
+                        <h2>Tres momentos que convierten el hábito en recompensa</h2>
                     </div>
+                    </Reveal>
 
-                    <div className="steps-grid">
-                        <article>
-                            <span>01</span>
-                            <h3>Identificación</h3>
-                            <p>
-                                El usuario se acerca y, si aplica, valida su
-                                cuenta por NFC para asociar recompensas.
-                            </p>
-                        </article>
-                        <article>
-                            <span>02</span>
-                            <h3>Clasificación asistida</h3>
-                            <p>
-                                La IA interpreta voz/texto y sugiere categoría
-                                para abrir el compartimento correcto.
-                            </p>
-                        </article>
-                        <article>
-                            <span>03</span>
-                            <h3>Registro y recompensa</h3>
-                            <p>
-                                El evento se registra en IoT y el usuario recibe
-                                CoBins si realizó una disposición correcta.
-                            </p>
-                        </article>
+                    <div className="steps-layout">
+                        <motion.div className="steps-bin-visual"
+                            initial={{ opacity: 0, x: -32 }} whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true, margin: '-80px' }}
+                            transition={{ duration: 0.8, ease: [0.16,1,0.3,1] }}>
+                            <img src={binImage} alt="NetBin — caneca inteligente de reciclaje" />
+                        </motion.div>
+
+                        <div className="steps-list">
+                            <motion.div className="step-card"
+                                initial={{ opacity: 0, x: 32 }} whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true, margin: '-80px' }}
+                                transition={{ duration: 0.72, ease: [0.16,1,0.3,1], delay: 0.07 }}>
+                                <span className="step-num">01</span>
+                                <div className="step-body">
+                                    <h3>Acércate y sé reconocido</h3>
+                                    <p>Tap NFC o acércate — RFID te identifica al instante y activa recompensas.</p>
+                                </div>
+                            </motion.div>
+                            <motion.div className="step-card"
+                                initial={{ opacity: 0, x: 32 }} whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true, margin: '-80px' }}
+                                transition={{ duration: 0.72, ease: [0.16,1,0.3,1], delay: 0.15 }}>
+                                <span className="step-num">02</span>
+                                <div className="step-body">
+                                    <h3>Habla — la IA clasifica</h3>
+                                    <p>Whisper transcribe, el modelo decide y el compartimento correcto se abre.</p>
+                                </div>
+                            </motion.div>
+                            <motion.div className="step-card"
+                                initial={{ opacity: 0, x: 32 }} whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true, margin: '-80px' }}
+                                transition={{ duration: 0.72, ease: [0.16,1,0.3,1], delay: 0.23 }}>
+                                <span className="step-num">03</span>
+                                <div className="step-body">
+                                    <h3>Bota, gana y canjea</h3>
+                                    <p>Clasifica correctamente, acumula CoBins y canjéalos en tiendas aliadas.</p>
+                                </div>
+                            </motion.div>
+                        </div>
                     </div>
                 </section>
 
                 <section className="contact-section" ref={contactUsRef}>
+                    <Reveal>
                     <div className="section-heading">
                         <p>Contacto</p>
                         <h2>Canales de contacto y activación de cuenta</h2>
                     </div>
+                    </Reveal>
 
                     <div className="contact-layout">
+                        <Reveal delay={0} style={{ display: 'flex', flexDirection: 'column' }}>
                         <Card className="contact-banner-card" elevation={0}>
                             <CardContent className="contact-banner-header">
                                 <p className="contact-kicker">
@@ -487,7 +555,9 @@ export default function WelcomePage() {
                                 </div>
                             </CardContent>
                         </Card>
+                        </Reveal>
 
+                        <Reveal delay={0.13} style={{ display: 'flex', flexDirection: 'column' }}>
                         <Card className="contact-form-card" elevation={0}>
                             <CardContent className="contact-form-header">
                                 <p className="contact-kicker">
@@ -557,11 +627,14 @@ export default function WelcomePage() {
                                     type="button"
                                     className="uiverse-btn uiverse-wide"
                                     onClick={ContactForm}
+                                    disabled={isSending}
+                                    style={{ opacity: isSending ? 0.7 : 1 }}
                                 >
-                                    <span>Enviar mensaje</span>
+                                    <span>{isSending ? "Enviando..." : "Enviar mensaje"}</span>
                                 </button>
                             </CardContent>
                         </Card>
+                        </Reveal>
                     </div>
                 </section>
             </main>
@@ -578,7 +651,7 @@ export default function WelcomePage() {
                     <div className="modal-card register-modal-card">
                         <button
                             type="button"
-                            className="uiverse-btn close-modal register-close"
+                            className="close-modal register-close"
                             onClick={togglePopUp}
                         >
                             <MdiCloseOutline className="svgIcon" />

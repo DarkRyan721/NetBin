@@ -574,103 +574,129 @@ main {
     line-height: 1.14;
 }
 
-/* ── Info / Feature / Steps grids ──────────────────────────────── */
+/* ── Producto & Beneficios grids ────────────────────────────────── */
 .info-grid,
-.feature-cards,
-.steps-grid {
+.feature-cards {
     display: grid;
     gap: 1rem;
     grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .info-grid article,
-.feature-cards article,
-.steps-grid article {
-    border: 1px solid var(--nb-l-bd);
+.feature-cards article {
+    border: none;
     background: #fff;
-    border-radius: 16px;
-    padding: 1.4rem;
-    box-shadow:
-        0 1px 3px rgba(8, 30, 20, 0.03),
-        0 6px 18px -14px rgba(8, 30, 20, 0.1);
-    transition:
-        transform 0.22s ease,
-        box-shadow 0.22s ease,
-        border-color 0.22s ease;
+    border-radius: 18px;
+    padding: 1.5rem 1.4rem;
+    box-shadow: 0 2px 14px rgba(8, 30, 20, 0.07);
+    transition: transform 0.24s ease, box-shadow 0.24s ease;
     will-change: transform;
-    position: relative;
-    overflow: hidden;
-    contain: layout style;
-}
-
-.info-grid article::before,
-.feature-cards article::before,
-.steps-grid article::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(
-        90deg,
-        rgba(16, 185, 129, 0.5),
-        transparent 70%
-    );
-    opacity: 0;
-    transition: opacity 0.22s ease;
-    will-change: opacity;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
 }
 
 .info-grid article:hover,
-.feature-cards article:hover,
-.steps-grid article:hover {
-    transform: translateY(-3px);
-    box-shadow:
-        0 2px 6px rgba(8, 30, 20, 0.04),
-        0 14px 30px -14px rgba(8, 30, 20, 0.16);
-    border-color: var(--nb-l-300);
-}
-
-.info-grid article:hover::before,
-.feature-cards article:hover::before,
-.steps-grid article:hover::before {
-    opacity: 1;
+.feature-cards article:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(8, 30, 20, 0.11);
 }
 
 .info-grid h3,
-.feature-cards h3,
-.steps-grid h3 {
-    margin: 0.75rem 0 0.45rem;
+.feature-cards h3 {
+    margin: 0;
     color: var(--nb-l-base);
-    font-size: 1rem;
+    font-size: 0.97rem;
     font-weight: 700;
+    letter-spacing: -0.01em;
 }
 
 .info-grid p,
-.feature-cards p,
-.steps-grid p {
+.feature-cards p {
     margin: 0;
     color: var(--nb-l-tx2);
-    font-size: 0.88rem;
-    line-height: 1.65;
+    font-size: 0.85rem;
+    line-height: 1.58;
 }
 
-.assistant-ai-card {
-    display: grid;
-    gap: 0.75rem;
-}
-
-.ai-provider-logo-row {
+/* product card — brand icon row */
+.product-icon-row {
     display: flex;
     align-items: center;
-    gap: 0.85rem;
+    gap: 0.55rem;
+    margin-bottom: 0.6rem;
     color: var(--nb-l-base);
+    opacity: 0.8;
 }
 
-/* ── Steps number badges ────────────────────────────────────────── */
-.steps-grid span {
+/* feature card — icon bubble */
+.feature-icon-wrap {
+    width: 44px;
+    height: 44px;
+    border-radius: 13px;
+    background: rgba(45, 117, 84, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--nb-l-700);
+    margin-bottom: 0.35rem;
+    transition: background 0.24s ease, transform 0.24s ease;
+}
+
+.feature-cards article:hover .feature-icon-wrap {
+    background: rgba(45, 117, 84, 0.16);
+    transform: scale(1.1);
+}
+
+/* ── Experiencia — image + steps layout ─────────────────────────── */
+.steps-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 1.25rem;
+    align-items: stretch;
+}
+
+.steps-bin-visual {
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 6px 32px rgba(8, 30, 20, 0.11);
+    min-height: 360px;
+}
+
+.steps-bin-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.steps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.step-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.15rem 1.3rem;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 14px rgba(8, 30, 20, 0.07);
+    transition: transform 0.24s ease, box-shadow 0.24s ease;
+    flex: 1;
+}
+
+.step-card:hover {
+    transform: translateX(6px);
+    box-shadow: 0 8px 26px rgba(8, 30, 20, 0.11);
+}
+
+.step-num {
     display: inline-flex;
+    flex-shrink: 0;
     width: 36px;
     height: 36px;
     align-items: center;
@@ -678,10 +704,24 @@ main {
     border-radius: 10px;
     background: rgba(45, 117, 84, 0.08);
     color: var(--nb-l-700);
-    border: 1px solid var(--nb-l-200);
     font-weight: 800;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     font-family: "JetBrains Mono", monospace;
+}
+
+.step-body h3 {
+    margin: 0 0 0.22rem;
+    color: var(--nb-l-base);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.step-body p {
+    margin: 0;
+    color: var(--nb-l-tx2);
+    font-size: 0.84rem;
+    line-height: 1.55;
 }
 
 /* ── Contact section ────────────────────────────────────────────── */
@@ -693,11 +733,9 @@ main {
 
 .contact-banner-card,
 .contact-form-card {
-    border: 1px solid var(--nb-l-bd) !important;
+    border: none !important;
     background: #fff !important;
-    box-shadow:
-        0 1px 3px rgba(8, 30, 20, 0.04),
-        0 10px 28px -18px rgba(8, 30, 20, 0.14) !important;
+    box-shadow: 0 2px 12px rgba(8, 30, 20, 0.07) !important;
     border-radius: 18px !important;
     overflow: hidden;
 }
@@ -938,20 +976,25 @@ main {
 
 /* ── Close button ───────────────────────────────────────────────── */
 .close-modal {
-    justify-self: end;
-    width: 36px;
-    height: 36px;
+    width: 30px;
+    height: 30px;
     border-radius: 999px;
-    border: 1px solid var(--nb-l-bd);
-    background: rgba(255, 255, 255, 0.98);
+    border: none;
+    background: rgba(8, 30, 20, 0.06);
     color: var(--nb-l-tx2);
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    padding: 0;
     line-height: 0;
-    transition: all 0.22s ease;
-    box-shadow: 0 2px 8px -4px rgba(8, 30, 20, 0.16);
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.close-modal:hover {
+    background: rgba(8, 30, 20, 0.12);
+    color: var(--nb-l-base);
+    transform: rotate(90deg);
 }
 
 .register-close {
@@ -959,20 +1002,11 @@ main {
     top: 10px;
     right: 10px;
     z-index: 2;
-    box-shadow: 0 6px 14px -8px rgba(8, 30, 20, 0.48);
 }
 
 .register-close .svgIcon {
-    width: 17px;
-    height: 17px;
-}
-
-.register-close:hover {
-    background: var(--nb-l-base);
-    color: #fff;
-    transform: translateY(-1px) rotate(90deg);
-    box-shadow: 0 8px 16px -8px rgba(8, 30, 20, 0.55);
-    border-color: transparent;
+    width: 16px;
+    height: 16px;
 }
 
 .success-chip {
@@ -1042,9 +1076,12 @@ main {
     }
 
     .info-grid,
-    .feature-cards,
-    .steps-grid {
+    .feature-cards {
         grid-template-columns: 1fr 1fr;
+    }
+
+    .steps-layout {
+        grid-template-columns: 1fr 1.4fr;
     }
 }
 
@@ -1071,9 +1108,16 @@ main {
 
     .hero-metrics,
     .info-grid,
-    .feature-cards,
-    .steps-grid {
+    .feature-cards {
         grid-template-columns: 1fr;
+    }
+
+    .steps-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .steps-bin-visual {
+        min-height: 220px;
     }
 
     .hero-content h1 {

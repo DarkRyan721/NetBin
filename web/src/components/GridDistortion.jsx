@@ -178,8 +178,12 @@ const GridDistortion = ({ grid = 15, mouse = 0.1, strength = 0.15, relaxation = 
       });
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    container.addEventListener('mouseleave', handleMouseLeave);
+    const isTouchOnly = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+
+    if (!isTouchOnly) {
+      window.addEventListener('mousemove', handleMouseMove);
+      container.addEventListener('mouseleave', handleMouseLeave);
+    }
 
     handleResize();
 
@@ -235,8 +239,10 @@ const GridDistortion = ({ grid = 15, mouse = 0.1, strength = 0.15, relaxation = 
         window.removeEventListener('resize', handleResize);
       }
 
-      window.removeEventListener('mousemove', handleMouseMove);
-      container.removeEventListener('mouseleave', handleMouseLeave);
+      if (!isTouchOnly) {
+        window.removeEventListener('mousemove', handleMouseMove);
+        container.removeEventListener('mouseleave', handleMouseLeave);
+      }
 
       if (renderer) {
         renderer.dispose();

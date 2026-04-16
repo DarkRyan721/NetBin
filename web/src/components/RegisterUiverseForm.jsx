@@ -198,8 +198,7 @@ const StyledWrapper = styled.div`
   }
 
   .input-wrap:focus-within {
-    border-color: #10b981;
-    box-shadow: 0 0 0 3px rgba(16,185,129,0.12);
+    border-color: #1a5c3a;
   }
 
   .field-input {
@@ -207,12 +206,17 @@ const StyledWrapper = styled.div`
     width: 100%;
     height: 100%;
     background: transparent;
-    outline: none;
+    outline: 0;
     font-family: 'Outfit', system-ui, sans-serif;
     font-size: 0.88rem;
     color: #0d2217;
     -webkit-appearance: none;
     appearance: none;
+  }
+
+  .field-input:focus {
+    outline: 0;
+    border: none;
   }
 
   .field-input::placeholder {
@@ -313,14 +317,14 @@ const StyledWrapper = styled.div`
   }
 
   .link-accent {
-    color: #10b981;
+    color: #1a5c3a;
     font-weight: 600;
     text-decoration: none;
     transition: color 0.15s;
   }
 
   .link-accent:hover {
-    color: #059669;
+    color: #082415;
     text-decoration: underline;
   }
 `;
